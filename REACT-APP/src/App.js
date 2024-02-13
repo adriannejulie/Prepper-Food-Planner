@@ -1,17 +1,26 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
+import Layout from "../src/components/Layout.js"; 
+import DefaultPage from "./pages/DefaultPage";
+import MealPlanner from "./pages/MealPlanner";
+import MyRecipes from "./pages/MyRecipes";
+import FindRecipes from "./pages/FindRecipes";
+import "./App.css";
+
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+          <Layout>
+                <Routes>
+                    <Route path="/" element={<DefaultPage />} />
+                    <Route path="/meal-planner" element={<MealPlanner />} />
+                    <Route path="/my-recipes" element={<MyRecipes />} />
+                    <Route path="/find-recipes" element={<FindRecipes />} />
+                </Routes>
+                </Layout>
+        </Router>
+    );
 }
 
 export default App;
