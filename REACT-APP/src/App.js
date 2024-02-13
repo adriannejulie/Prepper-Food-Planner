@@ -5,6 +5,7 @@ import DefaultPage from "./pages/DefaultPage";
 import MealPlanner from "./pages/MealPlanner";
 import MyRecipes from "./pages/MyRecipes";
 import FindRecipes from "./pages/FindRecipes";
+import SignUp from "./pages/SignUp";
 import "./App.css";
 
 
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/meal-planner" element={<MealPlanner />} />
                     <Route path="/my-recipes" element={<MyRecipes />} />
                     <Route path="/find-recipes" element={<FindRecipes />} />
+                    <Route path="/signup" element={<SignUp />} />
                 </Routes>
                 </Layout>
         </Router>
