@@ -3,8 +3,14 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import "./Login.css";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 import { jwtDecode } from "jwt-decode";
+import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 function Login({ onLogin }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
     const showUserInformation = (tokenObject) => {
         const token = tokenObject.credential;
 
@@ -23,6 +29,33 @@ function Login({ onLogin }) {
         }
     };
 
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    const standardLogin = () =>{
+        /*fetch(url, {
+            method: 'POST',
+            body: {
+                email: email,
+                password: password
+            }
+        }).then(response => {
+            if (response.status === 200){}
+            else{
+                window.alert("Incorrect email or password entered");
+            }
+        });*/
+    }
+
+    const signUp = () =>{
+        navigate('/signup');
+    }
+
     return (
         <div className="login-container">
             <img
@@ -40,12 +73,14 @@ function Login({ onLogin }) {
             <div className="login-section">
                 <p>Email</p>
                 <input
+                    onChange={handleEmailChange}
                     type="email"
                 />
             </div>
             <div className="login-section">
                 <p>Password</p>
                 <input
+                    onChange={handlePasswordChange}
                     type="password"
                 />
             </div>
@@ -59,8 +94,8 @@ function Login({ onLogin }) {
                 </label>
             </div>
             <div className="login-buttons">
-                <button>Login</button>
-                <button>Signup</button>
+                <button onClick={standardLogin}>Login</button>
+                <button onClick={signUp}>Signup</button>
             </div>
         </div>
     );
