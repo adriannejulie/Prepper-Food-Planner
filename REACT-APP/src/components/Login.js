@@ -57,6 +57,11 @@ function Login({ onLogin }) {
         setShowSignUp(true); 
     };
 
+    const closeSignUp = () => {
+        setShowSignUp(false);
+        setShowLogin(true); // Show the login component again
+    };
+
     return (
         <>
             {showLogin && (
@@ -101,7 +106,7 @@ function Login({ onLogin }) {
                     </div>
                 </div>
             )}
-            {showSignUp && <SignUp onClose={() => setShowLogin(true)} />} 
+            {showSignUp && <SignUp onClose={closeSignUp} />} 
         </>
     );
 }
