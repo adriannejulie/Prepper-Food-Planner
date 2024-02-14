@@ -1,40 +1,36 @@
 .login-container {
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
+    font-size: 1.6vh;
     font-weight: 500;
-    width: 400px;
-    height: 700px;
     background-color: #F2F5EB;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
-    border-radius: 20px;
+    padding: 5vh;
+    border-radius: 2vh;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    align-items: center;
-
 }
 
 .login-section {
-    width: 100%;
+    width: 20vw !important;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
+
 .login-google {
-    margin-top: 40px;
+    margin-top: 4vh;
     width: 100%;
     text-align: center;
     align-items: center;
-    display: default;
-    position: default;
-    
-    height: 44px;
-    width: 53%;
+    display: flex;
+    justify-content: center;
+    height: 4vh;
+    width: 20vw;
     border: 0px;
 }
 
@@ -45,7 +41,7 @@
 }
 
 .divider {
-    margin-top: 20px;
+    margin-top: 2vh;
     width: 100%;
     background-color: gray;
 }
@@ -57,10 +53,10 @@ p {
 
 input[type="email"],
 input[type="password"] {
-    width: calc(100%-10px);
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
+    width: calc(100% - 1vw);
+    padding: 1vh;
+    border: 0.1vh solid #000;
+    border-radius: 0.5vh;
     background-color: #fff;
 }
 
@@ -70,17 +66,15 @@ label {
 }
 
 .login-buttons>button {
-    margin-top: 30px;
+    margin-top: 3vh;
     width: 100%;
-    padding: 15px;
+    padding: 1.5vh;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vh;
     cursor: pointer;
     color: white;
     background-color: #42493F;
-
 }
-
 
 a {
     text-decoration: none;
@@ -91,11 +85,6 @@ a:hover {
     text-decoration: underline;
 }
 
-.placeholder-image {
-    margin-top: 40px;
-    width: 100px;
-}
-
 .login-section label {
     display: flex;
     align-items: center;
@@ -103,7 +92,7 @@ a:hover {
 }
 
 .login-section label input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 1vw;
 }
 
 .login-section label a {

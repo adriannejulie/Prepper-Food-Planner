@@ -1,4 +1,4 @@
-.login-container {
+.signup-container {
     font-family: 'Inter', sans-serif;
     font-size: 1.6vh;
     font-weight: 500;
@@ -12,48 +12,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }
 
-.login-section {
-    width: 20vw;
-    display: flex;
-    flex-direction: column;
-    margin-top: 2vh;
-}
-
-.login-section > input {
-    width: 18.5vw !important;
-}
-
-.login-google {
-    margin-top: 4vh;
-    width: 100%;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 4vh;
-    width: 20vw;
-    border: 0px;
-}
-
-.login-buttons {
-    width: 100%;
-    justify-content: center;
-    margin: 0;
-}
-
-.divider {
-    margin-top: 2vh;
-    width: 100%;
-    background-color: gray;
-}
-
-p {
-    margin: 0;
-    text-align: left;
-}
-
+input[type="text"],
 input[type="email"],
 input[type="password"] {
     width: calc(100% - 1vw);
@@ -63,41 +25,9 @@ input[type="password"] {
     background-color: #fff;
 }
 
-label {
+.login-section {
+    width: 30vw;
     display: flex;
-    align-items: center;
-}
-
-.login-buttons>button {
-    margin-top: 3vh;
-    width: 100%;
-    padding: 1.5vh;
-    border: none;
-    border-radius: 0.5vh;
-    cursor: pointer;
-    color: white;
-    background-color: #42493F;
-}
-
-a {
-    text-decoration: none;
-    color: #000;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.login-section label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.login-section label input[type="checkbox"] {
-    margin-right: 1vw;
-}
-
-.login-section label a {
-    margin-left: auto;
+    flex-direction: column;
+    margin-top: 0.1vh; 
 }
