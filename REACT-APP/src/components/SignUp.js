@@ -56,11 +56,7 @@ function SignUp({ onClose }) {
                 src={logoPlaceholderImage}
                 alt="Placeholder"
             />
-            <div className="login-google">
-                <GoogleOAuthProvider clientId="771652846868-uppchj2m6nn6dnaqu0i5g3ehv26l4cuc.apps.googleusercontent.com">
-                    <GoogleLogin />
-                </GoogleOAuthProvider>
-            </div>
+
             <hr className="divider" />
 
             <div className="login-section">
