@@ -13,6 +13,8 @@ function Login({ onLogin }) {
     const [showLogin, setShowLogin] = useState(true);
     const navigate = useNavigate();
     const { setUser } = useUser();
+    const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    console.log(clientId)
 
     const showUserInformation = (tokenObject) => {
         const token = tokenObject.credential;
@@ -73,7 +75,7 @@ function Login({ onLogin }) {
                         alt="Placeholder"
                     />
                     <div className="login-google">
-                        <GoogleOAuthProvider clientId="771652846868-uppchj2m6nn6dnaqu0i5g3ehv26l4cuc.apps.googleusercontent.com">
+                        <GoogleOAuthProvider clientId={clientId}>
                             <GoogleLogin onSuccess={showUserInformation} />
                         </GoogleOAuthProvider>
                     </div>
