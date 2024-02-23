@@ -19,9 +19,13 @@ function DefaultPage({ }) {
         setShowLoginPopup(false);
     };
     const handleSignup = () => {
-        setShowSignUp(prevState => !prevState);
+        if (!showSignUp) {
+            setShowSignUp(true);
+        }
     };
-
+    const handleSignUpClose = () => {
+        setShowSignUp(false);
+    };
     const handleLogin2 = () => {
         setShowLogin(prevState => !prevState);
     };
@@ -43,7 +47,7 @@ function DefaultPage({ }) {
                     <div onClick={handleSignup} style={{ cursor: "pointer" }}>
                         Sign Up
                         <Link className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
-                        {showSignUp && <SignUp />}
+                        {showSignUp && <SignUp onClose={handleSignUpClose} />}
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 
 
-function SignUp({ onSignUp }) {
+function SignUp({ onSignUp, onClose }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showSignUp, setShowSignUp] = useState(true);
@@ -45,11 +45,13 @@ function SignUp({ onSignUp }) {
 
         // Call onClose function to close the signup component
         setShowSignUp(false);
+        onClose();
     };
-
     const closeSignUp = () => {
         setShowSignUp(false);
+        onClose();
     };
+
 
     return (
         <>
