@@ -7,7 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom"; 
 import { useUser } from "./UserContext";
 
-function Login({ onLogin }) {
+function Login({ onLogin,onClose }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showLogin, setShowLogin] = useState(true);
@@ -60,6 +60,8 @@ function Login({ onLogin }) {
 
     const closeLogin = () => {
         setShowLogin(false); 
+        onClose();
+
     };
 
     return (
@@ -67,7 +69,7 @@ function Login({ onLogin }) {
             {showLogin && (
                 <div className="login-container">
                     <div className="exit">
-                    <button onClick={closeLogin}>X</button>
+                        <button onClick={closeLogin}>X</button>
                     </div>
                     <img
                         className="placeholder-image"
@@ -108,6 +110,7 @@ function Login({ onLogin }) {
                     </div>
                 </div>
             )}
+            {showLogin && <div className="overlay"></div>}
         </>
     );
 }

@@ -1,14 +1,13 @@
 .default-header {
     height: 100px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; 
     align-items: center;
     margin: 0;
     padding: 0;
     background-color: white;
     color: #002202;
     font-size: 20px;
-    float: right;
 }
 
 .default-header > div {
@@ -16,11 +15,10 @@
     margin-left: 7vw;
     display: flex;
     flex-direction: row;
-    align-items: right;
-    justify-content: center;
+    align-items: center;
 }
 
-.link {
+div > .link {
     text-decoration: none;
     color: #002202;
     display: inline-flex;
@@ -40,17 +38,7 @@
     width: 250px;
 }
 
-.account {
-    display: flex;
-    align-items: center;
-}
-.avatar {
-    margin-right: 20px;
-}
-.element{}
-
 .default-container {
     height:90vh;
     background-color: #DEE4D8;
-
 }

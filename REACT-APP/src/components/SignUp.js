@@ -107,7 +107,7 @@ function SignUp({ onSignUp, onClose }) {
                         <button onClick={signUp}>Signup</button>
                     </div>
                 </div>)}
-
+                {showSignUp && <div className="overlay"></div>}
         </>
     );
 }

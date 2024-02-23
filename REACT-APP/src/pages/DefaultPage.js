@@ -13,11 +13,15 @@ function DefaultPage({ }) {
     const [user, setUser] = useState(null);
     const [showLoginPopup, setShowLoginPopup] = useState(false);
 
-    const handleLogin = (user) => {
-        setIsLoggedIn(true);
-        setUser(user);
-        setShowLoginPopup(false);
+    const handleLogin = () => {
+        if (!showSignUp) {
+            setShowLogin(true);
+        }
     };
+    const handleLoginClose = () => {
+        setShowLogin(false);
+    };
+
     const handleSignup = () => {
         if (!showSignUp) {
             setShowSignUp(true);
@@ -26,9 +30,8 @@ function DefaultPage({ }) {
     const handleSignUpClose = () => {
         setShowSignUp(false);
     };
-    const handleLogin2 = () => {
-        setShowLogin(prevState => !prevState);
-    };
+
+    
     useEffect(() => {
     }, [showLogin]);
 
@@ -38,15 +41,18 @@ function DefaultPage({ }) {
             <div className="content">
                 <img src={logoPlaceholderImage} alt="Logo" className="logo" />
                 <div className="default-header">
-                    <div onClick={handleLogin2} style={{ cursor: "pointer" }} >
-                        Log In
-                        <Link className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
-                        {showLogin && <Login onLogin={handleLogin} />
-                        }
+                    <div>
+                        <Link onClick={handleLogin} className="link">
+                            Log In
+                            <ArrowDropDownIcon className="dropdown-icon" />
+                        </Link>
+                        {showLogin && <Login onClose={handleLoginClose} />}
                     </div>
-                    <div onClick={handleSignup} style={{ cursor: "pointer" }}>
-                        Sign Up
-                        <Link className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
+                    <div>
+                        <Link onClick={handleSignup} className="link">
+                            Sign Up
+                            <ArrowDropDownIcon className="dropdown-icon" />
+                        </Link>
                         {showSignUp && <SignUp onClose={handleSignUpClose} />}
                     </div>
                 </div>
@@ -54,6 +60,8 @@ function DefaultPage({ }) {
             <div className="default-container"></div>
         </div>
     );
+    
+    
 }
 
 export default DefaultPage;
