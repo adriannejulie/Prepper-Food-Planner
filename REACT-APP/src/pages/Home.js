@@ -1,31 +1,15 @@
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 import React, { useState } from "react";
 import { Avatar, Menu, MenuItem } from '@mui/material';
-import { Link, useNavigate  } from 'react-router-dom';
-import Login from "../components/Login";
+import { Link, useNavigate } from 'react-router-dom';
 import "./Home.css";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useUser } from "../components/UserContext";
 
 function Home() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [showLoginPopup, setShowLoginPopup] = useState(false);
+    const { user, setUser } = useUser(); // Destructure setUser from useUser()
     const navigate = useNavigate();
-
-    const handleLogin = (user) => {
-        setIsLoggedIn(true);
-        setUser(user);
-        setShowLoginPopup(false);
-    };
-
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        setUser(null);
-        setAnchorEl(null);
-        navigate("/");
-    };
-
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -34,9 +18,10 @@ function Home() {
         setAnchorEl(null);
     };
 
-    const toggleLoginPopup = () => {
-        setShowLoginPopup(!showLoginPopup);
-    };
+    const handleLogout = () => {
+        setUser(null);
+        navigate("/")
+    }
 
     return (
         <div className="container">
@@ -45,7 +30,7 @@ function Home() {
                 <div className="header">
                     <div>
                         Meal Planner
-                        {isLoggedIn ? (
+                        {user ? (
                             <Link to="/meal-planner" className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
                         ) : (
                             <span className="link"> <ArrowDropDownIcon className="dropdown-icon" /></span>
@@ -53,7 +38,7 @@ function Home() {
                     </div>
                     <div>
                         My Recipes
-                        {isLoggedIn ? (
+                        {user ? (
                             <Link to="/my-recipes" className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
                         ) : (
                             <span className="link"> <ArrowDropDownIcon className="dropdown-icon" /></span>
@@ -61,14 +46,14 @@ function Home() {
                     </div>
                     <div>
                         Find Recipes
-                        {isLoggedIn ? (
+                        {user ? (
                             <Link to="/find-recipes" className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
                         ) : (
                             <span className="link"> <ArrowDropDownIcon className="dropdown-icon" /></span>
                         )}
                     </div>
                     <div className="account">
-                        {isLoggedIn ? (
+                        {user ? (
                             <>
                                 <Avatar className="avatar" alt="Profile Picture" src={user.picture} />
                                 <Menu
@@ -85,7 +70,6 @@ function Home() {
                         ) : (
                             <>
                                 <p>Account</p>
-                                <Login onLogin={handleLogin} />
                                 <ArrowDropDownIcon className="dropdown-icon" />
 
                             </>

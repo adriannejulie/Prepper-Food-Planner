@@ -4,18 +4,19 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 
 
-function SignUp({ onClose }) {
+function SignUp({ onSignUp }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showSignUp, setShowSignUp] = useState(true);
 
     const handleFNameChange = (e) => {
         setEmail(e.target.value);
     };
-    
+
     const handleLNameChange = (e) => {
         setEmail(e.target.value);
     };
-    
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
@@ -43,63 +44,69 @@ function SignUp({ onClose }) {
         });*/
 
         // Call onClose function to close the signup component
+        setShowSignUp(false);
     };
 
-    const navLogin = () => {
-        onClose(); // Close the sign-up component
+    const closeSignUp = () => {
+        setShowSignUp(false);
     };
 
     return (
-        <div className="signup-container">
-            <img
-                className="placeholder-image"
-                src={logoPlaceholderImage}
-                alt="Placeholder"
-            />
+        <>
+            {showSignUp && (
+                <div className="signup-container">
+                    <div className="exit">
+                        <button onClick={closeSignUp}>X</button>
+                    </div>
+                    <img
+                        className="placeholder-image"
+                        src={logoPlaceholderImage}
+                        alt="Placeholder"
+                    />
 
-            <hr className="divider" />
+                    <hr className="divider" />
 
-            <div className="login-section">
-                <p>First Name</p>
-                <input
-                    onChange={handleFNameChange}
-                    type="text"
-                />
-            </div>    
-            <div className="login-section">
-                <p>Last Name</p>
-                <input
-                    onChange={handleLNameChange}
-                    type="text"
-                />
-            </div>
-            <div className="login-section">
-                <p>Email</p>
-                <input
-                    onChange={handleEmailChange}
-                    type="email"
-                />
-            </div>
-            <div className="login-section">
-                <p>Password</p>
-                <input
-                    onChange={handlePasswordChange}
-                    type="password"
-                />
-            </div>
-            <div className="login-section">
-                <p>Confirm Password</p>
-                <input
-                    onChange={handleReEntPassChange}
-                    type="password"
-                />
-            </div>
-            <div className="login-buttons">
-                <button onClick={signUp}>Signup</button>
-                <button onClick={navLogin}>Return to login screen</button>
-            </div>
-        </div>
+                    <div className="login-section">
+                        <p>First Name</p>
+                        <input
+                            onChange={handleFNameChange}
+                            type="text"
+                        />
+                    </div>
+                    <div className="login-section">
+                        <p>Last Name</p>
+                        <input
+                            onChange={handleLNameChange}
+                            type="text"
+                        />
+                    </div>
+                    <div className="login-section">
+                        <p>Email</p>
+                        <input
+                            onChange={handleEmailChange}
+                            type="email"
+                        />
+                    </div>
+                    <div className="login-section">
+                        <p>Password</p>
+                        <input
+                            onChange={handlePasswordChange}
+                            type="password"
+                        />
+                    </div>
+                    <div className="login-section">
+                        <p>Confirm Password</p>
+                        <input
+                            onChange={handleReEntPassChange}
+                            type="password"
+                        />
+                    </div>
+                    <div className="login-buttons">
+                        <button onClick={signUp}>Signup</button>
+                    </div>
+                </div>)}
+
+        </>
     );
 }
-
 export default SignUp;

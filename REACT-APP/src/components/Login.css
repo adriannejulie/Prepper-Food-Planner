@@ -98,3 +98,9 @@ a:hover {
 .login-section label a {
     margin-left: auto;
 }
+.exit{
+    position: absolute;
+    top:0;
+    right:0;
+    margin-right: 15px;
+}

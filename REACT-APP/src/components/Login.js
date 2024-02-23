@@ -4,26 +4,30 @@ import "./Login.css";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 import SignUp from "./SignUp";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom"; 
+import { useUser } from "./UserContext";
 
 function Login({ onLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [showLogin, setShowLogin] = useState(true); 
-    const [showSignUp, setShowSignUp] = useState(false);
+    const [showLogin, setShowLogin] = useState(true);
+    const navigate = useNavigate();
+    const { setUser } = useUser();
 
     const showUserInformation = (tokenObject) => {
         const token = tokenObject.credential;
 
         try {
             const decodedToken = jwtDecode(token);
-            console.log(decodedToken)
             const user = {
                 name: decodedToken.name,
                 email: decodedToken.email,
                 picture: decodedToken.picture
             };
 
-            onLogin(user);
+            setUser(user);
+            navigate("/meal-planner");
+            closeLogin();
         } catch (error) {
             console.error("Error decoding JWT:", error);
         }
@@ -52,20 +56,17 @@ function Login({ onLogin }) {
         });*/
     };
 
-    const toggleSignUp = () => {
-        setShowLogin(false);
-        setShowSignUp(true); 
-    };
-
-    const closeSignUp = () => {
-        setShowSignUp(false);
-        setShowLogin(true); // Show the login component again
+    const closeLogin = () => {
+        setShowLogin(false); 
     };
 
     return (
         <>
             {showLogin && (
                 <div className="login-container">
+                    <div className="exit">
+                    <button onClick={closeLogin}>X</button>
+                    </div>
                     <img
                         className="placeholder-image"
                         src={logoPlaceholderImage}
@@ -102,11 +103,9 @@ function Login({ onLogin }) {
                     </div>
                     <div className="login-buttons">
                         <button onClick={standardLogin}>Login</button>
-                        <button onClick={toggleSignUp}>Signup</button>
                     </div>
                 </div>
             )}
-            {showSignUp && <SignUp onClose={closeSignUp} />} 
         </>
     );
 }
