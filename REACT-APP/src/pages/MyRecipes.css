@@ -1,0 +1,51 @@
+.meal-planner-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90vh;
+    padding-right: 10%;
+}
+
+
+.recipes-container {
+    font-size: 1.6vh;
+    font-weight: 500;
+    background-color: white;
+    border-radius: 0vh 2vh 2vh 0vh;
+    top: 50%;
+    height: 75%;
+    width: 250px;
+    padding: 1vh;
+    padding-top: 2vh;
+}
+
+
+.recipe-viewing-container {
+    font-size: 1.6vh;
+    font-weight: 500;
+    background-color: #F2F5EB;
+    padding: 2vh;
+    border-radius: 2vh;
+    top: 50%;
+    height: 75%;
+    width: 50%;
+}
+
+
+.recipe-list-show-hide {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    background-color: #004f19;
+    margin-right: 10px;
+    color: white;
+}
+
+
+.saved-uploaded-selection{
+    height: 40px;
+    width: 70%;
+    border-radius: 10px;
+    background-color: #004f19;
+    color: white;
+}
