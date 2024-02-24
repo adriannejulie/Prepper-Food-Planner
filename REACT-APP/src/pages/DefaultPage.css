@@ -1,0 +1,44 @@
+.default-header {
+    height: 100px;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: #002202;
+    font-size: 20px;
+}
+
+.default-header > div {
+    margin-right: 15px;
+    margin-left: 7vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div > .link {
+    text-decoration: none;
+    color: #002202;
+    display: inline-flex;
+    align-items: center;
+}
+
+.dropdown-icon {
+    margin-left: 10px;
+    font-size: 36px !important;
+}
+
+.logo {
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100px;
+    width: 250px;
+}
+
+.default-container {
+    height:90vh;
+    background-color: #DEE4D8;
+}
