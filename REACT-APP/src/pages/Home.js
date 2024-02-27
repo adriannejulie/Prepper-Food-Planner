@@ -23,6 +23,10 @@ function Home() {
         navigate("/")
     }
 
+    const handleAccount = () => {
+        navigate("/account-info")
+    }
+
     return (
         <div className="container">
             <div className="content">
@@ -61,6 +65,7 @@ function Home() {
                                     open={Boolean(anchorEl)}
                                     onClose={handleMenuClose}
                                 >
+                                    <MenuItem onClick={handleAccount}>Account</MenuItem>
                                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
                                 </Menu>
                                 <p>{user.name}</p>

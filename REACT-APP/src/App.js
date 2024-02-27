@@ -6,6 +6,7 @@ import MealPlanner from "./pages/MealPlanner";
 import MyRecipes from "./pages/MyRecipes";
 import FindRecipes from "./pages/FindRecipes";
 import SignUp from "./components/SignUp.js";
+import AccountInfo from "./pages/AccountInfo.js";
 import { UserProvider } from "../src/components/UserContext";
 
 import "./App.css";
@@ -27,6 +28,11 @@ function App() {
                     <Route
                         path="/find-recipes"
                         element={<Layout><FindRecipes /></Layout>}
+                    />
+                    <Route
+                        path="/account-info"
+                        element={<Layout><AccountInfo/></Layout>}
+                    
                     />
                 </Routes>
             </UserProvider>
