@@ -21,10 +21,12 @@ function Home() {
     const handleLogout = () => {
         setUser(null);
         navigate("/")
+        handleMenuClose();
     }
 
     const handleAccount = () => {
         navigate("/account-info")
+        handleMenuClose();
     }
 
     return (
