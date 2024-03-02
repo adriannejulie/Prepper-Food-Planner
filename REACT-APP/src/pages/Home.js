@@ -1,4 +1,4 @@
-import logoPlaceholderImage from "../images/logo-placeholder-image.png";
+import logoPlaceholderImage from "../images/prepper_logo.png";
 import React, { useState } from "react";
 import { Avatar, Menu, MenuItem } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
