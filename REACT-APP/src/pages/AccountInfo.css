@@ -78,7 +78,7 @@
     padding-right: 10px;
     background-color: var(--on_primary);
     border-radius: 10px;
-
+    border: 2px solid var(--on_primary);
     height: 40%;
     width: 50%;
 
@@ -120,6 +120,11 @@
     color: var(--on_teriary);
     width: 10%;
     border-radius: 15px;
+}
+
+.elem-button:hover{
+
+    cursor: pointer;
 }
 
 
@@ -171,17 +176,35 @@ svg{
 }
 
 .text-input-error{
+    /*
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    */
     background-color: var(--on_primary);
     border-radius: 10px;
     border: 2px solid var(--error);
 
-    height: 40%;
-    width: 50%;
     
     
+}
+
+.text-input-select{
+
+    background-color: var(--on_primary);
+    border-radius: 10px;
+    border: 2px solid var(--on_primiary_container);
+}
+
+.text-input:focus{
+    border-color: white;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px white, 0 0 8px white;
+    box-shadow: inset 0 1px 1px white, 0 0 8px white;
+}
+
+.error-icon svg{
+    color: var(--error);
 }

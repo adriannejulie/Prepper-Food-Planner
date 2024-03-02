@@ -55,7 +55,7 @@ p {
 
 input[type="email"],
 input[type="password"] {
-    width: calc(100% - 1vw);
+    
     padding: 1vh;
     border: 0.1vh solid #000;
     border-radius: 0.5vh;
@@ -65,6 +65,7 @@ input[type="password"] {
 label {
     display: flex;
     align-items: center;
+
 }
 
 .login-buttons>button {
