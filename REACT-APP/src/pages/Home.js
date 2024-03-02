@@ -30,7 +30,7 @@ function Home() {
     }
 
     return (
-        <div className="container">
+  
             <div className="content">
                 <img src={logoPlaceholderImage} alt="Logo" className="logo" />
                 <div className="header">
@@ -85,7 +85,7 @@ function Home() {
 
                 </div>
             </div>
-        </div>
+
     );
 }
 
