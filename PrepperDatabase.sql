@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS prepper;
+DROP DATABASE IF EXISTS Prepper;
 CREATE DATABASE Prepper;
 USE Prepper;
 
@@ -103,5 +103,5 @@ END;
 //
 
 DELIMITER ;
-	
+
 
