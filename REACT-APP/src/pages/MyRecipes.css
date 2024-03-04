@@ -31,7 +31,7 @@
 .recipe-viewing-container {
     font-size: 1.6vh;
     font-weight: 500;
-    background-color: #F2F5EB;
+    background-color: white;
     padding: 2vh;
     border-radius: 2vh;
     top: 50%;
@@ -48,6 +48,7 @@
     border-radius: 10px;
     margin-right: 10px;
     cursor: pointer;
+    justify-content: center;
 }
 
 
@@ -55,6 +56,8 @@
     height: 40px;
     width: 75%;
     border-radius: 10px;
+    justify-content: space-between;
+    padding-left: 5px;
 }
 
 
@@ -75,4 +78,11 @@
 .menu-buttons{
     background-color: #004f19;
     color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.icon-size{
+    font-size: 25px;
 }

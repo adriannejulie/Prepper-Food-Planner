@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./MyRecipes.css";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Recipe from "../components/Recipe.js";
+import RecipeViewing from "../components/RecipeViewing.js";
+import { MdBookmark, MdDehaze } from "react-icons/md";
 
 function MyRecipes() {
     const [savedRecipes, setSavedRecipes] = useState([]);
@@ -55,12 +57,14 @@ function MyRecipes() {
         <div className="meal-planner-container">
                 <div className="recipes-container">
                     <div className="menu">
-                        <button className="recipe-list-show-hide menu-buttons"></button>
-                        <div className="saved-uploaded-selection menu-buttons">{(viewingUploadedRecipes) ? "Saved Recipes" : "Uploaded Recipes"}<button className="swap-recipe-view menu-buttons" onClick={chanegRecipeView}><ArrowDropDownIcon className="dropdown-icon menu-buttons" /></button></div>
+                        <button className="recipe-list-show-hide menu-buttons"><MdDehaze className="icon-size"/></button>
+                        <div className="saved-uploaded-selection menu-buttons"><MdBookmark className="icon-size"/>{(viewingUploadedRecipes) ? "Saved Recipes" : "Uploaded Recipes"}<button className="swap-recipe-view menu-buttons" onClick={chanegRecipeView}><ArrowDropDownIcon className="menu-buttons menu-buttons" /></button></div>
                     </div>
                     {(viewingUploadedRecipes) ? savedRecipes.map(theRecipes => (<Recipe aRecipe={theRecipes} key={theRecipes.recipeID}/>)) : uploadedRecipes.map(theRecipes => (<Recipe aRecipe={theRecipes} key={theRecipes.recipeID}/>))}
                 </div>
-                <div className="recipe-viewing-container"></div>
+                <div className="recipe-viewing-container">
+                    <RecipeViewing />
+                </div>
         </div>
     );
 }
