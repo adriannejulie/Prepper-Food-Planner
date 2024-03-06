@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUp({ onSignUp, onClose }) {
     const [firstName, setFirstName] = useState('');
@@ -63,8 +65,8 @@ function SignUp({ onSignUp, onClose }) {
             setShowSignUp(false);
             onClose();
         } else {
-            alert("Passwords must match")
-        };
+            toast.error("Passwords must match");
+        }
     }
 
     const closeSignUp = () => {
@@ -74,6 +76,8 @@ function SignUp({ onSignUp, onClose }) {
 
     return (
         <>
+            <ToastContainer position="top-center" />
+
             {showSignUp && (
                 <div className="signup-container">
                     <div className="exit">
