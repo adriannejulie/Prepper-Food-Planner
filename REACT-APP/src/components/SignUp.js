@@ -34,44 +34,43 @@ function SignUp({ onSignUp, onClose }) {
     };
 
     const signUp = () => {
-        /*fetch(url, {
-
-    method: 'POST',
-
-    body: {
-
-        email: email,
-
-        password: password
-
-    }
-
-}).then(response => {
-
-    if (response.status === 200){}
-
-    else{
-
-        window.alert("Incorrect email or password entered");
-
-    }
-
-});*/
-
-
-
-        // Call onClose function to close the signup component
-        if (password === confirmedPassword) {
-            setShowSignUp(false);
-            onClose();
-        } else {
-            toast.error("Passwords must match");
+        if (!firstName || !lastName || !email || !password || !confirmedPassword) {
+            toast.error("All fields are required");
+            return;
         }
+
+        if (password !== confirmedPassword) {
+            toast.error("Passwords must match");
+            return;
+        }
+
+        const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
+        if (!emailPattern.test(email)) {
+            toast.error("Invalid email format");
+            return;
+        }
+
+        /*fetch(url, {
+            method: 'POST',
+            body: {
+                email: email,
+                password: password
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                // Handle success
+            } else {
+                window.alert("Incorrect email or password entered");
+            }
+        });*/
+
+        closeSignUp();
     }
 
     const closeSignUp = () => {
         setShowSignUp(false);
         onClose();
+
     };
 
     return (
