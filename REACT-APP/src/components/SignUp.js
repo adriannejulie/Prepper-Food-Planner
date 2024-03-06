@@ -3,18 +3,20 @@ import "./SignUp.css";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 
-
 function SignUp({ onSignUp, onClose }) {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmedPassword, setConfirmedPassword] = useState('');
     const [showSignUp, setShowSignUp] = useState(true);
 
     const handleFNameChange = (e) => {
-        setEmail(e.target.value);
+        setFirstName(e.target.value);
     };
 
     const handleLNameChange = (e) => {
-        setEmail(e.target.value);
+        setLastName(e.target.value);
     };
 
     const handleEmailChange = (e) => {
@@ -26,32 +28,49 @@ function SignUp({ onSignUp, onClose }) {
     };
 
     const handleReEntPassChange = (e) => {
-        setEmail(e.target.value);
+        setConfirmedPassword(e.target.value);
     };
 
     const signUp = () => {
         /*fetch(url, {
-            method: 'POST',
-            body: {
-                email: email,
-                password: password
-            }
-        }).then(response => {
-            if (response.status === 200){}
-            else{
-                window.alert("Incorrect email or password entered");
-            }
-        });*/
+
+    method: 'POST',
+
+    body: {
+
+        email: email,
+
+        password: password
+
+    }
+
+}).then(response => {
+
+    if (response.status === 200){}
+
+    else{
+
+        window.alert("Incorrect email or password entered");
+
+    }
+
+});*/
+
+
 
         // Call onClose function to close the signup component
-        setShowSignUp(false);
-        onClose();
-    };
+        if (password === confirmedPassword) {
+            setShowSignUp(false);
+            onClose();
+        } else {
+            alert("Passwords must match")
+        };
+    }
+
     const closeSignUp = () => {
         setShowSignUp(false);
         onClose();
     };
-
 
     return (
         <>
@@ -107,7 +126,7 @@ function SignUp({ onSignUp, onClose }) {
                         <button onClick={signUp}>Signup</button>
                     </div>
                 </div>)}
-                {showSignUp && <div className="overlay"></div>}
+            {showSignUp && <div className="overlay"></div>}
         </>
     );
 }
