@@ -16,7 +16,7 @@
     background-color: white;
     border-radius: 0vh 2vh 2vh 0vh;
     top: 50%;
-    height: 75%;
+    height: 100%;
     min-width: 250px;
     padding: 1vh;
     padding-top: 2vh;
@@ -33,12 +33,13 @@
     font-weight: 500;
     background-color: white;
     padding: 2vh;
-    border-radius: 2vh;
     top: 50%;
-    height: 75%;
+    height: 100%;
     width: 100%;
     margin-left: 5%;
-    margin-right: 5%;
+    display: flex;
+    padding-bottom: 200px;
+    padding-top: 200px;
 }
 
 
@@ -76,7 +77,7 @@
 
 
 .menu-buttons{
-    background-color: #004f19;
+    background-color: rgb(21, 101, 53);
     color: white;
     display: flex;
     align-items: center;
