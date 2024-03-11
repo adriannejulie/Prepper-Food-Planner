@@ -8,9 +8,15 @@ import { MdOutlineAddBox, MdSearch } from "react-icons/md";
 function MealPlanner() {
 
     const [value, setValue] = useState(new dayjs());
+    const [meals, setMeals] = useState([]);
 
     useEffect(() => {
         console.log(value.format("YYYY-MM-DD"));
+        // dummy data using for testing
+        if (value.format("YYYY-MM-DD") === "2024-03-25") {
+            setMeals(["Christmas Dinner", "Easter Lunch", "Thanksgiving Breakfast"]);
+        }
+        console.log(meals);
       }, [value]);
 
     // temp functions, functionality to be added
@@ -21,6 +27,10 @@ function MealPlanner() {
     const findRecipes = () => {
         console.log("Find Recipes");
     }
+
+
+
+    // temp data, to be replaced with API call from functions above
 
     return (
         <div className="meal-planner">
@@ -40,7 +50,26 @@ function MealPlanner() {
                 </button>
             </div>
             <div className="section">
-                SUSSY
+                {
+                    meals.length === 0 ? 
+
+                    // no meals are planned on the selected date
+                    (<div id="no-meals-planned">
+                        No Meals Planned for Today
+                    </div>)
+                        
+                    : 
+
+                    // meals are planned on the selected date
+                    (<div id="meals-planned">
+                        <ul>
+                            {meals.map((meal, index) => {
+                                return <li key={index}>{meal}</li>
+                            })}
+                        </ul>
+                    </div>)
+                }
+
             </div>
         </div>
     );
