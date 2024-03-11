@@ -1,25 +1,15 @@
-// Home.js
-
+import logoPlaceholderImage from "../images/prepper_logo.png";
 import React, { useState } from "react";
-import Login from "../components/Login";
 import { Avatar, Menu, MenuItem } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import "./Home.css";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useUser } from "../components/UserContext";
 
 function Home() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleLogin = (user) => {
-        setIsLoggedIn(true);
-        setUser(user);
-    };
-
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        setUser(null);
-        setAnchorEl(null);
-    };
-
+    const { user, setUser } = useUser(); // Destructure setUser from useUser()
+    const navigate = useNavigate();
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -28,24 +18,74 @@ function Home() {
         setAnchorEl(null);
     };
 
+    const handleLogout = () => {
+        setUser(null);
+        navigate("/")
+        handleMenuClose();
+    }
+
+    const handleAccount = () => {
+        navigate("/account-info")
+        handleMenuClose();
+    }
+
     return (
-        <div className="container">
+  
             <div className="content">
-                {!isLoggedIn && <Login onLogin={handleLogin} />}
-                {isLoggedIn && (
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', margin: '10px' }}>
-                        <Avatar alt="Profile Picture" src={user.picture} onClick={handleMenuOpen} />
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleMenuClose}
-                        >
-                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                        </Menu>
+                <img src={logoPlaceholderImage} alt="Logo" className="logo" />
+                <div className="header">
+                    <div>
+                        Meal Planner
+                        {user ? (
+                            <Link to="/meal-planner" className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
+                        ) : (
+                            <span className="link"> <ArrowDropDownIcon className="dropdown-icon" /></span>
+                        )}
                     </div>
-                )}
+                    <div>
+                        My Recipes
+                        {user ? (
+                            <Link to="/my-recipes" className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
+                        ) : (
+                            <span className="link"> <ArrowDropDownIcon className="dropdown-icon" /></span>
+                        )}
+                    </div>
+                    <div>
+                        Find Recipes
+                        {user ? (
+                            <Link to="/find-recipes" className="link"><ArrowDropDownIcon className="dropdown-icon" /></Link>
+                        ) : (
+                            <span className="link"> <ArrowDropDownIcon className="dropdown-icon" /></span>
+                        )}
+                    </div>
+                    <div className="account">
+                        {user ? (
+                            <>
+                                <Avatar className="avatar" alt="Profile Picture" src={user.picture} />
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleMenuClose}
+                                >
+                                    <MenuItem onClick={handleAccount}>Account</MenuItem>
+                                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                                </Menu>
+                                <p>{user.name}</p>
+                                <ArrowDropDownIcon className="dropdown-icon" onClick={handleMenuOpen} />
+
+                            </>
+                        ) : (
+                            <>
+                                <p>Account</p>
+                                <ArrowDropDownIcon className="dropdown-icon" />
+
+                            </>
+                        )}
+                    </div>
+
+                </div>
             </div>
-        </div>
+
     );
 }
 

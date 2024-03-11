@@ -30,6 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @RequestMapping("/api/user")
 public class UserInfoController{
     private final DatabaseConnector databaseConnector;
+    private UserInfo user;
 
     @Autowired
     public UserInfoController(DatabaseConnector databaseConnector) {
@@ -42,22 +43,22 @@ public class UserInfoController{
     }
 
     @PostMapping("/signup")
-    public ResponseEntity createAccount(@RequestBody Customers customer)
+    public ResponseEntity createAccount(@RequestBody UserInfo user)
 
     {
-        this.customer = customer;
-        DatabaseConnection databaseConnection = new DatabaseConnection();
-        boolean userAdded = databaseConnection.addUsers(customer);
+        this.user = user;
+        DatabaseConnector databaseConnection = new DatabaseConnector();
+        boolean userAdded = databaseConnection.addUsers(user);
         if (userAdded) {
-            return new ResponseEntity<>(customer, HttpStatus.CREATED);
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
         } else {
             // If the user already exists, return 208 (Already Reported)
             return new ResponseEntity<>("User already exists", HttpStatus.ALREADY_REPORTED);
         }
     }
 
-    @PostMapping("/booking")
-    public ResponseEntity bookFlight(@RequestBody Booked flight) {
+    @GetMapping("/login")
+    public ResponseEntity login(@RequestBody UserInfo user) {
         this.flight = flight;
         
 
@@ -146,19 +147,6 @@ public class UserInfoController{
     
             emailService.sendEmail(email, subject, body);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/viewFlights")
-    public ResponseEntity getFlights(@RequestParam(value = "USERNAME") String username) {
-        DatabaseConnection databaseConnection = new DatabaseConnection();
-        ArrayList<Booked> flights = new ArrayList<>();
-        flights = databaseConnection.viewBooked(username);
-        if (flights != null) {
-            return new ResponseEntity<>(flights, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
     }
 
 

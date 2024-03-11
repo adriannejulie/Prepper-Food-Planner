@@ -1,0 +1,222 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+
+:root{
+    --on_primiary_container: #002202;
+    --on_primary: #FFFFFF;
+    --outline_variant: #C2C8BC;
+    --surface_container_low:#F2F5EB;
+    --surface_container_lowest: #FFFFFF;
+    --on_tertiary_container: #002022;
+    --error: #BA1A1A;
+    --surface_dim: #D8DBD2;
+    --on_teriary: #FFFFFF;
+    --on_secondary: #FFFFFF;
+    --secondary: #53634E;
+    --tertiary: #38656A;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    position:absolute; 
+    height:100%;
+    width: 100%;
+}
+.default-header {
+    height: 100px;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: #002202;
+    font-size: 20px;
+}
+
+.default-header > div {
+    margin-right: 15px;
+    margin-left: 7vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div > .link {
+    text-decoration: none;
+    color: #002202;
+    display: inline-flex;
+    align-items: center;
+}
+
+.dropdown-icon {
+    margin-left: 10px;
+    font-size: 36px !important;
+}
+
+.logo {
+    position: absolute;
+    top:0;
+    left: 40px;
+    height: 100px;
+    width: 100px;
+}
+
+.wrapper{
+    display: flex;
+    flex: 1;
+    min-height: 0px; /* IMPORTANT: you need this for non-chrome browsers */
+    width: 100%;
+
+}
+
+.min-h{
+    width: 100%;
+    overflow-y: scroll;
+}
+
+
+.default-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+    background-color: #eef2ef;
+    height: fit-content;
+    
+    
+}
+
+.welcome-container{
+
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    background-color: #DEE4D8;
+
+}
+
+.slanted-background{
+    width: fit-content;
+    background-color: white;
+    padding: 10px 100px;
+    border-radius: 50px 5px 50px 5px;
+}
+
+
+.idea{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 500px;
+    min-height: 0px;
+    gap: 100px;
+
+}
+
+
+.preview-image{
+    width: 600px;
+    height: auto;
+}
+
+.clip-image{
+    width: 335px;
+    height: auto;
+}
+
+.offwhite{
+    background-color: #eef2ef;
+}
+
+.image-holder{
+    border-radius: 150px;
+}
+
+.text-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    height: 434.438px;
+    border-radius: 150px;
+    background-color: #DEE4D8;
+}
+
+.ideas{
+
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.interest{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 1000px;
+    height: 300px;
+    border-radius: 100px;
+    background-color: #DEE4D8;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.header1{
+
+    padding: 1.0%;
+    border-radius: 10px;
+    font-size: 40px;
+    font-family: roboto;
+    color: var(--secondary);
+}
+
+.header2{
+
+    padding: 1.0%;
+    border-radius: 10px;
+    font-size: 30px;
+    font-family: roboto;
+    font-weight: lighter;
+    color: var(--tertiary);
+
+}
+
+.secondary{
+    background-color: var(--secondary);
+    color: var(--on_secondary);
+
+}
+.tertiary{
+    background-color: var(--tertiary);
+    color: var(--on_teriary);
+    
+}
+
+.button{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    padding: 1%;
+    border-radius: 10px;
+    height: 10%;
+}
+
+.button:hover{
+    cursor: pointer;
+}

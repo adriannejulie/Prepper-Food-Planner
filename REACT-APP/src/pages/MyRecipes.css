@@ -1,0 +1,89 @@
+.hidden {
+    display: none !important;
+  }
+
+.meal-planner-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90vh;
+}
+
+
+.recipes-container {
+    font-size: 1.6vh;
+    font-weight: 500;
+    background-color: white;
+    border-radius: 0vh 2vh 2vh 0vh;
+    top: 50%;
+    height: 100%;
+    min-width: 250px;
+    padding: 1vh;
+    padding-top: 2vh;
+    overflow-y: scroll;
+}
+
+.recipes-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+.recipe-viewing-container {
+    font-size: 1.6vh;
+    font-weight: 500;
+    background-color: white;
+    padding: 2vh;
+    top: 50%;
+    height: 100%;
+    width: 100%;
+    margin-left: 5%;
+    display: flex;
+    padding-bottom: 200px;
+    padding-top: 200px;
+}
+
+
+.recipe-list-show-hide {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    justify-content: center;
+}
+
+
+.saved-uploaded-selection{
+    height: 40px;
+    width: 75%;
+    border-radius: 10px;
+    justify-content: space-between;
+    padding-left: 5px;
+}
+
+
+.swap-recipe-view{
+    float: right;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.menu-buttons{
+    background-color: rgb(21, 101, 53);
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.icon-size{
+    font-size: 25px;
+}
