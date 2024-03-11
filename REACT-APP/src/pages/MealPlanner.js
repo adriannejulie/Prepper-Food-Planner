@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import "./MealPlanner.css";
+import MealPlan from "../components/MealPlan.js";
 import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from "dayjs";
@@ -12,10 +13,15 @@ function MealPlanner() {
 
     useEffect(() => {
         console.log(value.format("YYYY-MM-DD"));
+
         // dummy data using for testing
         if (value.format("YYYY-MM-DD") === "2024-03-25") {
             setMeals(["Christmas Dinner", "Easter Lunch", "Thanksgiving Breakfast"]);
         }
+        else {
+            setMeals([]);
+        }
+
         console.log(meals);
       }, [value]);
 
@@ -62,11 +68,9 @@ function MealPlanner() {
 
                     // meals are planned on the selected date
                     (<div id="meals-planned">
-                        <ul>
-                            {meals.map((meal, index) => {
-                                return <li key={index}>{meal}</li>
-                            })}
-                        </ul>
+                        {meals.map((meal, index) => {
+                            return <MealPlan key={index} meal={meal}></MealPlan>
+                        })}
                     </div>)
                 }
 

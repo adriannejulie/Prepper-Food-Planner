@@ -1,0 +1,60 @@
+.meal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border: solid 1px #53634E;
+    border-radius: 25px;
+    height: 20vh;
+    width: 25vw;
+    margin: 10px;
+}
+
+#img {
+    border-radius: 25px;
+    height: 10vh;
+    margin: 10px;
+}
+
+.mealplan-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 10vw;
+    height: 15vh;
+    border-radius: 25px;
+}
+
+#meal-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #888888;
+    align-self: center;
+}
+
+#type-and-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #53634E;
+    border-radius: 25px;
+    height: 3vh;
+    width: 8vw;
+    margin: 3px;
+}
+
+#icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 8vw;
+}
+
+#button {
+    border-radius: 50%;
+    border: none;
+    background-color: #F2F5EB
+}
