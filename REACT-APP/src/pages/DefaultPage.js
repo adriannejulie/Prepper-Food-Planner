@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import logoPlaceholderImage from "../images/prepper_logo.png";
+import logoLight from "../images/prepper-logo-light.png";
+import logodark from "../images/prepper-logo-dark.png"
+import backgroundCal from "../images/backgroundCalendar.png"
 import previewPlaceholder from "../images/placeholder-preview.png";
 import clip1 from "../images/clip1.png";
 import clip2 from "../images/clip2.png";
@@ -8,6 +10,9 @@ import { Link } from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
+import { MdEmail } from "react-icons/md";
+import { FaGithubAlt } from "react-icons/fa";
+
 import "./DefaultPage.css";
 
 function DefaultPage({ }) {
@@ -16,6 +21,11 @@ function DefaultPage({ }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
     const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+    const [showCarousel1, setShowCarousel1] = useState(true);
+    const [showCarousel2, setShowCarousel2] = useState(false);
+    const [showCarousel3, setShowCarousel3] = useState(false);
+
 
     const handleLogin = () => {
         if (!showSignUp) {
@@ -35,6 +45,39 @@ function DefaultPage({ }) {
         setShowSignUp(false);
     };
 
+    const handleCarouselToggle1 = () => {
+
+        if (!showCarousel1){
+            setShowCarousel1(true)
+            setShowCarousel2(false)
+            setShowCarousel3(false)
+        }
+    };
+
+    const handleCarouselToggle2 = () => {
+
+        if (!showCarousel2){
+            setShowCarousel1(false)
+            setShowCarousel2(true)
+            setShowCarousel3(false)
+        }
+    };
+
+    const handleCarouselToggle3 = () => {
+
+        if (!showCarousel3){
+            setShowCarousel1(false)
+            setShowCarousel2(false)
+            setShowCarousel3(true)
+        }
+    };
+
+    const carouselText1 = "Pick a recipe from your own catalog or browser for public on our forum. Pick a day and plan what dishes you want to eat"
+    const carouselText2 = "Cook up your own recipes and save them for later. You can also grab a bite of other people’s recipes for your meal plan."
+    const carouselText3 = "Search through our catalog of recipes, uploaded by other chefs like you. Search by name, author, or whatever is in your pantry"
+
+
+
     
     useEffect(() => {
     }, [showLogin]);
@@ -43,78 +86,141 @@ function DefaultPage({ }) {
     return (
         <div className="container">
             <div className="content">
-                <img src={logoPlaceholderImage} alt="Logo" className="logo" />
+                <img src={logoLight} alt="Logo" className="logo" />
                 <div className="default-header">
-                    <div>
-                        <Link onClick={handleLogin} className="link">
+                    <div className="login-signup-button tertiary alata-regular">
+                        <Link onClick={handleLogin} className="link white">
                             Log In
-                            <ArrowDropDownIcon className="dropdown-icon" />
+                            
                         </Link>
                         {showLogin && <Login onClose={handleLoginClose} />}
                     </div>
-                    <div>
-                        <Link onClick={handleSignup} className="link">
+                    <div className="login-signup-button primary alata-regular">
+                        <Link onClick={handleSignup} className="link white">
                             Sign Up
-                            <ArrowDropDownIcon className="dropdown-icon" />
                         </Link>
                         {showSignUp && <SignUp onClose={handleSignUpClose} />}
                     </div>
                 </div>
             </div>
-                <div className="wrapper">
-                <div className="min-h">
-                <div className="default-container">
-                    <div className="welcome-container">
-                        
-                        <div className="slanted-background">
+
+            <div className="wrapper">
+            <div className="min-h">
+            <div className="default-container">
+                <div className="welcome-container">
+                    
+                    
+
+                    <img src={backgroundCal} className="faded-image" />
+                    <div className="eye-catcher">
+                        <div className="big-title alata-regular white"> 
                             Plan with Prepper!
                         </div>
+                        <Link onClick={handleSignup} className="link eye-catcher-join alata-regular">
+                            Start Planning!
+                        </Link>
+                    </div>
+                        
+
+                </div>
+
+                <div className="offwhite ideas">
+
+                    <div className="mid-section">
+
+                        <img src={previewPlaceholder} className="picture-half" />
+                        <div className="text-half alata-regular">
+                            <div className="mid-header">How it works</div>
+                            <div className="mid-text">Plan, Create and Share with Prepper!<br></br>IAND WAJKd Fawjf bJKWBFKJdABWKKJ ABWFJBdA WJKBFKBWK JFBJKABFBK JAWBFKJBKFW</div>
+
+                        </div>
+
                     </div>
 
-                    <div className="offwhite ideas">
-                        <div className="idea">
 
-                            <div className="image-holder">
-                                <img src={previewPlaceholder} className="preview-image"/>
-                            </div>
-                            <div className="text-holder">
-                                <img src={clip1} className="clip-image"/>
-                            </div>
+                    <div className="carousel">
+                        <div className="carousel-options">
+                            <div className={showCarousel1 ? ("c-option carousel-hightlight alata-regular") : ("c-option carousel-inverse alata-regular")}
+                            onClick={handleCarouselToggle1} >Plan </div>
+                            <div className={showCarousel2 ? ("c-option carousel-hightlight alata-regular") : ("c-option carousel-inverse alata-regular")} onClick={handleCarouselToggle2} >Prep</div>
+                            <div className={showCarousel3 ? ("c-option carousel-hightlight alata-regular") : ("c-option carousel-inverse alata-regular")} onClick={handleCarouselToggle3} >Search and Share</div>
+
                         </div>
+                        <div className="carousel-content">
 
-                        <div className="idea">
-                            <div className="text-holder">
-                                <img src={clip2} className="clip-image"/>
-                            </div>
-                            <div className="image-holder">
-                                    <img src={previewPlaceholder} className="preview-image"/>
-                            </div>
-                            
+                                <div className="caro-pic-holder">
+                                    <img src={showCarousel1 ? (previewPlaceholder) : (
+
+                                        showCarousel2 ? (backgroundCal) : (
+
+                                            showCarousel3 ? (previewPlaceholder) : (
+
+                                                previewPlaceholder //ERROR
+                                            )
+                                        )
+
+                                    )} className="picture-caro" />
+                                </div>
+
+                                <div className="carousel-descr alata-regular ">
+                                    <div className="carousel-header">
+                                    {showCarousel1 ? ("Plan your day out") : (
+                                            showCarousel2 ? ("Prep & Share") : (
+                                                showCarousel3 ? ("Discover a new dish") : ("None")
+                                            )
+                                        )}
+                                    </div>
+                                    <div className="carousel-text">
+
+                                        {showCarousel1 ? (carouselText1) : (
+                                            showCarousel2 ? (carouselText2) : (
+                                                showCarousel3 ? (carouselText3) : ("None")
+                                            )
+                                        )}
+                                    
+                                    </div>
+                                    
+                                </div>
                         </div>
+                    </div>
+                   
 
-                        <div className="idea">
-                            <div className="image-holder">
-                                    <img src={previewPlaceholder} className="preview-image"/>
-                            </div>
-                            <div className="text-holder">
-                                <img src={clip3} className="clip-image"/>
+                    <div className="interest alata-regular">
+
+                        <div className="header1 ">Interested in what we offer?</div>
+                        <div className="join-button secondary" onClick={handleSignup}>Join Here!</div>
+                        <div className="header2">Already a member?</div>
+                        <div className="join-button tertiary" onClick={handleLogin}>Sign In</div>
+
+                    </div>
+
+                    <div className="footer">
+                        <img src={logodark} className="footer-logo"/>
+                        <div className="contacts white playfair-display">
+                            <div className="contact-header"> Contact Us</div>
+                            <div className="contact-header"> 696-969-6969</div>
+                            <div className= "contact-icons">
+                                <div className="icon white">
+                                <MdEmail/>
+                                </div>
+                                <div className="icon white">
+                                <FaGithubAlt />
+                                </div>
                                 
                             </div>
                         </div>
-
-                        <div className="interest">
-
-                            <div className="header1">Interested in what we offer?</div>
-                            <div className="button secondary" onClick={handleSignup}>Join Here!</div>
-                            <div className="header2">Already a member?</div>
-                            <div className="button tertiary" onClick={handleLogin}>Sign In</div>
-
+                        <div className="footer-spacer"></div>
+                        <div className="info-pages white playfair-display">
+                            <div className="contact-header">About Us</div>
+                            <div className="contact-header">|</div>
+                            <div className="contact-header">FAQ</div>
                         </div>
                     </div>
+                </div>
 
-                </div>
-                </div>
-                </div>
+            </div>
+            </div>
+            </div>
         </div>
     );
     
