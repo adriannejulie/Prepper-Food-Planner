@@ -51,6 +51,7 @@
 p {
     margin: 0;
     text-align: left;
+    color: black;
 }
 
 input[type="email"],
@@ -65,6 +66,7 @@ input[type="password"] {
 label {
     display: flex;
     align-items: center;
+    color: #000;
 
 }
 
@@ -96,6 +98,7 @@ a:hover {
 
 .login-section label input[type="checkbox"] {
     margin-right: 1vw;
+    color: black !important;
 }
 
 .login-section label a {
