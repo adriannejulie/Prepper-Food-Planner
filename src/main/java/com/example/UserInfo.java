@@ -1,4 +1,4 @@
-package com;
+package com.example;
 
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,24 +11,28 @@ public class UserInfo {
     @JsonProperty("PASSWORD")
     private String password;
 
-    @JsonProperty("NAME")
-    private String name;
+    @JsonProperty("FIRSTNAME")
+    private String firstname;
+
+    @JsonProperty("LASTNAME")
+    private String lastname;
 
     @JsonProperty("ISGOOGLE")
     private boolean isGoogle;
 
-    public UserInfo(String email, String password, String name, boolean isGoogle){
+    public UserInfo(String email, String password, String firstname, String lastname, boolean isGoogle){
         this.password = password;
-        this.name = name;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.isGoogle = isGoogle;
     }
 
     public UserInfo(){
         this.email = "";
-        this.password = "";
-        this.name = "";
-        this.google = false;
+        this.firstname = "";
+        this.lastname = "";
+        this.isGoogle = false;
     }
 
     public String getEmail() {
@@ -47,12 +51,20 @@ public class UserInfo {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLastName() {
+        return lastname;
+    }
+
+    public void setFirstName(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastName(String lastname) {
+        this.lastname = lastname;
     }
 
     public boolean getGoogleStatus(){

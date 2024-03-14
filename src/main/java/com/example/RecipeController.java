@@ -1,4 +1,4 @@
-package com;
+package com.example;
 
 public class RecipeController {
     
