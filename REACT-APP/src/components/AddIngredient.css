@@ -1,0 +1,71 @@
+.hide-buttons{
+    visibility: hidden;
+}
+
+
+.add-ingredient-popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingredient-container{
+    background-color: white;
+    height: 50%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.ingredient-list::-webkit-scrollbar {
+    display: none;
+}
+
+
+.ingredient-list{
+    background-color: #c2ceb7;
+    height: 80%;
+    width: 80%;
+    overflow-y: scroll;
+}
+
+
+.buttons-container{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+}
+
+
+.add-ingredient-button{
+    background-color: #c2ceb7;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+
+.icon-buttons{
+    background-color: #38656A;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.icon-style{
+    color: white;
+}

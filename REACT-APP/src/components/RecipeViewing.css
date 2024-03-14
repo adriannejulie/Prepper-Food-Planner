@@ -1,3 +1,8 @@
+.hide-button{
+    visibility: hidden;
+}
+
+
 .recipe-grid{
     display: grid;
     grid-template-rows: 30% 65%;
@@ -36,6 +41,9 @@
     margin-bottom: 20px;
     box-shadow: 0 4px 2px -2px gray;
     background-color: #f1f7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -69,4 +77,20 @@
     height: 16.5px; 
     padding: 3px;
     margin-right: 10px;
+}
+
+
+.recipe-header-button{
+    background-color: black;
+    height: 24px;
+    width: 24px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+
+.header-icon-style{
+    color: white;
+    height: 20px;
+    width: 20px;
 }
