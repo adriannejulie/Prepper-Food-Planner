@@ -1,0 +1,28 @@
+.ingredient-row{
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+.amount-box{
+    background-color: white;
+    width: 30%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+
+.ingredient-box{
+    background-color: white;
+    width: 65%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+
+.dash-box{
+    width: 5%;
+    text-align: center;
+}
