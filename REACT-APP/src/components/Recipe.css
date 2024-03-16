@@ -1,3 +1,8 @@
+.hide-icon{
+    visibility: hidden;
+}
+
+
 .users-recipe{
     border-style: solid;
     border-color: lightgrey;
@@ -9,28 +14,61 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    cursor: pointer;
+}
+
+
+.users-recipe-default-color{
+    border-style: solid;
+    border-color: lightgrey;
     background-color: white;
     color: white;
-    cursor: pointer;
+}
+
+
+.users-recipe-active-color{
+    border-style: none;
+    background-color: rgb(21, 101, 53);
+    color: rgb(21, 101, 53);
 }
 
 
 .recipe-name{
     color: rgb(21, 101, 53);
+    border-bottom: 2px solid rgb(21, 101, 53);
+    width: 60%;
+}
+
+
+.recipe-name-default-colors{
+    color: rgb(21, 101, 53);
+    border-bottom: 2px solid rgb(21, 101, 53);
+}
+
+
+.recipe-name-active-colors{
+    color: white;
+    border-bottom : none;
 }
 
 
 .recipe-icon-styling{
-    color: white;
     height: 13px;
     width: 13px;
     padding-left: 10px;
 }
 
 
+.recipe-icon-default-color{
+    color: white;
+}
+
+.recipe-icon-active-color{
+    color: rgb(21, 101, 53);
+}
+
+
 .recipe-time-calories{
-    border-style: solid;
-    border-color: lightgrey;
     width: 90%;
     height: 30px;
     border-radius: 20px;
@@ -42,4 +80,15 @@
     display: flex;
     flex-direction: row;
     text-align: center;
+    justify-content: space-between;
+}
+
+
+.recipe-time-calories-default{
+    background-color: rgb(21, 101, 53);
+}
+
+
+.recipe-time-calories-active{
+    background-color: white;
 }
