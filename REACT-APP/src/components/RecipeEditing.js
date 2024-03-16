@@ -14,6 +14,7 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
     const [recipeCalories, setRecipeCalories] = useState(aRecipe?.calories);
     const [recipeSteps, setRecipeSteps] = useState(aRecipe?.steps);
     const [showIngredientPopup, setShowIngredientPopup] = useState(false);
+    const [recipePhoto, setRecipePhoto] = useState(aRecipe?.image);
 
     useEffect(() => {
         const recipeIngredients = aRecipe.ingredients.split(",");
@@ -75,6 +76,20 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
     }
 
 
+    const getUploadedImage = (usersFile) => {
+        const file = usersFile.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function() {
+            const data = reader.result;
+            setRecipePhoto(data);
+            console.log(data);
+            console.log(usersFile);
+  }
+    }
+
+
+
     return (
         <div className="recipe-grid">
             <div>
@@ -87,8 +102,8 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
                 </div>
             </div>
             <label>
-                <img className="recipe-image" src={aRecipe?.image} />
-                <input className="hide-element" type="file" name="myfile" />
+                <img className="recipe-image" src={recipePhoto} />
+                <input className="hide-element" type="file" name="myfile" onChange={(e) => getUploadedImage(e)}/>
             </label>
             <textarea placeholder="Write your recipe here" className="recipe-instructions-container recipe-instructions-styling" value={recipeSteps} onChange={handleInstructionsChange}></textarea>
             <div className="ingredients-container" >

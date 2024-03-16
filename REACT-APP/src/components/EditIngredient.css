@@ -1,8 +1,10 @@
 .ingredient-row{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     margin-top: 15px;
     margin-bottom: 15px;
+    height: 30px;
 }
 
 
@@ -11,18 +13,21 @@
     width: 30%;
     text-align: center;
     border-radius: 10px;
+    border: none;
 }
 
 
 .ingredient-box{
     background-color: white;
-    width: 65%;
+    width: 60%;
     text-align: center;
     border-radius: 10px;
+    border: none;
 }
 
 
 .dash-box{
     width: 5%;
     text-align: center;
+    line-height: 25px;
 }
