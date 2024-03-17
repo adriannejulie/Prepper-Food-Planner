@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
+import logoLight from "../images/prepper_logo.png";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -84,7 +85,7 @@ function SignUp({ onSignUp, onClose }) {
                     </div>
                     <img
                         className="placeholder-image"
-                        src={logoPlaceholderImage}
+                        src={logoLight}
                         alt="Placeholder"
                     />
 

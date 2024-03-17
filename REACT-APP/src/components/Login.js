@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import "./Login.css";
+import logoLight from "../images/prepper_logo.png";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 import SignUp from "./SignUp";
 import { jwtDecode } from "jwt-decode";
@@ -72,7 +73,7 @@ function Login({ onLogin, onClose }) {
                     </div>
                     <img
                         className="placeholder-image"
-                        src={logoPlaceholderImage}
+                        src={logoLight}
                         alt="Placeholder"
                     />
                     <div className="login-google">

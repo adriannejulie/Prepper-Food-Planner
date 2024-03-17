@@ -42,3 +42,7 @@ input[type="password"] {
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 1; 
 }
+
+.placeholder-image{
+    width: 80px;
+}

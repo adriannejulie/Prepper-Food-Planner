@@ -147,7 +147,7 @@ function DefaultPage({ }) {
                         <img src={previewPlaceholder} className="picture-half" />
                         <div className="text-half alata-regular">
                             <div className="mid-header">How it works</div>
-                            <div className="mid-text">Plan, Create and Share with Prepper!<br></br>IAND WAJKd Fawjf bJKWBFKJdABWKKJ ABWFJBdA WJKBFKBWK JFBJKABFBK JAWBFKJBKFW</div>
+                            <div className="mid-text">Plan, Create and Share with Prepper!<br></br>Schedule a meal that you create and upload yourself or find using our catalog of recipes uploaded by other user!</div>
 
                         </div>
 
@@ -227,8 +227,6 @@ function DefaultPage({ }) {
                         </div>
                         <div className="info-pages white playfair-display footer-content">
                             <div className="contact-header" onClick={handleAboutUs}>About Us</div>
-                            <RxDividerHorizontal className="contact-header white" />
-                            <div className="contact-header">FAQ</div>
                         </div>
                     </div>
                 </div>
