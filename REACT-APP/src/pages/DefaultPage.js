@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
-import logoLight from "../images/prepper-logo-light.png";
+import logoLight from "../images/prepper_logo.png";
 import logodark from "../images/prepper-logo-dark.png"
 import backgroundCal from "../images/backgroundCalendar.png"
 import previewPlaceholder from "../images/placeholder-preview.png";
 import clip1 from "../images/clip1.png";
 import clip2 from "../images/clip2.png";
 import clip3 from "../images/clip3.png";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { MdEmail } from "react-icons/md";
 import { FaGithubAlt } from "react-icons/fa";
+import { RxDividerHorizontal } from "react-icons/rx";
+import { useNavigate } from "react-router-dom"; 
+
+
 
 import "./DefaultPage.css";
 
@@ -27,6 +31,14 @@ function DefaultPage({ }) {
     const [showCarousel3, setShowCarousel3] = useState(false);
 
 
+    const [isAnimating, setIsAnimating] = useState(false);
+    const navigate = useNavigate();
+
+
+    const handleAnimation = () => {
+        setIsAnimating(!isAnimating);
+      };
+    
     const handleLogin = () => {
         if (!showSignUp) {
             setShowLogin(true);
@@ -76,6 +88,10 @@ function DefaultPage({ }) {
     const carouselText2 = "Cook up your own recipes and save them for later. You can also grab a bite of other people’s recipes for your meal plan."
     const carouselText3 = "Search through our catalog of recipes, uploaded by other chefs like you. Search by name, author, or whatever is in your pantry"
 
+    const handleAboutUs = () => {
+
+        navigate("/about-us")
+    }
 
 
     
@@ -140,7 +156,7 @@ function DefaultPage({ }) {
 
                     <div className="carousel">
                         <div className="carousel-options">
-                            <div className={showCarousel1 ? ("c-option carousel-hightlight alata-regular") : ("c-option carousel-inverse alata-regular")}
+                            <div className={showCarousel1 ? ("c-option carousel-hightlight alata-regular carousel-hightlight-to-none") : ("c-option carousel-inverse alata-regular")}
                             onClick={handleCarouselToggle1} >Plan </div>
                             <div className={showCarousel2 ? ("c-option carousel-hightlight alata-regular") : ("c-option carousel-inverse alata-regular")} onClick={handleCarouselToggle2} >Prep</div>
                             <div className={showCarousel3 ? ("c-option carousel-hightlight alata-regular") : ("c-option carousel-inverse alata-regular")} onClick={handleCarouselToggle3} >Search and Share</div>
@@ -195,24 +211,23 @@ function DefaultPage({ }) {
                     </div>
 
                     <div className="footer">
-                        <img src={logodark} className="footer-logo"/>
-                        <div className="contacts white playfair-display">
+                        <img src={logodark} className="footer-logo footer-content"/>
+                        <div className="contacts white playfair-display footer-contact">
                             <div className="contact-header"> Contact Us</div>
-                            <div className="contact-header"> 696-969-6969</div>
-                            <div className= "contact-icons">
-                                <div className="icon white">
-                                <MdEmail/>
-                                </div>
-                                <div className="icon white">
-                                <FaGithubAlt />
-                                </div>
-                                
-                            </div>
+                            <div className="contact-header"> Fake-Phone-Number</div>
                         </div>
-                        <div className="footer-spacer"></div>
-                        <div className="info-pages white playfair-display">
-                            <div className="contact-header">About Us</div>
-                            <div className="contact-header">|</div>
+                        <div className= "contact-icons footer-content">
+                                <a href= "mailto:prepper.planner@gmail.com" className="icon white">
+                                <MdEmail/>
+                                </a>
+                                <a  href= "https://github.com/adriannejulie/Prepper-Food-Planner" className="icon white">
+                                <FaGithubAlt />
+                                </a>
+                                
+                        </div>
+                        <div className="info-pages white playfair-display footer-content">
+                            <div className="contact-header" onClick={handleAboutUs}>About Us</div>
+                            <RxDividerHorizontal className="contact-header white" />
                             <div className="contact-header">FAQ</div>
                         </div>
                     </div>
