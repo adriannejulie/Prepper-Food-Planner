@@ -56,3 +56,6 @@ links
 .header > div{
     padding:20px;
 }
+.dropdown-trigger {
+    cursor: pointer;
+}
