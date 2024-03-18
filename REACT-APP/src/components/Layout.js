@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import Home from "../pages/Home";
+import Navbar from "../pages/Navbar";
 import "./Layout.css";
 
 function Layout({ children }) {
     return (
         <div>
-            <Home />
+            <Navbar />
             <div className="page-content">{children}</div>
         </div>
     );

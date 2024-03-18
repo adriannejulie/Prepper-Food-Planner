@@ -2,12 +2,12 @@ import logoPlaceholderImage from "../images/prepper_logo.png";
 import React, { useState } from "react";
 import { Avatar, Menu, MenuItem } from '@mui/material';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import "./Home.css";
+import "./Navbar.css";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useUser } from "../components/UserContext";
 
-function Home() {
+function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const { user, setUser } = useUser(); // Destructure setUser from useUser()
     const navigate = useNavigate();
@@ -95,4 +95,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Navbar;
