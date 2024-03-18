@@ -11,6 +11,7 @@ import { MdEmail } from "react-icons/md";
 import { FaGithubAlt } from "react-icons/fa";
 import { RxDividerHorizontal } from "react-icons/rx";
 import teampng from "../images/team_png.png";
+import Tordan from "../images/tordan.png";
 
 
 import "./AboutUs.css";
@@ -145,9 +146,9 @@ function AboutUs({ }) {
 
                             <div className="team-member-cont">
                     
-                                <img src={teampng} className="team-member-picture"></img>
+                                <img src={Tordan} className="team-member-picture"></img>
                                 <div className="team-member-header">Jordan Torske</div>
-                                <div className="team-member-bio">Jordan Torske</div>
+                                <div className="team-member-bio">Hi there! Im Jordan Torske, a front-end engineer here at Prepper. I love designing user friendly, engaging and appealing interfaces for users like you! In my free time I enjoy spending time outdoors, skiing and hiking! </div>
                             </div>
                         </div>
 
