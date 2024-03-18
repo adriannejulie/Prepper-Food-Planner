@@ -1,0 +1,132 @@
+.hide-button{
+    visibility: hidden;
+}
+
+
+.recipe-grid{
+    display: grid;
+    grid-template-rows: 20% 80%;
+    grid-template-columns: 60% 35%;
+    gap: 5%;
+    width: 100%;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+
+.recipe-instructions-container{
+    background-color: #c2ceb7;
+    line-height: 20px;
+    padding-left: 30px;
+    font-size: large;
+    margin-left: 30px;
+    height: 450px;
+}
+
+.recipe-instructions{
+    background-color: #c2ceb7;
+    line-height: 20px;
+    padding-left: 30px;
+    font-size: large;
+}
+
+.title-container{
+    padding-left: 30px;
+}
+
+
+.ingredients-container{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 2px -2px gray;
+    width: 90%;
+}
+
+
+.recipe-image{
+    width: 90%;
+    height: 100%;
+}
+
+
+.ingredients-header{
+    text-align: center;
+    height: 30px;
+    line-height: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 2px -2px gray;
+    background-color: #f1f7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+
+
+.ingredients-list{
+    line-height: 25px;
+    height: 470px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f1f7eb;
+    font-size: medium;
+    box-shadow: 0 4px 2px -2px gray;
+}
+
+
+.cooktime-calories-container{
+    display: flex;
+    padding-left: 3px;
+}
+
+
+.align-icons-text{
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    margin-top: 5px;
+    font-size: 30px;
+}
+
+.align-icons-title{
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    font-size: larger;
+}
+
+
+.icon-background{
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px; 
+    padding: 4px;
+    margin-right: 10px;
+}
+
+
+.back-button{
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    border-radius: 7px;
+    margin-left: 10px;
+}
+
+.save-button{
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    border-radius: 7px;
+    margin-left: 10px;
+}
+
+
+.header-icon-style{
+    color: white;
+    height: 32px;
+    width: 32px;
+}
