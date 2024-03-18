@@ -27,7 +27,7 @@
     display: inline-flex;
     align-items: center;
 }
-
+links
 .dropdown-icon {
     margin-left: 10px;
     font-size: 36px !important;
@@ -47,4 +47,12 @@
 }
 .avatar {
     margin-right: 20px;
+}
+.active-link {
+    background-color: #f0f0f0;
+    height: 100%;
+    padding:20px;
+}
+.header > div{
+    padding:20px;
 }

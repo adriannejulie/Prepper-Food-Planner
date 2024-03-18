@@ -32,45 +32,45 @@ function Home() {
     }
 
     return (
-        <div className="content">
-            <img src={logoPlaceholderImage} alt="Logo" className="logo" />
-            <div className="header">
-                <div>
-                    Meal Planner
-                    {user ? (
-                        <Link to="/meal-planner" className="link">
-                            {location.pathname === "/meal-planner" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
-                        </Link>
-                    ) : (
-                        <span className="link">
-                            {location.pathname === "/meal-planner" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
-                        </span>
-                    )}
-                </div>
-                <div>
-                    My Recipes
-                    {user ? (
-                        <Link to="/my-recipes" className="link">
-                            {location.pathname === "/my-recipes" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
-                        </Link>
-                    ) : (
-                        <span className="link">
-                            {location.pathname === "/my-recipes" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
-                        </span>
-                    )}
-                </div>
-                <div>
-                    Find Recipes
-                    {user ? (
-                        <Link to="/find-recipes" className="link">
-                            {location.pathname === "/find-recipes" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
-                        </Link>
-                    ) : (
-                        <span className="link">
-                            {location.pathname === "/find-recipes" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
-                        </span>
-                    )}
-                </div>
+    <div className="content">
+        <img src={logoPlaceholderImage} alt="Logo" className="logo" />
+        <div className="header">
+            <div className={`${location.pathname === "/meal-planner" ? "active-link" : ""}`}>
+                Meal Planner
+                {user ? (
+                    <Link to="/meal-planner" className="link ">
+                        {location.pathname === "/meal-planner" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
+                    </Link>
+                ) : (
+                    <span className="link ">
+                        {location.pathname === "/meal-planner" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
+                    </span>
+                )}
+            </div>
+            <div className={`${location.pathname === "/my-recipes" ? "active-link" : ""}`}>
+                My Recipes
+                {user ? (
+                    <Link to="/my-recipes" className="link ">
+                        {location.pathname === "/my-recipes" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
+                    </Link>
+                ) : (
+                    <span className="link ">
+                        {location.pathname === "/my-recipes" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
+                    </span>
+                )}
+            </div>
+            <div className={`${location.pathname === "/find-recipes" ? "active-link" : ""}`}>
+                Find Recipes
+                {user ? (
+                    <Link to="/find-recipes" className="link ">
+                        {location.pathname === "/find-recipes" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
+                    </Link>
+                ) : (
+                    <span className="link ">
+                        {location.pathname === "/find-recipes" ? <ArrowDropDownIcon className="dropdown-icon" /> : <ArrowRightIcon className="dropdown-icon" />}
+                    </span>
+                )}
+            </div>
                     <div className="account">
                         {user ? (
                             <>
