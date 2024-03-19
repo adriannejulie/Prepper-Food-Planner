@@ -1,0 +1,106 @@
+.overlay__background {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 9;
+  }
+  
+.overlay__container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 10;
+    padding: 30px;
+    border-radius: 50px;
+    width: 70vw;
+    height: 70vh;
+    background-color: #DEE4D8;
+}
+
+.overlay__controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.overlay__close {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    border: none;
+    width: 67vw;
+    background-color: transparent;
+    font-size: 36px;
+    cursor: pointer;
+}
+
+#text-input {
+    width: 67vw;
+    height: 30px;
+    margin: 10px;
+}
+
+.overlay__view {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; /* align on x */
+    align-items: center; /* align on y */
+    width: 70vw;
+    height: 65vh;
+}
+
+.recipe-viewer {
+    display: flex;
+    width: 25vw;
+    height: 55vh;
+    flex-direction: column;
+    background-color: #F2F5EB;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-controls {
+    display: flex;
+    width: 25vw;
+    height: 55vh;
+    flex-direction: column;
+    background-color: #F2F5EB;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+#text {
+    background-color: white;
+    border-radius: 50px;
+    font-size: 14px;
+    width: 10vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#add-Button {
+    background-color: #53634E;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 5px 10px 18px #888888;
+    height: 40px;
+    width: 20vw;
+    margin: 50px;
+    font-size: 14px;
+    font-weight: bold;
+}
+

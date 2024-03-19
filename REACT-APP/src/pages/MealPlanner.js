@@ -5,11 +5,15 @@ import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from "dayjs";
 import { MdOutlineAddBox, MdSearch } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import AddMealPlan from "../components/AddMealPlan.js";
 
 function MealPlanner() {
 
     const [value, setValue] = useState(new dayjs());
     const [meals, setMeals] = useState([]);
+    const [showOverlay, setShowOverlay] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log(value.format("YYYY-MM-DD"));
@@ -27,19 +31,21 @@ function MealPlanner() {
 
     // temp functions, functionality to be added
     const addMeal = () => {
+        setShowOverlay(!showOverlay);
         console.log("Add Meal");
     }
 
     const findRecipes = () => {
-        console.log("Find Recipes");
+        navigate("/find-recipes");
     }
 
-
-
-    // temp data, to be replaced with API call from functions above
+    const toggleOverlay = () => {
+        setShowOverlay(!showOverlay);
+    }
 
     return (
         <div className="meal-planner">
+            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay} />
             <div className="section">
                 <div id="section-calendar">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
