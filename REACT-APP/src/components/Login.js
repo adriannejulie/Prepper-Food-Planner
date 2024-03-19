@@ -1,10 +1,11 @@
 import React, { useEffect,useState } from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import "./Login.css";
+import logoLight from "../images/prepper_logo.png";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 import SignUp from "./SignUp";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { useUser } from "./UserContext";
 import axios from "axios";
 function Login({ onLogin, onClose }) {
@@ -14,7 +15,6 @@ function Login({ onLogin, onClose }) {
     const navigate = useNavigate();
     const { setUser } = useUser();
     const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-    console.log(clientId)
 
     const showUserInformation = (tokenObject) => {
         const token = tokenObject.credential;
@@ -72,7 +72,7 @@ function Login({ onLogin, onClose }) {
     };
 
     const closeLogin = () => {
-        setShowLogin(false); 
+        setShowLogin(false);
         onClose();
 
     };
@@ -89,7 +89,7 @@ function Login({ onLogin, onClose }) {
                     </div>
                     <img
                         className="placeholder-image"
-                        src={logoPlaceholderImage}
+                        src={logoLight}
                         alt="Placeholder"
                     />
                     <div className="login-google">
@@ -99,15 +99,17 @@ function Login({ onLogin, onClose }) {
                     </div>
                     <hr className="divider" />
                     <div className="login-section">
-                        <p>Email</p>
+                        <label htmlFor="emailInput">Email</label>
                         <input
+                            id="emailInput"
                             onChange={handleEmailChange}
                             type="email"
                         />
                     </div>
                     <div className="login-section">
-                        <p>Password</p>
+                        <label htmlFor="password">Password</label>
                         <input
+                            id="password"
                             onChange={handlePasswordChange}
                             type="password"
                         />

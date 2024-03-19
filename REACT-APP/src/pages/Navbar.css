@@ -8,11 +8,12 @@
     background-color: white;
     color: #002202;
     font-size: 20px;
-    padding: 0 20px; 
+    padding: 0 20px;
     margin-left: 250px;
+
 }
 
-.header > div {
+.header>div {
     margin-right: 15px;
     margin-left: 7vw;
     display: flex;
@@ -23,9 +24,9 @@
 
 .link {
     text-decoration: none;
-    color: #002202;
-    display: inline-flex;
-    align-items: center;
+    color: #002202 !important;
+    text-decoration: none;
+    color: inherit;
 }
 
 .dropdown-icon {
@@ -35,8 +36,8 @@
 
 .logo {
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     height: 100px;
     width: 100px;
 }
@@ -44,7 +45,24 @@
 .account {
     display: flex;
     align-items: center;
+
 }
+
 .avatar {
     margin-right: 20px;
+}
+
+.active-link {
+    background-color: #f0f0f0;
+    height: 100%;
+    padding: 20px;
+
+}
+
+.header>div {
+    padding: 20px;
+}
+
+.dropdown-trigger {
+    cursor: pointer;
 }
