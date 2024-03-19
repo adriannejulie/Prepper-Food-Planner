@@ -4,6 +4,8 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+import { useUser  } from "./UserContext";
 
 function SignUp({ onSignUp, onClose }) {
     const [firstName, setFirstName] = useState('');
@@ -12,6 +14,9 @@ function SignUp({ onSignUp, onClose }) {
     const [password, setPassword] = useState('');
     const [confirmedPassword, setConfirmedPassword] = useState('');
     const [showSignUp, setShowSignUp] = useState(true);
+
+    const navigate = useNavigate();
+    const { setUser } = useUser();
 
     const handleFNameChange = (e) => {
         setFirstName(e.target.value);
@@ -50,19 +55,38 @@ function SignUp({ onSignUp, onClose }) {
             return;
         }
 
-        /*fetch(url, {
+        fetch('http://localhost:8080/addUser', {
             method: 'POST',
-            body: {
+            headers: {
+                'Content-Type': 'application/json' // Specify content type as JSON
+            },
+            body: JSON.stringify({ // Stringify the JavaScript object
                 email: email,
-                password: password
-            }
+                firstName: firstName,
+                lastName: lastName,
+                password: password,
+                isGoogle: false
+            })
         }).then(response => {
             if (response.status === 200) {
-                // Handle success
+                const user = {
+                    name: firstName.concat(" ", lastName),
+                    email: email,
+                    picture: null,
+
+                }
+                setUser(user)
+                navigate("/meal-planner")
+                closeSignUp()
+
             } else {
-                window.alert("Incorrect email or password entered");
+                if (response.status === 400){
+                    window.alert("Email already in use.");
+                } else {
+                    window.alert("Something went wrong ");
+                }
             }
-        });*/
+        });
 
         closeSignUp();
     }
