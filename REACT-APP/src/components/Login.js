@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import "./Login.css";
 import logoLight from "../images/prepper_logo.png";
@@ -7,7 +7,7 @@ import SignUp from "./SignUp";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UserContext";
-
+import axios from "axios";
 function Login({ onLogin, onClose }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -43,19 +43,32 @@ function Login({ onLogin, onClose }) {
         setPassword(e.target.value);
     };
 
-    const standardLogin = () => {
-        /*fetch(url, {
-            method: 'POST',
-            body: {
+    const standardLogin = async () => {
+        try{
+            const response = await axios.get('http://localhost:8080/login', {
+            params: {
                 email: email,
-                password: password
+                password: password,
+                isGoogle: false
             }
-        }).then(response => {
-            if (response.status === 200){}
-            else{
-                window.alert("Incorrect email or password entered");
+            });
+            
+            console.log(response.data)
+
+                console.log(response.data)
+                const user = {
+                    name: response.data.firstName.concat(" ", response.data.lastName),
+                    email: email,
+                    picture: null,
+                }
+
+                setUser(user)
+                navigate("/meal-planner")
+                closeLogin()
             }
-        });*/
+         catch (error){
+            window.alert("Incorrect username or password");
+        };
     };
 
     const closeLogin = () => {
@@ -63,6 +76,9 @@ function Login({ onLogin, onClose }) {
         onClose();
 
     };
+
+
+
 
     return (
         <>
