@@ -43,6 +43,7 @@ function Login({ onLogin, onClose }) {
         setPassword(e.target.value);
     };
 
+
     const standardLogin = async () => {
         try{
             const response = await axios.get('http://localhost:8080/login', {
@@ -76,9 +77,6 @@ function Login({ onLogin, onClose }) {
         onClose();
 
     };
-
-
-
 
     return (
         <>

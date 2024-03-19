@@ -3,9 +3,6 @@ import logoLight from "../images/prepper_logo.png";
 import logodark from "../images/prepper-logo-dark.png"
 import backgroundCal from "../images/backgroundCalendar.png"
 import previewPlaceholder from "../images/placeholder-preview.png";
-import clip1 from "../images/clip1.png";
-import clip2 from "../images/clip2.png";
-import clip3 from "../images/clip3.png";
 import { Link, Navigate } from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Login from "../components/Login";
@@ -15,6 +12,9 @@ import { FaGithubAlt } from "react-icons/fa";
 import { RxDividerHorizontal } from "react-icons/rx";
 import { useNavigate } from "react-router-dom"; 
 
+import { Cloudinary } from "../components/CloudinaryImageUpload";
+import { Image, Transformation } from 'cloudinary-react';
+import { CloudinaryContext, uploadMultiple } from 'cloudinary-react';
 
 
 import "./DefaultPage.css";
@@ -34,6 +34,20 @@ function DefaultPage({ }) {
     const [isAnimating, setIsAnimating] = useState(false);
     const navigate = useNavigate();
 
+    const [image, setImage] = useState(null);
+
+    const handleImageUpload = async (e) =>{
+
+
+        const res_image =  await Cloudinary(e);
+
+        setImage(res_image)
+        
+    }
+    
+    useEffect( () => {
+        console.log(image)
+    }, [image])
 
     const handleAnimation = () => {
         setIsAnimating(!isAnimating);
@@ -100,7 +114,7 @@ function DefaultPage({ }) {
 
 
     return (
-        <div className="container">
+        <div className="landing-page-container">
             <div className="content">
                 <img src={logoLight} alt="Logo" className="logo" />
                 <div className="default-header">
@@ -132,7 +146,7 @@ function DefaultPage({ }) {
                         <div className="big-title alata-regular white"> 
                             Plan with Prepper!
                         </div>
-                        <Link onClick={handleSignup} className="link eye-catcher-join alata-regular">
+                        <Link onClick={handleSignup} className="link eye-catcher-join alata-regular white">
                             Start Planning!
                         </Link>
                     </div>
@@ -147,7 +161,7 @@ function DefaultPage({ }) {
                         <img src={previewPlaceholder} className="picture-half" />
                         <div className="text-half alata-regular">
                             <div className="mid-header">How it works</div>
-                            <div className="mid-text">Plan, Create and Share with Prepper!<br></br>Schedule a meal that you create and upload yourself or find using our catalog of recipes uploaded by other user!</div>
+                            <div className="mid-text">Plan, Create and Share with Prepper!<br></br>Schedule a meal that you create and upload yourself or find using our catalog of recipes uploaded by other users!</div>
 
                         </div>
 
@@ -229,6 +243,24 @@ function DefaultPage({ }) {
                             <div className="contact-header" onClick={handleAboutUs}>About Us</div>
                         </div>
                     </div>
+                    <CloudinaryContext cloudName="dh0iihyz2">
+                        
+                        { image ? 
+                        (
+                            
+                            <Image publicId={image}>
+                                <Transformation width="300" height="200" crop="fill" />
+                            </Image>
+                            
+                           
+                        ) 
+                        : 
+                        (
+                            
+                            <input type="file" onChange={e => handleImageUpload(e)} />
+                        )
+                        }
+                    </CloudinaryContext>
                 </div>
 
             </div>
