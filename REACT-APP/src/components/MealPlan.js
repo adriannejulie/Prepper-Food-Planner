@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MealPlan.css';
 import { MdOutlineBookmarkBorder, MdModeEdit } from "react-icons/md";
+import axios from 'axios';
 
-// dunno about this import
-import Recipe from './Recipe';
 
-function MealPlan ({meal, index}) {
+function MealPlan ({meal, recipeID, type, index}) {
 
-    // dunno if this will actually work?
-    // const [recipe, setRecipe] = useState(Recipe);
+    const [recipe, setRecipe] = useState();
 
-    // temp function, functionality to be added
-    const getRecipe = (recipeID) => {
-        console.log("Get Recipe");
-    }
+    // has bugs, will probably move to MealPlanner.js and pass necessary data as props
+    // useEffect(() => {
+    //     console.log("Get Recipe");
+    //     axios
+    //         .get(`http://localhost:8080/getRecipe/${recipeID}`)
+    //         .then((res) => {
+    //             setRecipe(res.data ? res.data : []);
+    //             console.log(res);
+    //     })
+    //     console.log(recipe);
+    // }, []);
 
     const editMeal = () => {
         console.log("Edit Meal");
@@ -36,7 +41,7 @@ function MealPlan ({meal, index}) {
             </div>
             <div className='mealplan-section' style={{backgroundColor: "white"}}>
                 <div id='type-and-time'>
-                    <p id='meal-name'>Breakfast</p>
+                    <p id='meal-name'>{type}</p>
                 </div>
                 <div id='type-and-time'>
                     <p id='meal-name'>30-45min</p>

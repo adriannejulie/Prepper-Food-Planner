@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { MdOutlineAddBox, MdSearch } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import AddMealPlan from "../components/AddMealPlan.js";
+import axios from 'axios';
 
 function MealPlanner() {
 
@@ -18,15 +19,13 @@ function MealPlanner() {
     useEffect(() => {
         console.log(value.format("YYYY-MM-DD"));
 
-        // dummy data using for testing
-        if (value.format("YYYY-MM-DD") === "2024-03-25") {
-            setMeals(["Christmas Dinner", "Easter Lunch", "Thanksgiving Breakfast"]);
-        }
-        else {
-            setMeals([]);
-        }
+        axios
+            .get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}`)
+            .then((res) => {
+                setMeals(res.data ? res.data : []);
+                console.log(meals);
+            })
 
-        console.log(meals);
       }, [value]);
 
     // temp functions, functionality to be added
@@ -75,7 +74,7 @@ function MealPlanner() {
                     // meals are planned on the selected date
                     (<div id="meals-planned">
                         {meals.map((meal, index) => {
-                            return <MealPlan key={index} meal={meal}></MealPlan>
+                            return <MealPlan key={index} meal={meal.mealPlanID} recipeID={meal.recipeID} type={meal.type}></MealPlan>
                         })}
                     </div>)
                 }
