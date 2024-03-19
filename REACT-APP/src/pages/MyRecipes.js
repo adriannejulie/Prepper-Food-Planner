@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import "./MyRecipes.css";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Recipe from "../components/Recipe.js";
 import RecipeViewing from "../components/RecipeViewing.js";
 import RecipeEditing from "../components/RecipeEditing.js";
 import { MdBookmark, MdDehaze } from "react-icons/md";
+import axios from "axios";
 
 function MyRecipes() {
     const [savedRecipes, setSavedRecipes] = useState([]);
@@ -13,86 +14,25 @@ function MyRecipes() {
     const [activeRecipe, setActiveRecipe] = useState("");
     const [currentSavedRecipe, setCurrentSavedRecipe] = useState("");
     const [currentUploadedRecipe, setCurrentUploadedRecipe] = useState("");
+
     
-    useEffect(() => {    
-        setSavedRecipes([{
-        "recipeID": 1,
-        "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        "title" : "Buttermilk Pancakes",
-        "measuremnents" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        "description" : "Yummy Buttermilk pancakes",
-        "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        "duration" : "30",  
-        "calories" : "210",
-        "author" : "Harry Potter"
-    },
-    {
-        "recipeID": 2,
-        "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        "title" : "Buttermilk Pancakes",
-        "measuremnents" : "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        "description" : "Yummy Buttermilk pancakes",
-        "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        "duration" : "30",  
-        "calories" : "210",
-        "author" : "Harry Potter"
-    } ,
-    {
-        "recipeID": 3,
-        "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        "title" : "Buttermilk Pancakes",
-        "measuremnents" : "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        "description" : "Yummy Buttermilk pancakes",
-        "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        "duration" : "30",  
-        "calories" : "210",
-        "author" : "Harry Potter"
-    } ,
-    {
-        "recipeID": 4,
-        "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        "title" : "Buttermilk Pancakes",
-        "measuremnents" : "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        "description" : "Yummy Buttermilk pancakes",
-        "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        "duration" : "30",  
-        "calories" : "210",
-        "author" : "Chris Tanev"
-    } 
-    ])}, []);
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8080/getSavedRecipes/${userID}`)
+            .then((res) => {
+                setSavedRecipes(res.data ? res.data : []);
+            })
+            console.log(savedRecipes);
+    }, []);
 
-
-    useEffect(() => {    
-        setUploadedRecipes([{
-            "recipeID": 1,
-            "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-            "title" : "Buttermilk Pancake",
-            "measuremnents" : "null,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-            "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-            "description" : "Yummy Buttermilk pancakes",
-            "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-            "duration" : "30",  
-            "calories" : "210",
-            "author" : "Harry Potter"
-    },
-    {
-        "recipeID": 2,
-        "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        "title" : "Buttermilk Pancake",
-        "measuremnents" : "null,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        "description" : "Yummy Buttermilk pancakes",
-        "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        "duration" : "30",  
-        "calories" : "210",
-        "author" : "Harry Potter"
-    }
-    ])}, []);
-
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8080/getRecipes/${userID}`)
+            .then((res) => {
+                setUploadedRecipes(res.data ? res.data : []);
+            })
+            console.log(uploadedRecipes);
+    }, []);
 
     const chanegRecipeView = () => {
         setViewingUploadedRecipes(!viewingUploadedRecipes);
@@ -131,10 +71,10 @@ function MyRecipes() {
         var recipes = uploadedRecipes;
         var recipeIndex = recipes.findIndex(singleRecipe => singleRecipe.recipeID === iDOfRecipe);
         recipes[recipeIndex].title = recipeTitle; 
-        recipes[recipeIndex].measuremnents = amounts.join(","); 
+        recipes[recipeIndex].measurements = amounts.join(","); 
         recipes[recipeIndex].ingredients = recipeIngredients.join(","); 
-        recipes[recipeIndex].steps = recipeSteps; 
-        recipes[recipeIndex].duration = cookTime; 
+        recipes[recipeIndex].intructions = recipeSteps; 
+        recipes[recipeIndex].prepTime = cookTime; 
         recipes[recipeIndex].calories = recipeCalories; 
         setUploadedRecipes([...uploadedRecipes]);
         setCurrentUploadedRecipe(recipes[recipeIndex]);
