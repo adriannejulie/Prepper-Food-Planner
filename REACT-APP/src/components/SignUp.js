@@ -83,48 +83,29 @@ function SignUp({ onSignUp, onClose }) {
                     <div className="exit">
                         <button onClick={closeSignUp}>X</button>
                     </div>
-                    <img
-                        className="placeholder-image"
-                        src={logoLight}
-                        alt="Placeholder"
-                    />
+                    <img className="placeholder-image" src={logoLight} alt="Placeholder" />
 
                     <hr className="divider" />
 
                     <div className="login-section">
-                        <p>First Name</p>
-                        <input
-                            onChange={handleFNameChange}
-                            type="text"
-                        />
+                        <label htmlFor="firstName">First Name</label>
+                        <input id="firstName" onChange={handleFNameChange} type="text" />
                     </div>
                     <div className="login-section">
-                        <p>Last Name</p>
-                        <input
-                            onChange={handleLNameChange}
-                            type="text"
-                        />
+                        <label htmlFor="lastName">Last Name</label>
+                        <input id="lastName" onChange={handleLNameChange} type="text" />
                     </div>
                     <div className="login-section">
-                        <p>Email</p>
-                        <input
-                            onChange={handleEmailChange}
-                            type="email"
-                        />
+                        <label htmlFor="email">Email</label>
+                        <input id="email" onChange={handleEmailChange} type="email" />
                     </div>
                     <div className="login-section">
-                        <p>Password</p>
-                        <input
-                            onChange={handlePasswordChange}
-                            type="password"
-                        />
+                        <label htmlFor="password">Password</label>
+                        <input id="password" onChange={handlePasswordChange} type="password" />
                     </div>
                     <div className="login-section">
-                        <p>Confirm Password</p>
-                        <input
-                            onChange={handleReEntPassChange}
-                            type="password"
-                        />
+                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <input id="confirmPassword" onChange={handleReEntPassChange} type="password" />
                     </div>
                     <div className="login-buttons">
                         <button onClick={signUp}>Signup</button>
