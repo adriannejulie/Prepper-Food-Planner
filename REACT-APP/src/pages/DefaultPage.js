@@ -234,13 +234,13 @@ function DefaultPage({ }) {
                                 <a href= "mailto:prepper.planner@gmail.com" className="icon white">
                                 <MdEmail/>
                                 </a>
-                                <a  href= "https://github.com/adriannejulie/Prepper-Food-Planner" className="icon white">
-                                <FaGithubAlt />
+                                <a href="https://github.com" className="icon white" target="blank" rel="noopener noreferrer">
+                                    <FaGithubAlt />
                                 </a>
                                 
                         </div>
                         <div className="info-pages white playfair-display footer-content">
-                            <div className="contact-header" onClick={handleAboutUs}>About Us</div>
+                            <div style={{ cursor: 'pointer' }} className="contact-header" onClick={handleAboutUs}>About Us</div>
                         </div>
                     </div>
                     <CloudinaryContext cloudName="dh0iihyz2">
