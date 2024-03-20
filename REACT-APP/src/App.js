@@ -9,6 +9,7 @@ import SignUp from "./components/SignUp.js";
 import AboutUs from "./pages/AboutUs.js"
 import AccountInfo from "./pages/AccountInfo.js";
 import { UserProvider } from "../src/components/UserContext";
+import ProtectedRoute from './components/ProtectedRoute'; 
 
 import "./App.css";
 
@@ -20,28 +21,47 @@ function App() {
                     <Route path="/" element={<DefaultPage />} />
                     <Route
                         path="/meal-planner"
-                        element={<Layout><MealPlanner /></Layout>}
+                        element={
+                            <ProtectedRoute>
+                                <Layout><MealPlanner /></Layout>
+                            </ProtectedRoute>
+                        }
                     />
                     <Route
                         path="/my-recipes"
-                        element={<Layout><MyRecipes /></Layout>}
+                        element={
+                            <ProtectedRoute>
+                                <Layout><MyRecipes /></Layout>
+                            </ProtectedRoute>
+                        }
                     />
                     <Route
                         path="/find-recipes"
-                        element={<Layout><FindRecipes /></Layout>}
+                        element={
+                            <ProtectedRoute>
+                                <Layout><FindRecipes /></Layout>
+                            </ProtectedRoute>
+                        }
                     />
                     <Route
                         path="/account-info"
-                        element={<Layout><AccountInfo/></Layout>}
-                    
+                        element={
+                            <ProtectedRoute>
+                                <Layout><AccountInfo /></Layout>
+                            </ProtectedRoute>
+                        }
                     />
-                    <Route path = "/about-us" element={<AboutUs/>}/>
+                    <Route
+                        path="/about-us"
+                        element={
+                            <ProtectedRoute>
+                                <AboutUs />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </UserProvider>
-
         </Router>
     );
 }
-
-
 export default App;
