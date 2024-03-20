@@ -18,7 +18,8 @@ function MyRecipes() {
     
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/getSavedRecipes/${userID}`)
+            // .get(`http://localhost:8080/getSavedRecipes/${userID}`) // This is for when userID is implemented
+            .get(`http://localhost:8080/getSavedRecipes/1`)
             .then((res) => {
                 setSavedRecipes(res.data ? res.data : []);
             })
@@ -27,7 +28,8 @@ function MyRecipes() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/getRecipes/${userID}`)
+            // .get(`http://localhost:8080/getRecipes/${userID}`) // This is for when userID is implemented
+            .get(`http://localhost:8080/getRecipes/1`)
             .then((res) => {
                 setUploadedRecipes(res.data ? res.data : []);
             })
