@@ -112,28 +112,36 @@ function MyRecipes() {
     const saveNewRecipe = (amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps) => {
         console.log("gets the users saved recipes back");
         if(amounts.length > 0 && recipeIngredients.length > 0 && recipeTitle.length > 0 && cookTime.length > 0 && recipeCalories.length > 0 && recipeSteps.length > 0){
-
+            axios
+                .post(`http://localhost:8080/addRecipe`, {
+                    "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                    "title" : recipeTitle,
+                    "measurements" : amounts.join(","),
+                    "ingredients" : recipeIngredients.join(","),
+                    "instructions" : recipeSteps,
+                    "prepTime" : cookTime,  
+                    "calories" : recipeCalories,
+                    "userID" : user.userID,
+                    "saves" : "0",
+                    "isPublic": false
+                })
+                .then((res) => {
+                    // setUploadedRecipes(res.data ? res.data : []);
+                    console.log(res.data);
+                    if (res.status === 200) {
+                        window.alert("Recipe has been added to your recipes");
+                    }
+                    
+                })
+                .catch ((err) => {
+                    console.log(err);
+                    window.alert("There was an error adding the recipe");
+                });
+                
         }
         else{
             window.alert("One or more fields are empty. Please ensure all fields are all filled in.");
         }
-        /*
-        axios
-            // .get(`http://localhost:8080/getRecipes/${userID}`) // This is for when userID is implemented
-            .post(`http://localhost:8080/getRecipes/1`, {
-                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-                "title" : recipeTitle,
-                "measuremnents" : amounts,
-                "ingredients" : recipeIngredients,
-                "instructions" : recipeSteps,
-                "prepTime" : cookTime,  
-                "calories" : recipeCalories,
-                "author" : ""
-            })
-            .then((res) => {
-                setUploadedRecipes(res.data ? res.data : []);
-            }).then(console.log(uploadedRecipes[uploadedRecipes.length - 1]))
-            */
     }
 
 
