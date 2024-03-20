@@ -31,7 +31,7 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
                 </div>
             </div>
             <img className="recipe-image" src={aRecipe?.image}></img>
-            <div className="recipe-instructions-container">{aRecipe?.instructions}</div>
+            <div className="recipe-instructions-container">{aRecipe?.steps}</div>
             <div className="ingredients-container" >
                 <div className="ingredients-header">Ingredients</div>
                 <div className="ingredients-list">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>
