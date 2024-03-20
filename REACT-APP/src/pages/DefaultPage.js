@@ -234,7 +234,7 @@ function DefaultPage({ }) {
                                 <a href= "mailto:prepper.planner@gmail.com" className="icon white">
                                 <MdEmail/>
                                 </a>
-                                <a href="https://github.com" className="icon white" target="blank" rel="noopener noreferrer">
+                                <a href="https://github.com/adriannejulie/Prepper-Food-Planner" className="icon white" target="blank" rel="noopener noreferrer">
                                     <FaGithubAlt />
                                 </a>
                                 
