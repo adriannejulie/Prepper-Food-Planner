@@ -5,10 +5,10 @@ import { MdAccountBox, MdHourglassTop } from "react-icons/md";
 import { FaBicycle, FaSearch } from "react-icons/fa";
 
 function RecipeCard({ recipe, searchValue, handleClick }) {
-    const titleContainsSearch = recipe.title.toLowerCase().includes(searchValue.toLowerCase());
+    const containsSearch = recipe.title.toLowerCase().includes(searchValue.toLowerCase()) || recipe.ingredients.toLowerCase().includes(searchValue.toLowerCase());
 
     return (
-        <div className={`foundRecipe ${!titleContainsSearch ? 'hide' : ''}`} onClick={() => handleClick(recipe.recipeID)}>
+        <div className={`foundRecipe ${!containsSearch ? 'hide' : ''}`} onClick={() => handleClick(recipe.recipeID)}>
             <img className="image" src={recipe.image}></img>
             <div className="top-container">
                 <div className="title">{recipe.title}</div>
@@ -19,7 +19,7 @@ function RecipeCard({ recipe, searchValue, handleClick }) {
                     <div className="body">{recipe.description}</div>
                 </div>
                 <div className="row-container">
-                    <div className="time"><MdHourglassTop className="icon-find"/>{recipe.prepTime} Minutes</div>
+                    <div className="time"><MdHourglassTop className="icon-find"/>{recipe.duration} Minutes</div>
                     <div className="calories"><FaBicycle className="icon-find"/>{recipe.calories} Calories</div>
                 </div>
             </div>
@@ -37,9 +37,9 @@ function FindRecipes() {
         const sampleRecipes = [
             {
                 "recipeID": 1,
-                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "image" : "https://res.cloudinary.com/dhenatkk5/image/upload/v1710943320/qyn2z07ophdpulzskcxf.png",
                 "title" : "Buttermilk Pancakes 1",
-                "measurements" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "measuremnents" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
                 "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
                 "description" : "Yummy Buttermilk pancakes",
                 "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
