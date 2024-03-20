@@ -5,6 +5,8 @@ import logoPlaceholderImage from "../images/logo-placeholder-image.png";
 import logoLight from "../images/prepper_logo.png";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+import { useUser  } from "./UserContext";
 
 function SignUp({ onSignUp, onClose }) {
     const [firstName, setFirstName] = useState('');
@@ -13,6 +15,9 @@ function SignUp({ onSignUp, onClose }) {
     const [password, setPassword] = useState('');
     const [confirmedPassword, setConfirmedPassword] = useState('');
     const [showSignUp, setShowSignUp] = useState(true);
+
+    const navigate = useNavigate();
+    const { setUser } = useUser();
 
     const handleFNameChange = (e) => {
         setFirstName(e.target.value);
@@ -51,19 +56,38 @@ function SignUp({ onSignUp, onClose }) {
             return;
         }
 
-        /*fetch(url, {
+        fetch('http://localhost:8080/addUser', {
             method: 'POST',
-            body: {
+            headers: {
+                'Content-Type': 'application/json' // Specify content type as JSON
+            },
+            body: JSON.stringify({ // Stringify the JavaScript object
                 email: email,
-                password: password
-            }
+                firstName: firstName,
+                lastName: lastName,
+                password: password,
+                isGoogle: false
+            })
         }).then(response => {
             if (response.status === 200) {
-                // Handle success
+                const user = {
+                    name: firstName.concat(" ", lastName),
+                    email: email,
+                    picture: null,
+
+                }
+                setUser(user)
+                navigate("/meal-planner")
+                closeSignUp()
+
             } else {
-                window.alert("Incorrect email or password entered");
+                if (response.status === 400){
+                    window.alert("Email already in use.");
+                } else {
+                    window.alert("Something went wrong ");
+                }
             }
-        });*/
+        });
 
         closeSignUp();
     }
@@ -83,48 +107,29 @@ function SignUp({ onSignUp, onClose }) {
                     <div className="exit">
                         <button onClick={closeSignUp}>X</button>
                     </div>
-                    <img
-                        className="placeholder-image"
-                        src={logoLight}
-                        alt="Placeholder"
-                    />
+                    <img className="placeholder-image" src={logoLight} alt="Placeholder" />
 
                     <hr className="divider" />
 
                     <div className="login-section">
-                        <p>First Name</p>
-                        <input
-                            onChange={handleFNameChange}
-                            type="text"
-                        />
+                        <label htmlFor="firstName">First Name</label>
+                        <input id="firstName" onChange={handleFNameChange} type="text" />
                     </div>
                     <div className="login-section">
-                        <p>Last Name</p>
-                        <input
-                            onChange={handleLNameChange}
-                            type="text"
-                        />
+                        <label htmlFor="lastName">Last Name</label>
+                        <input id="lastName" onChange={handleLNameChange} type="text" />
                     </div>
                     <div className="login-section">
-                        <p>Email</p>
-                        <input
-                            onChange={handleEmailChange}
-                            type="email"
-                        />
+                        <label htmlFor="email">Email</label>
+                        <input id="email" onChange={handleEmailChange} type="email" />
                     </div>
                     <div className="login-section">
-                        <p>Password</p>
-                        <input
-                            onChange={handlePasswordChange}
-                            type="password"
-                        />
+                        <label htmlFor="password">Password</label>
+                        <input id="password" onChange={handlePasswordChange} type="password" />
                     </div>
                     <div className="login-section">
-                        <p>Confirm Password</p>
-                        <input
-                            onChange={handleReEntPassChange}
-                            type="password"
-                        />
+                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <input id="confirmPassword" onChange={handleReEntPassChange} type="password" />
                     </div>
                     <div className="login-buttons">
                         <button onClick={signUp}>Signup</button>

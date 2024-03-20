@@ -54,7 +54,7 @@
     margin-bottom: 10px;
 }
 
-input {
+.find-recipe-input {
     font-size: 40px;
     background-color: var(--on_primary);
     border-radius: 20px;

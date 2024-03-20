@@ -9,7 +9,7 @@ function RecipeCard({ recipe, searchValue, handleClick }) {
 
     return (
         <div className={`foundRecipe ${!titleContainsSearch ? 'hide' : ''}`} onClick={() => handleClick(recipe.recipeID)}>
-            <img className="image" src={recipe.image}></img>
+            <img className="image" src={recipe.imageURL}></img>
             <div className="top-container">
                 <div className="title">{recipe.title}</div>
                 <div className="author"><MdAccountBox className="icon-find"/>{recipe.author}</div>
@@ -19,7 +19,7 @@ function RecipeCard({ recipe, searchValue, handleClick }) {
                     <div className="body">{recipe.description}</div>
                 </div>
                 <div className="row-container">
-                    <div className="time"><MdHourglassTop className="icon-find"/>{recipe.duration} Minutes</div>
+                    <div className="time"><MdHourglassTop className="icon-find"/>{recipe.prepTime} Minutes</div>
                     <div className="calories"><FaBicycle className="icon-find"/>{recipe.calories} Calories</div>
                 </div>
             </div>
@@ -309,7 +309,7 @@ function FindRecipes() {
                 <div className="box">
                     <div className="search-wrapper">
                         <label htmlFor="search"><FaSearch className="title-icon"/>Browse Recipes</label>
-                        <input type="search" id="search" value={searchValue} onChange={handleSearchChange}/>
+                        <input className="find-recipe-input" type="search" id="search" value={searchValue} onChange={handleSearchChange}/>
                     </div>
                     
                     <div className="recipeContainer">

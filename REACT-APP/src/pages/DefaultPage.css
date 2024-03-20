@@ -31,7 +31,7 @@
     font-style: normal;
   }
 
-.container{
+.landing-page-container{
     display: flex;
     flex-direction: column;
     position:absolute; 
@@ -292,7 +292,7 @@ div > .link {
 
 
 .white{
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 .mid-section{
@@ -532,6 +532,7 @@ div > .link {
 
     border-bottom: 1px solid var(--outline_variant);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 100%;
 
 }
 
