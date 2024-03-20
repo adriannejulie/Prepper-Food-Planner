@@ -70,15 +70,8 @@ function SignUp({ onSignUp, onClose }) {
             })
         }).then(response => {
             if (response.status === 200) {
-                const user = {
-                    name: firstName.concat(" ", lastName),
-                    email: email,
-                    picture: null,
-
-                }
-                setUser(user)
-                navigate("/meal-planner")
-                closeSignUp()
+                return response.json()
+                
 
             } else {
                 if (response.status === 400){
@@ -87,7 +80,21 @@ function SignUp({ onSignUp, onClose }) {
                     window.alert("Something went wrong ");
                 }
             }
-        });
+        }).then(data => {
+
+            const user = {
+                userID: data.userID,
+                name: firstName.concat(" ", lastName),
+                email: email,
+                picture: null,
+
+            }
+            setUser(user)
+            console.log(user)
+            navigate("/meal-planner")
+            closeSignUp()
+
+        })
 
         closeSignUp();
     }

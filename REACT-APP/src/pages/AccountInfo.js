@@ -17,7 +17,7 @@ function AccountInfo({}){
     const navigate = useNavigate();
     
     //Placeholder values
-    const [id, setID] = useState("6969696969")
+    const [id, setID] = useState(user.userID)
     const [firstName, setFirstName] = useState(name[0])
     const [lastName, setLastName] = useState(name[1])
     const [email, setEmail] = useState(user.email)
