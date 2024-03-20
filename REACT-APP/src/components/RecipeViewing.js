@@ -8,6 +8,7 @@ function RecipeViewing({ aRecipe, swapToEditing, editAbility }) {
     const [recipeIngredients, setIngredients] = useState([]);
 
     useEffect(() => {
+        console.log(aRecipe);
         const recipeIngredients = aRecipe.ingredients.split(",");
         const recipeMeasurements = aRecipe.measurements.split(",");
         setAmounts(recipeMeasurements)
