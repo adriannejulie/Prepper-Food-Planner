@@ -53,7 +53,7 @@
 
 .overlay__view {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around; /* align on x */
     align-items: center; /* align on y */
     width: 70vw;
@@ -62,20 +62,20 @@
 
 .recipe-viewer {
     display: flex;
-    width: 25vw;
-    height: 55vh;
+    width: 65vw;
+    height: 50vh;
     flex-direction: column;
     background-color: #F2F5EB;
     border-radius: 50px;
-    justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .add-controls {
     display: flex;
-    width: 25vw;
-    height: 55vh;
-    flex-direction: column;
+    width: 50vw;
+    height: 15vh;
+    flex-direction: row;
     background-color: #F2F5EB;
     border-radius: 50px;
     justify-content: center;
@@ -102,5 +102,39 @@
     margin: 50px;
     font-size: 14px;
     font-weight: bold;
+}
+
+#type-input{
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 10vh;
+    align-items: center;
+}
+
+#view-toggle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 15vw;
+    height: 5vh;
+    align-items: center;
+    margin: 5px;
+    background-color: #53634E;
+    border-radius: 50px;
+    border: none;
+}
+
+#recipe-view{
+    display: flex;
+    flex-direction: row;
+    width: 60vw;
+    height: 10vh;
+    background-color: #DEE4D8;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #53634E;
+    margin: 10px
 }
 
