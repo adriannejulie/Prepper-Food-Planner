@@ -17,24 +17,24 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
 
     
     return (
-        <div className="recipe-grid">
-            <div className="title-container">
+        <div className="recipe-viewing-grid">
+            <div className="recipe-title-container">
                 <h1 className="align-icons-title">
                     {aRecipe?.title}
-                    <button className="back-button" onClick={onBack}><IoMdArrowRoundBack className="header-icon-style"/></button>
-                    <button className="save-button" onClick={onSave}><IoMdSave className="header-icon-style"/></button>
+                    <button className="back-button" onClick={onBack}><IoMdArrowRoundBack className="icon-style-header"/></button>
+                    <button className="save-button" onClick={onSave}><IoMdSave className="icon-style-header"/></button>
                 </h1>
-                <div className="align-icons-text"><MdAccountBox className="icon-background"/> Author: {aRecipe?.author}</div>
+                <div className="align-icon-format"><MdAccountBox className="background-for-icon"/> Author: {aRecipe?.author}</div>
                 <div className="cooktime-calories-container">
-                    <div className="align-icons-text"><MdHourglassTop className="icon-background"/>{aRecipe?.prepTime} Minutes</div>
-                    <div className="align-icons-text"><FaBicycle className="icon-background"/>{aRecipe?.calories} Calories</div>
+                    <div className="align-icon-format"><MdHourglassTop className="background-for-icon"/>{aRecipe?.prepTime} Minutes</div>
+                    <div className="align-icon-format"><FaBicycle className="background-for-icon"/>{aRecipe?.calories} Calories</div>
                 </div>
             </div>
-            <img className="recipe-image" src={aRecipe?.image}></img>
-            <div className="recipe-instructions-container">{aRecipe?.instructions}</div>
-            <div className="ingredients-container" >
-                <div className="ingredients-header">Ingredients</div>
-                <div className="ingredients-list">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>
+            <img className="the-recipe-image" src={aRecipe?.image}></img>
+            <div className="container-for-instructions">{aRecipe?.instructions}</div>
+            <div className="recipe-ingredients-container" >
+                <div className="ingredients-container-title">Ingredients</div>
+                <div className="recipes-ingredients">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>
             </div>
         </div>
     );
