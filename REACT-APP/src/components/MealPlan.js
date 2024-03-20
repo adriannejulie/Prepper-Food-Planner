@@ -4,21 +4,7 @@ import { MdOutlineBookmarkBorder, MdModeEdit } from "react-icons/md";
 import axios from 'axios';
 
 
-function MealPlan ({meal, recipeID, type, index}) {
-
-    const [recipe, setRecipe] = useState();
-
-    // has bugs, will probably move to MealPlanner.js and pass necessary data as props
-    // useEffect(() => {
-    //     console.log("Get Recipe");
-    //     axios
-    //         .get(`http://localhost:8080/getRecipe/${recipeID}`)
-    //         .then((res) => {
-    //             setRecipe(res.data ? res.data : []);
-    //             console.log(res);
-    //     })
-    //     console.log(recipe);
-    // }, []);
+function MealPlan ({recipe, type, index}) {
 
     const editMeal = () => {
         console.log("Edit Meal");
@@ -33,9 +19,9 @@ function MealPlan ({meal, recipeID, type, index}) {
         <div className='meal' key={index}>
             <div className='mealplan-section'>
                 
-                <img id='img' src="https://reactjs.org/logo-og.png" alt="React Image"></img>
+                <img id='img' src={recipe.image} alt="React Image"></img>
                 <div id='meal-name'>
-                    {meal}
+                    {recipe.title}
                 </div>
 
             </div>
@@ -44,7 +30,7 @@ function MealPlan ({meal, recipeID, type, index}) {
                     <p id='meal-name'>{type}</p>
                 </div>
                 <div id='type-and-time'>
-                    <p id='meal-name'>30-45min</p>
+                    <p id='meal-name'>{recipe.prepTime}</p>
                 </div>
                 <div id='icons'>
                     <button id='button' onClick={editMeal}>

@@ -3,7 +3,7 @@ import axios from "axios";
 import "./AddMealPlan.css";
 import AddMealPlanRecipe from "./AddMealPlanRecipe";
 
-function AddMealPlan({ isOpen, onClose }) {
+function AddMealPlan({ isOpen, onClose, date }) {
 
     const [breakfast, setBreakfast] = useState(false);
     const [lunch, setLunch] = useState(false);
@@ -13,6 +13,9 @@ function AddMealPlan({ isOpen, onClose }) {
     const [recipeView, setRecipeView] = useState('uploaded');
     const [recipeID, setRecipeID] = useState('');
 
+
+    // functions that require APIs
+    // userID = 1 is a placeholder for when userID is implemented
     useEffect(() => {
         axios
             // .get(`http://localhost:8080/getSavedRecipes/${userID}`) // This is for when userID is implemented
@@ -20,7 +23,8 @@ function AddMealPlan({ isOpen, onClose }) {
             .then((res) => {
                 setSavedRecipes(res.data ? res.data : []);
             })
-            console.log(savedRecipes);
+
+        console.log(savedRecipes);
     }, [isOpen]);
 
     useEffect(() => {
@@ -30,8 +34,29 @@ function AddMealPlan({ isOpen, onClose }) {
             .then((res) => {
                 setUploadedRecipes(res.data ? res.data : []);
             })
-            console.log(uploadedRecipes);
+        console.log(uploadedRecipes);
     }, [isOpen]);
+
+    const addMeal = () => {
+        console.log(`Add Meal ${date}`);
+        axios
+            .post(`http://localhost:8080/addMealPlan`, {
+                recipeID: recipeID,
+                type: breakfast ? "breakfast" : lunch ? "lunch" : "dinner",
+                userID: 1, // This is for when userID is implemented
+                date: date
+            })
+            .then((res) => {
+                console.log(res);
+                console.log(`Add Meal ${date}`);
+            })
+
+        onClose();
+    }
+
+    useEffect(() => {
+        console.log(recipeID);
+    }, [recipeID]);
 
 
     const handleBreakfastToggle = () => {
@@ -64,11 +89,6 @@ function AddMealPlan({ isOpen, onClose }) {
         }
     };
 
-    const addMeal = () => {
-        console.log("Add Meal");
-        onClose();
-    }
-
     const searchMeal = () => {
         console.log("Search Meal");
     }   
@@ -80,11 +100,6 @@ function AddMealPlan({ isOpen, onClose }) {
             setRecipeView('uploaded');
         }
     }
-
-    const testid = (recipeID) => {
-        console.log(recipeID);
-    }
-
 
     return (
         <Fragment>
@@ -107,7 +122,7 @@ function AddMealPlan({ isOpen, onClose }) {
                                 // show uploaded recipes
                                 (<div>
                                     {uploadedRecipes.map((recipe, index) => (
-                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={testid}/>
+                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={setRecipeID}/>
                                     ))}
                                 </div>) 
 
@@ -115,7 +130,7 @@ function AddMealPlan({ isOpen, onClose }) {
                                 // show saved recipes
                                 (<div>
                                     {savedRecipes.map((recipe, index) => (
-                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={testid}/>
+                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={setRecipeID}/>
                                     ))}
                                 </div>)
 

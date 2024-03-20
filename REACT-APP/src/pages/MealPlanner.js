@@ -13,20 +13,45 @@ function MealPlanner() {
 
     const [value, setValue] = useState(new dayjs());
     const [meals, setMeals] = useState([]);
+    const [mealTypes, setMealTypes] = useState([]);
     const [showOverlay, setShowOverlay] = useState(false);
+    const [recipes, setRecipes] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(value.format("YYYY-MM-DD"));
+        const fetchData = async () => {
+            try {
+                console.log(value.format("YYYY-MM-DD"));
+    
+                const response = await axios.get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}`); // needs to be changed for userID
+                const data = response.data ? response.data : [];
+                
+                setMeals(data);
+                setMealTypes(data.map((meal) => meal.type));
+                console.log(data);
 
-        axios
-            .get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}`)
-            .then((res) => {
-                setMeals(res.data ? res.data : []);
-                console.log(meals);
-            })
+            } catch (error) {
+                console.error("Error fetching meal plans:", error);
+            }
+        };
+    
+        fetchData();
+    }, [value]);
 
-      }, [value]);
+      useEffect(() => {
+        console.log("Get Recipe");
+        const fetchRecipes = async () => {
+            const newRecipes = [];
+            for (let i = 0; i < meals.length; i++) {
+                const res = await axios.get(`http://localhost:8080/getRecipe/${meals[i].recipeID}`);
+                newRecipes.push(res.data ? res.data : {});
+                console.log(res);
+            }
+            setRecipes(newRecipes);
+            console.log(newRecipes);
+        };
+        fetchRecipes();
+    }, [meals]);
 
     // temp functions, functionality to be added
     const addMeal = () => {
@@ -40,11 +65,12 @@ function MealPlanner() {
 
     const toggleOverlay = () => {
         setShowOverlay(!showOverlay);
+        window.location.reload();
     }
 
     return (
         <div className="meal-planner">
-            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay} />
+            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay} date={value.format("YYYY-MM-DD")}/>
             <div className="section">
                 <div id="section-calendar">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -73,8 +99,8 @@ function MealPlanner() {
 
                     // meals are planned on the selected date
                     (<div id="meals-planned">
-                        {meals.map((meal, index) => {
-                            return <MealPlan key={index} meal={meal.mealPlanID} recipeID={meal.recipeID} type={meal.type}></MealPlan>
+                        {recipes.map((recipe, index) => {
+                            return <MealPlan key={index} recipe={recipe} type={mealTypes[index]}></MealPlan>
                         })}
                     </div>)
                 }
