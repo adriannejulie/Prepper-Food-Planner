@@ -18,8 +18,8 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
 
     useEffect(() => {
         const recipeIngredients = aRecipe.ingredients.split(",");
-        const recipeMeasuremnents = aRecipe.measuremnents.split(",");
-        setAmounts(recipeMeasuremnents)
+        const recipeMeasurements = aRecipe.measurements.split(",");
+        setAmounts(recipeMeasurements)
         setIngredients(recipeIngredients)
     }, [aRecipe])
 
