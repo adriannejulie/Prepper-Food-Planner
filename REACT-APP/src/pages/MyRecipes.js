@@ -7,6 +7,8 @@ import RecipeEditing from "../components/RecipeEditing.js";
 import NewRecipe from "../components/NewRecipe.js";
 import { MdBookmark, MdDehaze } from "react-icons/md";
 import axios from "axios";
+import { useUser } from "../components/UserContext";
+
 
 function MyRecipes() {
     const [savedRecipes, setSavedRecipes] = useState([]);
@@ -15,12 +17,16 @@ function MyRecipes() {
     const [activeRecipe, setActiveRecipe] = useState("");
     const [currentSavedRecipe, setCurrentSavedRecipe] = useState("");
     const [currentUploadedRecipe, setCurrentUploadedRecipe] = useState("");
+    const { user, setUser } = useUser();
+
 
     
     useEffect(() => {
+
+        console.log(user)
         axios
-            // .get(`http://localhost:8080/getSavedRecipes/${userID}`) // This is for when userID is implemented
-            .get(`http://localhost:8080/getSavedRecipes/1`)
+            .get(`http://localhost:8080/getSavedRecipes/${user.userID}`) // This is for when userID is implemented
+            //.get(`http://localhost:8080/getSavedRecipes/1`)
             .then((res) => {
                 setSavedRecipes(res.data ? res.data : []);
                 if(res.data.length > 0){
@@ -32,8 +38,8 @@ function MyRecipes() {
 
     useEffect(() => {
         axios
-            // .get(`http://localhost:8080/getRecipes/${userID}`) // This is for when userID is implemented
-            .get(`http://localhost:8080/getRecipes/1`)
+            .get(`http://localhost:8080/getRecipes/${user.userID}`) // This is for when userID is implemented
+            //.get(`http://localhost:8080/getRecipes/1`)
             .then((res) => {
                 setUploadedRecipes(res.data ? res.data : []);
                 if(res.data.length > 0){

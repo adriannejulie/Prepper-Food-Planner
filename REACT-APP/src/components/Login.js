@@ -54,14 +54,13 @@ function Login({ onLogin, onClose }) {
             }
             });
             
-            console.log(response.data)
 
-                console.log(response.data)
-                const user = {
-                    name: response.data.firstName.concat(" ", response.data.lastName),
-                    email: email,
-                    picture: null,
-                }
+            const user = {
+                userID: response.data.userID,
+                name: response.data.firstName.concat(" ", response.data.lastName),
+                email: email,
+                picture: null,
+            }
 
                 setUser(user)
                 navigate("/meal-planner")

@@ -15,11 +15,11 @@
 
 .header>div {
     margin-right: 15px;
-    margin-left: 7vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    min-width:180px;
 }
 
 .link {
