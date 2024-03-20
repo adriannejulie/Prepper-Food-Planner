@@ -48,311 +48,251 @@ function FindRecipes() {
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
   const [showRecipeViewing, setShowRecipeViewing] = useState(false);
 
-  useEffect(() => {
-    const sampleRecipes = [
-      {
-        recipeID: 1,
-        image:
-          "https://res.cloudinary.com/dhenatkk5/image/upload/v1710943320/qyn2z07ophdpulzskcxf.png",
-        title: "Buttermilk Pancakes 1",
-        measurements: "1 cup, 1 tsp, 1 tsp, 1, 1 1/8 cup, 2 tbsp, null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 2,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 2",
-        measurements: "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 3,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 3",
-        measurements: "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 4,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 4",
-        measurements: "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Chris Tanev",
-      },
-      {
-        recipeID: 5,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 1",
-        measurements: "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 6,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 2",
-        measurements: "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 7,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 3",
-        measurements: "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 8,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 4",
-        measurements: "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Chris Tanev",
-      },
-      {
-        recipeID: 9,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 1",
-        measurements: "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 10,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 2",
-        measurements: "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 11,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 3",
-        measurements: "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 12,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 4",
-        measurements: "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Chris Tanev",
-      },
-      {
-        recipeID: 13,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 1",
-        measurements: "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 14,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 2",
-        measurements: "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 15,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 3",
-        measurements: "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 16,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 4",
-        measurements: "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Chris Tanev",
-      },
-      {
-        recipeID: 17,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 1",
-        measurements: "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 18,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 2",
-        measurements: "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 19,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 3",
-        measurements: "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Harry Potter",
-      },
-      {
-        recipeID: 20,
-        image:
-          "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-        title: "Buttermilk Pancakes 4",
-        measurements: "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
-        ingredients:
-          "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-        description: "Yummy Buttermilk pancakes",
-        steps:
-          "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
-        duration: "30",
-        calories: "210",
-        author: "Chris Tanev",
-      },
-    ];
-    setReceivedRecipes(sampleRecipes);
-  }, []);
+    useEffect(() => {
+        const sampleRecipes = [
+            {
+                "recipeID": 1,
+                "image" : "https://res.cloudinary.com/dhenatkk5/image/upload/v1710943320/qyn2z07ophdpulzskcxf.png",
+                "title" : "Buttermilk Pancakes 1",
+                "measuremnents" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            },
+            {
+                "recipeID": 2,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 2",
+                "measurements" : "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 3,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 3",
+                "measurements" : "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 4,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 4",
+                "measurements" : "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Chris Tanev"
+            },
+            {
+                "recipeID": 5,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 1",
+                "measurements" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            },
+            {
+                "recipeID": 6,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 2",
+                "measurements" : "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 7,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 3",
+                "measurements" : "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 8,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 4",
+                "measurements" : "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Chris Tanev"
+            },
+            {
+                "recipeID": 9,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 1",
+                "measurements" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            },
+            {
+                "recipeID": 10,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 2",
+                "measurements" : "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 11,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 3",
+                "measurements" : "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 12,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 4",
+                "measurements" : "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Chris Tanev"
+            },
+            {
+                "recipeID": 13,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 1",
+                "measurements" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            },
+            {
+                "recipeID": 14,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 2",
+                "measurements" : "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 15,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 3",
+                "measurements" : "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 16,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 4",
+                "measurements" : "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Chris Tanev"
+            },
+            {
+                "recipeID": 17,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 1",
+                "measurements" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            },
+            {
+                "recipeID": 18,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 2",
+                "measurements" : "2 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 19,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 3",
+                "measurements" : "3 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Harry Potter"
+            } ,
+            {
+                "recipeID": 20,
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                "title" : "Buttermilk Pancakes 4",
+                "measurements" : "4 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
+                "description" : "Yummy Buttermilk pancakes",
+                "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
+                "duration" : "30",  
+                "calories" : "210",
+                "author" : "Chris Tanev"
+            }
+        ];
+        setReceivedRecipes(sampleRecipes);
+    }, []);
 
   const handleSearchChange = (e) => {
     setSearchValue(e.target.value);
