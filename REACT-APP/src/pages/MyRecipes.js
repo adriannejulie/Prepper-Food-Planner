@@ -139,7 +139,7 @@ function MyRecipes() {
 
     const addNewRecipe = () => {
         setViewingUploadedRecipes(true);
-        if(currentUploadedRecipe !== "", currentUploadedRecipe.length > 0 && currentUploadedRecipe.length > 0 && currentUploadedRecipe.length > 0 && currentUploadedRecipe.length > 0 && currentUploadedRecipe.length > 0 && currentUploadedRecipe.length > 0){
+        if(true){
             const newRecipeTemplate = {
                 "recipeID": uploadedRecipes[uploadedRecipes.length - 1].recipeID + 1,
                 "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
