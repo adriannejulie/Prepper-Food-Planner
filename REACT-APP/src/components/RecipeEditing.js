@@ -10,9 +10,9 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
     const [amounts, setAmounts] = useState([]);
     const [recipeIngredients, setIngredients] = useState([]);
     const [recipeTitle, setRecipeTitle] = useState(aRecipe?.title);
-    const [cookTime, setCookTime] = useState(aRecipe?.duration);
+    const [cookTime, setCookTime] = useState(aRecipe?.prepTime);
     const [recipeCalories, setRecipeCalories] = useState(aRecipe?.calories);
-    const [recipeSteps, setRecipeSteps] = useState(aRecipe?.steps);
+    const [recipeSteps, setRecipeSteps] = useState(aRecipe?.instructions);
     const [showIngredientPopup, setShowIngredientPopup] = useState(false);
     const [recipePhoto, setRecipePhoto] = useState(aRecipe?.image);
 
