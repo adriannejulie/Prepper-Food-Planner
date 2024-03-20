@@ -21,10 +21,12 @@ function Navbar() {
     };
 
     const handleLogout = () => {
-        setUser(null);
-        navigate("/")
+        setUser(null); 
+        localStorage.removeItem('user'); 
+        navigate("/");
         handleMenuClose();
-    }
+    };
+    
 
     const handleAccount = () => {
         navigate("/account-info")

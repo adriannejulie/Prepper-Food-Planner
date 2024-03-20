@@ -12,7 +12,7 @@ import { FaGithubAlt } from "react-icons/fa";
 import { RxDividerHorizontal } from "react-icons/rx";
 import teampng from "../images/team_png.png";
 import Tordan from "../images/tordan.png";
-
+import { useNavigate } from "react-router-dom"; 
 
 import "./AboutUs.css";
 
@@ -21,6 +21,7 @@ function AboutUs({ }) {
     const [showSignUp, setShowSignUp] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
 
     const [isAnimating, setIsAnimating] = useState(false);
@@ -47,12 +48,16 @@ function AboutUs({ }) {
         setShowSignUp(false);
     };
 
+    const handleHomePage = () => {
+        navigate("/");
+
+    }
 
 
     return (
         <div className="container">
             <div className="content">
-                <img src={logoLight} alt="Logo" className="logo" />
+                <img src={logoLight} alt="Logo" className="logo" onClick={handleHomePage}/>
                 <div className="default-header">
                     <div className="login-signup-button tertiary alata-regular">
                         <Link onClick={handleLogin} className="link white">
@@ -193,8 +198,6 @@ function AboutUs({ }) {
                         </div>
                         <div className="info-pages white playfair-display footer-content">
                             <div className="contact-header" >About Us</div>
-                            <RxDividerHorizontal className="contact-header white" />
-                            <div className="contact-header">FAQ</div>
                         </div>
                     </div>
                 </div>

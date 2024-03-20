@@ -309,7 +309,7 @@ function FindRecipes() {
                 <div className="box">
                     <div className="search-wrapper">
                         <label htmlFor="search"><FaSearch className="title-icon"/>Browse Recipes</label>
-                        <input type="search" id="search" value={searchValue} onChange={handleSearchChange}/>
+                        <input className="find-recipe-input" type="search" id="search" value={searchValue} onChange={handleSearchChange}/>
                     </div>
                     
                     <div className="recipeContainer">
