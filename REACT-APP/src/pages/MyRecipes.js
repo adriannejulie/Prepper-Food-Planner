@@ -50,7 +50,7 @@ function MyRecipes() {
     }, []);
 
     const chanegRecipeView = () => {
-        if(currentUploadedRecipe.title !== "" && currentUploadedRecipe.measurements !== "" && currentUploadedRecipe.ingredients !== "" && currentUploadedRecipe.steps !== "" && currentUploadedRecipe.duration !== "" && currentUploadedRecipe.calories !== ""){
+        if(currentUploadedRecipe.title !== "" && currentUploadedRecipe.measurements !== "" && currentUploadedRecipe.ingredients !== "" && currentUploadedRecipe.instructions !== "" && currentUploadedRecipe.prepTime !== "" && currentUploadedRecipe.calories !== ""){
             setViewingUploadedRecipes(!viewingUploadedRecipes);
             if(viewingUploadedRecipes){
                 if(currentSavedRecipe !== ""){
@@ -142,24 +142,24 @@ function MyRecipes() {
         else{
             window.alert("One or more fields are empty. Please ensure all fields are all filled in.");
         }
-        
     }
 
 
     const addNewRecipe = () => {
         setViewingUploadedRecipes(true);
-        if(true){
+        if(currentUploadedRecipe !== "" && currentUploadedRecipe.title.length > 0 && currentUploadedRecipe.measurements.length > 0 && currentUploadedRecipe.ingredients.length > 0 && currentUploadedRecipe.instructions.length > 0 && currentUploadedRecipe.prepTime.length > 0 && currentUploadedRecipe.calories.length > 0){
             const newRecipeTemplate = {
                 "recipeID": uploadedRecipes[uploadedRecipes.length - 1].recipeID + 1,
                 "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
                 "title" : "",
-                "measuremnents" : "",
+                "measurements" : "",
                 "ingredients" : "",
-                "steps" : "",
-                "duration" : "",  
+                "instructions" : "",
+                "prepTime" : "",  
                 "calories" : "",
                 "author" : ""
             }
+            console.log("ayo")
             var recipes = uploadedRecipes;
             recipes.push(newRecipeTemplate);
             setUploadedRecipes([...recipes]); 
@@ -167,6 +167,7 @@ function MyRecipes() {
             setActiveRecipe(<NewRecipe aRecipe={newRecipeTemplate} newRecipeSave={saveNewRecipe}/>);
         }
         else{
+            console.log(currentUploadedRecipe !== "" , currentUploadedRecipe.title , currentUploadedRecipe.measurements.length > 0 , currentUploadedRecipe.ingredients.length > 0 , currentUploadedRecipe.instructions.length > 0 , currentUploadedRecipe.prepTime.length > 0 , currentUploadedRecipe.calories.length > 0);
             window.alert("One or more fields in the current recipe are missing. Please ensure you have filled out all the fields for a recipe before creating another one.");
         }
     }
