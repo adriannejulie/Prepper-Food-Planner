@@ -100,6 +100,29 @@ function MyRecipes() {
             setUploadedRecipes([...uploadedRecipes]);
             setCurrentUploadedRecipe(recipes[recipeIndex]);
             setActiveRecipe(<RecipeViewing aRecipe={recipes[recipeIndex]} swapToEditing={editRecipe} editAbility={true}/>);
+            axios
+                .put(`http://localhost:8080/updateRecipe/${iDOfRecipe}`, {
+                    "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                    "title" : recipeTitle,
+                    "measurements" : amounts.join(","),
+                    "ingredients" : recipeIngredients.join(","),
+                    "instructions" : recipeSteps,
+                    "prepTime" : cookTime,  
+                    "calories" : recipeCalories,
+                    "userID" : user.userID,
+                    "saves" : "6",
+                    "isPublic": true
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    if (res.status === 200) {
+                        window.alert("Recipe has been updated");
+                    }
+                })
+                .catch ((err) => {
+                    console.log(err);
+                    window.alert("There was an error updating the recipe");
+                });
         }
         else{
             console.log(cookTime);
