@@ -1,4 +1,4 @@
-#recipe-view{
+.recipe-view {
     display: flex;
     flex-direction: row;
     width: 60vw;
@@ -9,4 +9,8 @@
     align-items: center;
     border: 2px solid #53634E;
     margin: 10px
+}
+
+.hide {
+    display: none;
 }

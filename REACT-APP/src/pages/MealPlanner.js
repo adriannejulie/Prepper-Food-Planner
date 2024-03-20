@@ -8,6 +8,7 @@ import { MdOutlineAddBox, MdSearch } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import AddMealPlan from "../components/AddMealPlan.js";
 import axios from 'axios';
+import { useUser } from "../components/UserContext";
 
 function MealPlanner() {
 
@@ -17,13 +18,14 @@ function MealPlanner() {
     const [showOverlay, setShowOverlay] = useState(false);
     const [recipes, setRecipes] = useState([]);
     const navigate = useNavigate();
+    const { user, setUser } = useUser();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 console.log(value.format("YYYY-MM-DD"));
     
-                const response = await axios.get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}`); // needs to be changed for userID
+                const response = await axios.get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}/${user.userID}`); // needs to be changed for userID
                 const data = response.data ? response.data : [];
                 
                 setMeals(data);

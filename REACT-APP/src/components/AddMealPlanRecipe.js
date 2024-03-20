@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddMealPlanRecipe.css';
 
-const AddMealPlanRecipe = ( { recipe, index,  setRecipeID }) => {
+const AddMealPlanRecipe = ( { recipe, index, setRecipeID, isSearched }) => {
+    const containsSearch = 
+        recipe.title.toLowerCase().includes(isSearched.toLowerCase()) ||
+        recipe.ingredients.toLowerCase().includes(isSearched.toLowerCase());
 
     return (
-        <button id="recipe-view" onClick={() => {setRecipeID(recipe.recipeID)}} key={index}>
+        <button className={`recipe-view ${!containsSearch ? "hide" : ""}`} 
+                onClick={() => {setRecipeID(recipe.recipeID)}}>
             <img id="img" src={recipe.image} alt="Recipe Image"></img>
             <div id="meal-name">
-                {recipe.description}
+                {recipe.title}
             </div>
         </button>
     );

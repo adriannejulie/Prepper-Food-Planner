@@ -15,6 +15,10 @@ function MealPlan ({recipe, type, index}) {
         console.log("Save Meal");
     }
 
+    const capitalize = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     return (
         <div className='meal' key={index}>
             <div className='mealplan-section'>
@@ -27,10 +31,10 @@ function MealPlan ({recipe, type, index}) {
             </div>
             <div className='mealplan-section' style={{backgroundColor: "white"}}>
                 <div id='type-and-time'>
-                    <p id='meal-name'>{type}</p>
+                    <p id='meal-name'>{capitalize(type)}</p>
                 </div>
                 <div id='type-and-time'>
-                    <p id='meal-name'>{recipe.prepTime}</p>
+                    <p id='meal-name'>{recipe.prepTime} mins</p>
                 </div>
                 <div id='icons'>
                     <button id='button' onClick={editMeal}>

@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import "./AddMealPlan.css";
 import AddMealPlanRecipe from "./AddMealPlanRecipe";
+import { useUser } from "./UserContext";
 
 function AddMealPlan({ isOpen, onClose, date }) {
 
@@ -12,14 +13,15 @@ function AddMealPlan({ isOpen, onClose, date }) {
     const [uploadedRecipes, setUploadedRecipes] = useState([]);
     const [recipeView, setRecipeView] = useState('uploaded');
     const [recipeID, setRecipeID] = useState('');
+    const [searchValue, setSearchValue] = useState("");
+    const { user, setUser } = useUser();
 
 
     // functions that require APIs
     // userID = 1 is a placeholder for when userID is implemented
     useEffect(() => {
         axios
-            // .get(`http://localhost:8080/getSavedRecipes/${userID}`) // This is for when userID is implemented
-            .get(`http://localhost:8080/getSavedRecipes/1`)
+            .get(`http://localhost:8080/getSavedRecipes/${user.userID}`)
             .then((res) => {
                 setSavedRecipes(res.data ? res.data : []);
             })
@@ -29,8 +31,7 @@ function AddMealPlan({ isOpen, onClose, date }) {
 
     useEffect(() => {
         axios
-            // .get(`http://localhost:8080/getRecipes/${userID}`) // This is for when userID is implemented
-            .get(`http://localhost:8080/getRecipes/1`)
+            .get(`http://localhost:8080/getRecipes/${user.userID}`) 
             .then((res) => {
                 setUploadedRecipes(res.data ? res.data : []);
             })
@@ -89,9 +90,10 @@ function AddMealPlan({ isOpen, onClose, date }) {
         }
     };
 
-    const searchMeal = () => {
-        console.log("Search Meal");
-    }   
+    const handleSearchChange = (e) => {
+        setSearchValue(e.target.value);
+        console.log(searchValue);
+    };
 
     const setView = () => {
         if (recipeView === 'uploaded') {
@@ -111,7 +113,7 @@ function AddMealPlan({ isOpen, onClose, date }) {
                         <button className="overlay__close" type="button" onClick={onClose}>
                             X
                         </button>
-                        <input id="text-input" type="text" placeholder="Search" onSubmit={searchMeal}/>
+                        <input id="text-input" type="text" placeholder="Search" value={searchValue} onChange={handleSearchChange}/>
                     </div>
                     <div className="overlay__view">
                         <button id="view-toggle" onClick={setView}>
@@ -122,7 +124,7 @@ function AddMealPlan({ isOpen, onClose, date }) {
                                 // show uploaded recipes
                                 (<div>
                                     {uploadedRecipes.map((recipe, index) => (
-                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={setRecipeID}/>
+                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={setRecipeID} isSearched={searchValue}/>
                                     ))}
                                 </div>) 
 
@@ -130,7 +132,7 @@ function AddMealPlan({ isOpen, onClose, date }) {
                                 // show saved recipes
                                 (<div>
                                     {savedRecipes.map((recipe, index) => (
-                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={setRecipeID}/>
+                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={setRecipeID} isSearched={searchValue}/>
                                     ))}
                                 </div>)
 
