@@ -26,7 +26,7 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
                 </h1>
                 <div className="align-icons-text"><MdAccountBox className="icon-background"/> Author: {aRecipe?.author}</div>
                 <div className="cooktime-calories-container">
-                    <div className="align-icons-text"><MdHourglassTop className="icon-background"/>{aRecipe?.prepTime} Minutes</div>
+                    <div className="align-icons-text"><MdHourglassTop className="icon-background"/>{aRecipe?.duration} Minutes</div>
                     <div className="align-icons-text"><FaBicycle className="icon-background"/>{aRecipe?.calories} Calories</div>
                 </div>
             </div>
