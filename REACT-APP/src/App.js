@@ -7,6 +7,7 @@ import MyRecipes from "./pages/MyRecipes";
 import FindRecipes from "./pages/FindRecipes";
 import SignUp from "./components/SignUp.js";
 import AboutUs from "./pages/AboutUs.js"
+import NotFoundPage from "./pages/NotFoundPage.js"
 import AccountInfo from "./pages/AccountInfo.js";
 import { UserProvider } from "../src/components/UserContext";
 import ProtectedRoute from './components/ProtectedRoute'; 
@@ -59,6 +60,7 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </UserProvider>
         </Router>
