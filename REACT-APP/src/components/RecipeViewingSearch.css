@@ -3,7 +3,7 @@
 }
 
 
-.recipe-grid{
+.recipe-viewing-grid{
     display: grid;
     grid-template-rows: 20% 80%;
     grid-template-columns: 70% 25%;
@@ -14,7 +14,7 @@
 }
 
 
-.recipe-instructions-container{
+.container-for-instructions{
     background-color: #c2ceb7;
     line-height: 20px;
     padding-left: 30px;
@@ -36,13 +36,13 @@
     font-style: normal;
 }
 
-.title-container{
+.recipe-title-container{
     padding-left: 30px;
     margin-left: 50px;
 }
 
 
-.ingredients-container{
+.recipe-ingredients-container{
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 2px -2px gray;
@@ -50,13 +50,13 @@
 }
 
 
-.recipe-image{
+.the-recipe-image{
     width: 90%;
     height: 100%;
 }
 
 
-.ingredients-header{
+.ingredients-container-title{
     text-align: center;
     height: 30px;
     line-height: 25px;
@@ -73,7 +73,7 @@
 }
 
 
-.ingredients-list{
+.recipes-ingredients{
     line-height: 25px;
     height: 470px;
     display: flex;
@@ -94,7 +94,7 @@
 }
 
 
-.align-icons-text{
+.align-icon-format{
     display: flex;
     align-items: center;
     margin-right: 25px;
@@ -113,7 +113,7 @@
 }
 
 
-.icon-background{
+.background-for-icon{
     background-color: black;
     color: white;
     border-radius: 4px;
@@ -141,7 +141,7 @@
 }
 
 
-.header-icon-style{
+.icon-style-header{
     color: white;
     height: 32px;
     width: 32px;

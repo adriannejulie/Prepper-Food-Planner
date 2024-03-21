@@ -44,9 +44,10 @@ function MyRecipes() {
                 setUploadedRecipes(res.data ? res.data : []);
                 if(res.data.length > 0){
                     selectedRecipeUploaded(res.data[0]);
+                    console.log("we are logging", res.data ? res.data : []);
                 }
+                console.log(uploadedRecipes);
             })
-            console.log(uploadedRecipes);
     }, []);
 
     const chanegRecipeView = () => {
@@ -70,6 +71,7 @@ function MyRecipes() {
 
 
     const editRecipe = (recipeViewing) => {
+        console.log(uploadedRecipes);
         setCurrentUploadedRecipe(recipeViewing);
         setActiveRecipe(<RecipeEditing aRecipe={recipeViewing} updateRecipe={updateRecipeContents}/>);
     }
@@ -91,6 +93,9 @@ function MyRecipes() {
         if(amounts.length > 0 && recipeIngredients.length > 0 && recipeTitle.length > 0 && cookTime.length > 0 && recipeCalories.length > 0 && recipeSteps.length > 0){
             var recipes = uploadedRecipes;
             var recipeIndex = recipes.findIndex(singleRecipe => singleRecipe.recipeID === iDOfRecipe);
+            console.log(iDOfRecipe);
+            console.log(recipes);
+            console.log(uploadedRecipes);
             recipes[recipeIndex].title = recipeTitle; 
             recipes[recipeIndex].measurements = amounts.join(","); 
             recipes[recipeIndex].ingredients = recipeIngredients.join(","); 
@@ -157,7 +162,8 @@ function MyRecipes() {
                 "instructions" : "",
                 "prepTime" : "",  
                 "calories" : "",
-                "author" : ""
+                "author" : "",
+                "saves" : "0"
             }
             console.log("ayo")
             var recipes = uploadedRecipes;
@@ -178,7 +184,7 @@ function MyRecipes() {
                 <div className="recipes-container">
                 <div className="menu">
                         <button className="recipe-list-show-hide menu-buttons"><MdDehaze className="icon-size menu-buttons"/></button>
-                        <button onClick={addNewRecipe}>Add Recipe + </button>
+                        <button className="add-recipe-button menu-buttons" onClick={addNewRecipe}>Add Recipe + </button>
                     </div>
                     <div className="saved-uploaded-selection menu-buttons"><MdBookmark className="icon-size menu-buttons"/>{(viewingUploadedRecipes) ? "Uploaded Recipes" : "Saved Recipes"}
                         <button className="swap-recipe-view menu-buttons" onClick={chanegRecipeView}><ArrowDropDownIcon className="menu-buttons menu-buttons" /></button>
