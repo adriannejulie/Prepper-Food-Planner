@@ -8,6 +8,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import "./AccountInfo.css"
 import { useStepContext } from "@mui/material";
 import { useUser } from "../components/UserContext";
+import axios from 'axios';
 
 //No placeholder args. Can be changed later
 function AccountInfo({}){
@@ -17,42 +18,10 @@ function AccountInfo({}){
     const navigate = useNavigate();
     
     //Placeholder values
-    const [id, setID] = useState("6969696969")
+    const [id, setID] = useState(Number(user.userID))
     const [firstName, setFirstName] = useState(name[0])
     const [lastName, setLastName] = useState(name[1])
     const [email, setEmail] = useState(user.email)
-
-    const [changeFirstName, setChangeFirstName] = useState(false)
-    const [changeLastName, setChangeLastName] = useState(false)
-    const [changeEmail, setChangeEmail] = useState(false)
-
-
-    const [firstNameError, setFirstNameError] = useState(false)
-    const [lastNameError, setLastNameError] = useState(false)
-    const [emailError, setEmailError] = useState(false)
-
-    const onChangeEmail = (email) => {
-
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        setEmailError(!emailPattern.test(email))
-        setEmail(email)
-
-        //Change email here!
-
-
-    }
-
-    const onChangeFirstName = (name) => {
-
-        //Nothing to check for yet
-        setFirstNameError(false)
-        setFirstName(name)
-    }
-
-    const onChangeLastName = (name) => {
-        setLastNameError(false)
-        setLastName(name)
-    }
 
 
 
@@ -62,10 +31,22 @@ function AccountInfo({}){
         navigate("/")
     }
 
-    const handleDelete = () => {
-        //Nothing to do delete from yet
-        setUser(null)
-        navigate("/")
+    const handleDelete = async () => {
+
+
+        try {
+            const response = await axios.delete(`http://localhost:8080/users/${user.email}`);
+            console.log(response.data);
+            setUser(null)
+            navigate("/")
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            // Handle error, update UI accordingly
+        }
+
+
+
+
 
     }
 
@@ -100,36 +81,18 @@ function AccountInfo({}){
                             <div className="header-text">
                                 Email
                             </div>
-                            
-
-                            { !changeEmail ?
-                            (<div className="icon elem-button" onClick={(e) => setChangeEmail(!changeEmail)}><MdCreate /></div>)
-                            :
-                            ( !emailError ? (<div className="icon elem-button" onClick={(e) => setChangeEmail(!changeEmail)}><MdSave /></div>) 
-                            : <div className="icon error-icon"><MdSave /></div>
-                            
-                            )
-                            }
+                    
                             
 
 
                         </div>
-                        <div className={!emailError ? (changeEmail ? "info-section text-input-select" : "info-section") : ("info-section text-input-error")}>
-                            { changeEmail ?
-                            (<input
-                                className= "text-input"
-                                value={email}
-                                onChange={(e) => onChangeEmail(e.target.value)}
-                            
-                            
-                            />)
-                            :
-                            (<div className="text">
+                        <div className= "info-section">
+  
+                            <div className="text">
 
                                 {email}
 
-                            </div>)
-                            } 
+                            </div>
                         </div>
                         
                     </div>
@@ -141,32 +104,14 @@ function AccountInfo({}){
                                     First Name
                                 </div>
 
-                                { !changeFirstName ?
-                                (<div className="icon elem-button" onClick={(e) => setChangeFirstName(!changeFirstName)}><MdCreate /></div>)
-                                :
-                                ( !firstNameError ? (<div className="icon elem-button" onClick={(e) => setChangeFirstName(!changeFirstName)}><MdSave /></div>) 
-                                : <div className="icon error-icon"><MdSave /></div>
-                                
-                                )
-                                }
 
                             </div>
-                            <div className={!firstNameError ? (changeFirstName ? "info-section text-input-select" : "info-section") : ("info-section text-input-error")}>
-                                { changeFirstName ?
-                                (<input
-                                    className= "text-input"
-                                    value={firstName}
-                                    onChange={(e) => onChangeFirstName(e.target.value)}
-                                
-                                
-                                />)
-                                :
-                                (<div className="text">
+                            <div className= "info-section">
+                                <div className="text">
 
                                     {firstName}
 
-                                </div>)
-                                } 
+                                </div>
                             </div>
                         </div>
                         <div className="inner-section">
@@ -175,32 +120,15 @@ function AccountInfo({}){
                                 <div className="header-text">
                                     Last Name
                                 </div>
-                                { !changeLastName ?
-                                (<div className="icon elem-button" onClick={(e) => setChangeLastName(!changeLastName)}><MdCreate /></div>)
-                                :
-                                ( !lastNameError ? (<div className="icon elem-button" onClick={(e) => setChangeLastName(!changeLastName)}><MdSave /></div>) 
-                                : <div className="icon error-icon"><MdSave /></div>
-                                
-                                )
-                                }
 
                             </div>
-                            <div className={!lastNameError ? (changeLastName ? "info-section text-input-select" : "info-section") : ("info-section text-input-error")}>
-                                { changeLastName ?
-                                (<input
-                                    className= "text-input"
-                                    value={lastName}
-                                    onChange={(e) => onChangeLastName(e.target.value)}
-                                
-                                
-                                />)
-                                :
-                                (<div className="text">
+                            <div className= "info-section">
+                                <div className="text">
 
                                     {lastName}
 
-                                </div>)
-                                } 
+                                </div>
+                                
                             </div>
                         </div>
                         

@@ -7,6 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import { useUser  } from "./UserContext";
+import axios from "axios";
+
 
 function SignUp({ onSignUp, onClose }) {
     const [firstName, setFirstName] = useState('');
@@ -39,7 +41,7 @@ function SignUp({ onSignUp, onClose }) {
         setConfirmedPassword(e.target.value);
     };
 
-    const signUp = () => {
+    const signUp = async () => {
         if (!firstName || !lastName || !email || !password || !confirmedPassword) {
             toast.error("All fields are required");
             return;
@@ -56,40 +58,44 @@ function SignUp({ onSignUp, onClose }) {
             return;
         }
 
-        fetch('http://localhost:8080/addUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // Specify content type as JSON
-            },
-            body: JSON.stringify({ // Stringify the JavaScript object
+        try {
+            const response = await axios.post('http://localhost:8080/addUser', {
                 email: email,
                 firstName: firstName,
                 lastName: lastName,
                 password: password,
                 isGoogle: false
-            })
-        }).then(response => {
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        
             if (response.status === 200) {
+                const data = response.data;
                 const user = {
-                    name: firstName.concat(" ", lastName),
+                    userID: data.userID,
+                    name: `${firstName} ${lastName}`,
                     email: email,
                     picture: null,
-
-                }
-                setUser(user)
-                navigate("/meal-planner")
-                closeSignUp()
-
+                };
+        
+                console.log(user)
+                setUser(user);
+                navigate("/meal-planner");
+                closeSignUp();
             } else {
-                if (response.status === 400){
-                    window.alert("Email already in use.");
-                } else {
-                    window.alert("Something went wrong ");
-                }
-            }
-        });
 
-        closeSignUp();
+                toast.error("Unknown error")
+                
+            }
+        } catch (error) {
+            if (error.response.status === 409) {
+                toast.error("Email already in use.");
+            } else {
+                toast.error("Something went wrong");
+            }
+        }
     }
 
     const closeSignUp = () => {

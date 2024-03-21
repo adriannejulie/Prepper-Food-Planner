@@ -9,7 +9,7 @@ import { Cloudinary } from "../components/CloudinaryImageUpload";
 import { Image, Transformation } from 'cloudinary-react';
 import { CloudinaryContext, uploadMultiple } from 'cloudinary-react';
 
-function RecipeEditing({ aRecipe, updateRecipe }) {    
+function NewRecipe({ aRecipe, newRecipeSave }) {    
     const [amounts, setAmounts] = useState([]);
     const [recipeIngredients, setIngredients] = useState([]);
     const [recipeTitle, setRecipeTitle] = useState(aRecipe?.title);
@@ -103,7 +103,7 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
         <div className="recipe-grid">
             <div>
                 {showIngredientPopup && <AddIngredient hidePopup={showHidePopup} ingredients={recipeIngredients} amounts={amounts} saveIngredients={saveIngredientsAdded}/>}
-                <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => updateRecipe(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, aRecipe.recipeID)}><ImCheckmark className="checkmark-icon-style"/></button></div>
+                <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => newRecipeSave(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps)}><ImCheckmark className="checkmark-icon-style"/></button></div>
                 <div className="align-icons-text"><MdAccountBox /> Author: {aRecipe?.author}</div>
                 <div className="cooktime-calories-container">
                     <div className="align-icons-text"><MdHourglassTop className="icon-background"/><input className="duration-cooktime-input" value={cookTime} onChange={handleCookTimeChange}></input>Minutes</div>
@@ -123,4 +123,4 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
     );
 }
 
-export default RecipeEditing;
+export default NewRecipe;

@@ -3,9 +3,12 @@ import "./FindRecipes.css";
 import RecipeViewingSearch from "../components/RecipeViewingSearch.js";
 import { MdAccountBox, MdHourglassTop } from "react-icons/md";
 import { FaBicycle, FaSearch } from "react-icons/fa";
+import axios from "axios";
 
 function RecipeCard({ recipe, searchValue, handleClick }) {
-    const containsSearch = recipe.title.toLowerCase().includes(searchValue.toLowerCase()) || recipe.ingredients.toLowerCase().includes(searchValue.toLowerCase());
+  const containsSearch =
+    recipe.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+    recipe.ingredients.toLowerCase().includes(searchValue.toLowerCase());
 
     return (
         <div className={`foundRecipe ${!containsSearch ? 'hide' : ''}`} onClick={() => handleClick(recipe.recipeID)}>
@@ -19,14 +22,31 @@ function RecipeCard({ recipe, searchValue, handleClick }) {
                 <div className="calories"><FaBicycle className="icon-find"/>{recipe.calories} Calories</div>
             </div>
         </div>
-    );
+      </div>
+      <div className="bottom-container">
+        <div>
+          <div className="body">{recipe.description}</div>
+        </div>
+        <div className="row-container">
+          <div className="time">
+            <MdHourglassTop className="icon-find" />
+            {recipe.duration} Minutes
+          </div>
+          <div className="calories">
+            <FaBicycle className="icon-find" />
+            {recipe.calories} Calories
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function FindRecipes() {
-    const [searchValue, setSearchValue] = useState('');
-    const [receivedRecipes, setReceivedRecipes] = useState([]);
-    const [selectedRecipeId, setSelectedRecipeId] = useState(null);
-    const [showRecipeViewing, setShowRecipeViewing] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [receivedRecipes, setReceivedRecipes] = useState([]);
+  const [selectedRecipeId, setSelectedRecipeId] = useState(null);
+  const [showRecipeViewing, setShowRecipeViewing] = useState(false);
 
     useEffect(() => {
         const sampleRecipes = [
@@ -274,29 +294,63 @@ function FindRecipes() {
         setReceivedRecipes(sampleRecipes);
     }, []);
 
-    const handleSearchChange = (e) => {
-        setSearchValue(e.target.value);
-    };
-    
-    const handleClickRecipe = (recipeId) => {
-        setSelectedRecipeId(recipeId);
-    };
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+  };
 
-    useEffect(() => {
-        console.log(selectedRecipeId);
-        if(selectedRecipeId){
-            setShowRecipeViewing(true);
+  const handleClickRecipe = (recipeId) => {
+    setSelectedRecipeId(recipeId);
+  };
 
+  useEffect(() => {
+    console.log(selectedRecipeId);
+    if (selectedRecipeId) {
+      setShowRecipeViewing(true);
+    }
+  }, [selectedRecipeId]);
+
+  const handleBackToList = () => {
+    setSelectedRecipeId(null);
+    setShowRecipeViewing(false);
+  };
+
+  const handleSaveRecipe = () => {
+    axios
+      .post(`http://localhost:8080/addSavedRecipe`, {
+        userID: 2,
+        recipeID: selectedRecipeId,
+      })
+
+      .then((res) => {
+        console.log(res.data);
+        console.log(res.status);
+        if (res.status === 200) {
+          alert("Recipe saved successfully");
         }
-    }, [selectedRecipeId]);
+      })
+      .catch((err) => {
+        alert("Recipe already saved");
+        console.log(err);
+      });
+  };
 
-    const handleBackToList = () => {
-        setSelectedRecipeId(null);
-        setShowRecipeViewing(false);
-    };
-
-    const handleSaveRecipe = () => {
-    };
+  return (
+    <div className="container">
+      {!showRecipeViewing && (
+        <div className="box">
+          <div className="search-wrapper">
+            <label htmlFor="search">
+              <FaSearch className="title-icon" />
+              Browse Recipes
+            </label>
+            <input
+              className="find-recipe-input"
+              type="search"
+              id="search"
+              value={searchValue}
+              onChange={handleSearchChange}
+            />
+          </div>
 
     return (
         <div className="container">
@@ -317,8 +371,20 @@ function FindRecipes() {
             {showRecipeViewing && (
                 <RecipeViewingSearch aRecipe={receivedRecipes.find(recipe => recipe.recipeID === selectedRecipeId)} onBack={handleBackToList} onSave={handleSaveRecipe}/>
             )}
+
         </div>
-    );
+      )}
+      {showRecipeViewing && (
+        <RecipeViewingSearch
+          aRecipe={receivedRecipes.find(
+            (recipe) => recipe.recipeID === selectedRecipeId
+          )}
+          onBack={handleBackToList}
+          onSave={handleSaveRecipe}
+        />
+      )}
+    </div>
+  );
 }
 
 export default FindRecipes;
