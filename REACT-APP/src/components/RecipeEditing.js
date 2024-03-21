@@ -110,7 +110,8 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
                     <div className="align-icons-text"><FaBicycle className="icon-background"/><input className="duration-cooktime-input" value={recipeCalories} onChange={handleCaloriesChange}></input> Calories</div>
                 </div>
             </div>
-            <label>
+            <label className="image-container">
+                <div className="icon-on-image"><div className="photo-icon-background"><MdModeEdit /></div></div>
                 <img className="recipe-image" src={recipePhoto} />
                 <input className="hide-element" type="file" name="myfile" onChange={(e) => getUploadedImage(e)}/>
             </label>

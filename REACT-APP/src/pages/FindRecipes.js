@@ -10,17 +10,17 @@ function RecipeCard({ recipe, searchValue, handleClick }) {
     recipe.title.toLowerCase().includes(searchValue.toLowerCase()) ||
     recipe.ingredients.toLowerCase().includes(searchValue.toLowerCase());
 
-  return (
-    <div
-      className={`foundRecipe ${!containsSearch ? "hide" : ""}`}
-      onClick={() => handleClick(recipe.recipeID)}
-    >
-      <img className="image" src={recipe.image}></img>
-      <div className="top-container">
-        <div className="title">{recipe.title}</div>
-        <div className="author">
-          <MdAccountBox className="icon-find" />
-          {recipe.author}
+    return (
+        <div className={`foundRecipe ${!containsSearch ? 'hide' : ''}`} onClick={() => handleClick(recipe.recipeID)}>
+            <img className="image" src={recipe.image}></img>
+            <div className="top-container">
+                <div className="title">{recipe.title}</div>
+                <div className="author"><MdAccountBox className="icon-auth"/>{recipe.author}</div>
+            </div>
+            <div className="bottom-container">
+                <div className="time"><MdHourglassTop className="icon-find"/>{recipe.duration} Minutes</div>
+                <div className="calories"><FaBicycle className="icon-find"/>{recipe.calories} Calories</div>
+            </div>
         </div>
       </div>
       <div className="bottom-container">
@@ -56,7 +56,7 @@ function FindRecipes() {
                 "title" : "Buttermilk Pancakes 1",
                 "measurements" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
                 "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
-                "description" : "Yummy Buttermilk pancakes",
+                "description" : "Yummy Buttermilk pancakes tr4heta[ojsiofndposnbvotiejokbn vbfjohgiepgjnvcbviepdojvnchb0psdnb ",
                 "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",
                 "duration" : "30",  
                 "calories" : "210",
@@ -352,16 +352,26 @@ function FindRecipes() {
             />
           </div>
 
-          <div className="recipeContainer">
-            {receivedRecipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.recipeID}
-                recipe={recipe}
-                searchValue={searchValue}
-                handleClick={handleClickRecipe}
-              />
-            ))}
-          </div>
+    return (
+        <div className="container">
+            {!showRecipeViewing && (
+                <div className="box">
+                    <div className="search-wrapper">
+                        <label htmlFor="search" className="browse-title"><FaSearch className="title-icon"/>Browse Recipes</label>
+                        <input className="find-recipe-input" type="search" id="search" value={searchValue} onChange={handleSearchChange}/>
+                    </div>
+                    
+                    <div className="recipeContainer">
+                        {receivedRecipes.map(recipe => (
+                            <RecipeCard key={recipe.recipeID} recipe={recipe} searchValue={searchValue} handleClick={handleClickRecipe} />
+                        ))}
+                    </div>
+                </div>
+            )}
+            {showRecipeViewing && (
+                <RecipeViewingSearch aRecipe={receivedRecipes.find(recipe => recipe.recipeID === selectedRecipeId)} onBack={handleBackToList} onSave={handleSaveRecipe}/>
+            )}
+
         </div>
       )}
       {showRecipeViewing && (

@@ -3,24 +3,27 @@
 }
 
 
-.recipe-grid{
+.recipe-viewing-grid{
     display: grid;
     grid-template-rows: 20% 80%;
     grid-template-columns: 70% 25%;
-    gap: 5%;
+    gap: 50px;
     width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     padding-top: 10px;
 }
 
 
-.recipe-instructions-container{
+.container-for-instructions{
     background-color: #c2ceb7;
     line-height: 20px;
     padding-left: 30px;
     font-size: large;
-    margin-left: 30px;
-    height: 450px;
+    margin-left: 70px;
+    height: 480px;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .recipe-instructions{
@@ -28,14 +31,18 @@
     line-height: 20px;
     padding-left: 30px;
     font-size: large;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
-.title-container{
+.recipe-title-container{
     padding-left: 30px;
+    margin-left: 50px;
 }
 
 
-.ingredients-container{
+.recipe-ingredients-container{
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 2px -2px gray;
@@ -43,13 +50,13 @@
 }
 
 
-.recipe-image{
+.the-recipe-image{
     width: 90%;
     height: 100%;
 }
 
 
-.ingredients-header{
+.ingredients-container-title{
     text-align: center;
     height: 30px;
     line-height: 25px;
@@ -60,10 +67,13 @@
     justify-content: center;
     align-items: center;
     font-size: large;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
-.ingredients-list{
+.recipes-ingredients{
     line-height: 25px;
     height: 470px;
     display: flex;
@@ -72,6 +82,9 @@
     background-color: #f1f7eb;
     font-size: medium;
     box-shadow: 0 4px 2px -2px gray;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
@@ -81,12 +94,15 @@
 }
 
 
-.align-icons-text{
+.align-icon-format{
     display: flex;
     align-items: center;
     margin-right: 25px;
     margin-top: 5px;
     font-size: 30px;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .align-icons-title{
@@ -97,7 +113,7 @@
 }
 
 
-.icon-background{
+.background-for-icon{
     background-color: black;
     color: white;
     border-radius: 4px;
@@ -125,7 +141,7 @@
 }
 
 
-.header-icon-style{
+.icon-style-header{
     color: white;
     height: 32px;
     width: 32px;
