@@ -22,16 +22,18 @@
     z-index: 10;
     padding: 30px;
     border-radius: 50px;
-    width: 70vw;
-    height: 70vh;
+    width: 80vw;
+    height: 80vh;
     background-color: #DEE4D8;
 }
 
 .overlay__controls {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
+    width: 80vw;
+    height: 2vh;
 }
 
 .overlay__close {
@@ -39,9 +41,8 @@
     flex-direction: row;
     justify-content: flex-end;
     border: none;
-    width: 67vw;
     background-color: transparent;
-    font-size: 36px;
+    font-size: 20px;
     cursor: pointer;
 }
 
@@ -56,40 +57,50 @@
     flex-direction: column;
     justify-content: space-around; /* align on x */
     align-items: center; /* align on y */
-    width: 70vw;
-    height: 65vh;
+    width: 80vw;
+    height: 80vh;
 }
 
-.recipe-viewer {
+.section-container {
     display: flex;
-    width: 65vw;
-    height: 50vh;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80vw;
+    height: 70vh;
+}
+
+#section {
+    display: flex;
+    width: 30vw;
+    height: 65vh;
     flex-direction: column;
     background-color: #F2F5EB;
     border-radius: 50px;
     align-items: center;
-    margin-bottom: 20px;
 }
 
-.add-controls {
+#recipes-container {
     display: flex;
-    width: 50vw;
-    height: 15vh;
-    flex-direction: row;
+    flex-direction: column;
+    width: 30vw;
+    height: 55vh;
     background-color: #F2F5EB;
     border-radius: 50px;
-    justify-content: center;
     align-items: center;
+    overflow-y: auto;
 }
 
 #text {
     background-color: white;
-    border-radius: 50px;
+    border-radius: 50px; 
     font-size: 14px;
-    width: 10vw;
+    width: 20vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    margin: 5px;
 }
 
 #add-Button {
@@ -97,9 +108,9 @@
     border-radius: 50px;
     border: none;
     box-shadow: 5px 10px 18px #888888;
-    height: 40px;
+    height: 4vh;
     width: 20vw;
-    margin: 50px;
+    margin: 10px;
     font-size: 14px;
     font-weight: bold;
 }
@@ -113,16 +124,15 @@
 }
 
 #view-toggle{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 15vw;
-    height: 5vh;
-    align-items: center;
-    margin: 5px;
     background-color: #53634E;
     border-radius: 50px;
     border: none;
+    box-shadow: 5px 10px 18px #888888;
+    height: 4vh;
+    width: 20vw;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 #recipe-view{
@@ -138,3 +148,11 @@
     margin: 10px
 }
 
+#section-calendar {
+    height: 30vh;
+    margin: 20px;
+}
+
+.active {
+    background-color: #53634E;
+}

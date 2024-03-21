@@ -72,13 +72,14 @@ function MealPlanner() {
 
     return (
         <div className="meal-planner">
-            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay} date={value.format("YYYY-MM-DD")}/>
-            <div className="section">
-                <div id="section-calendar">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
-                    </LocalizationProvider> 
-                </div>
+            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay}/>
+            <div id="plannerSection">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateCalendar 
+                        value={value} 
+                        onChange={(newValue) => setValue(newValue)} 
+                        style={{"height": "50vh"}}/>
+                </LocalizationProvider> 
                 <button className="button" onClick={addMeal}>
                     <MdOutlineAddBox />
                     Add Meal
@@ -88,7 +89,7 @@ function MealPlanner() {
                     Find Recipes
                 </button>
             </div>
-            <div className="section">
+            <div id="mealPlans-container">
                 {
                     meals.length === 0 ? 
 
@@ -102,7 +103,7 @@ function MealPlanner() {
                     // meals are planned on the selected date
                     (<div id="meals-planned">
                         {recipes.map((recipe, index) => {
-                            return <MealPlan key={index} recipe={recipe} type={mealTypes[index]}></MealPlan>
+                            return <MealPlan key={index} mealPlanID={meals[index].mealPlanID} recipe={recipe} type={mealTypes[index]}></MealPlan>
                         })}
                     </div>)
                 }

@@ -1,18 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './MealPlan.css';
-import { MdOutlineBookmarkBorder, MdModeEdit } from "react-icons/md";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 import axios from 'axios';
+import AddMealPlan from './AddMealPlan';
 
 
-function MealPlan ({recipe, type, index}) {
+function MealPlan ({recipe, mealPlanID, type, index }) {
+
+    const [ editMode , setEditMode ] = useState(false);
 
     const editMeal = () => {
         console.log("Edit Meal");
+        setEditMode(!editMode);
     }
 
-    // this is a sus button
-    const saveMeal = () => {
-        console.log("Save Meal");
+    const deleteMeal = () => {
+        const deleteMeal = async () => {
+            try { 
+                const response = await axios.delete(`http://localhost:8080/removeMealPlan/${mealPlanID}`); 
+                const data = response.data ? response.data : [];
+                
+                console.log(data);
+
+            } catch (error) {
+                console.error("Error deleting meal:", error);
+            }
+        };
+    
+        deleteMeal();
+        window.location.reload();
     }
 
     const capitalize = (str) => {
@@ -21,6 +37,7 @@ function MealPlan ({recipe, type, index}) {
 
     return (
         <div className='meal' key={index}>
+            <AddMealPlan isOpen={editMode} onClose={ setEditMode } editMode={editMode} mealPlanID={mealPlanID}/> 
             <div className='mealplan-section'>
                 
                 <img id='img' src={recipe.image} alt="React Image"></img>
@@ -31,17 +48,17 @@ function MealPlan ({recipe, type, index}) {
             </div>
             <div className='mealplan-section' style={{backgroundColor: "white"}}>
                 <div id='type-and-time'>
-                    <p id='meal-name'>{capitalize(type)}</p>
+                    <div id='type-and-time-text'>{capitalize(type)}</div>
                 </div>
                 <div id='type-and-time'>
-                    <p id='meal-name'>{recipe.prepTime} mins</p>
+                    <div id='type-and-time-text'>{recipe.prepTime} mins</div>
                 </div>
                 <div id='icons'>
                     <button id='button' onClick={editMeal}>
                         <MdModeEdit />
                     </button>
-                    <button id='button' onClick={saveMeal}>
-                        <MdOutlineBookmarkBorder />
+                    <button id='button' onClick={deleteMeal}>
+                        <MdDelete />
                     </button>
                 </div>
             </div>

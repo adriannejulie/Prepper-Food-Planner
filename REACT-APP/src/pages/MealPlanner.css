@@ -5,22 +5,32 @@
     height: 100vh;
 }
 
-.section {
+#plannerSection {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     background-color: #F2F5EB;
     border-radius: 25px;
     box-shadow: 5px 10px 18px #888888;
     margin: 50px;
     height: 75vh;
     width: 30vw;
+    overflow-y: auto;
 }
 
-#section-calendar {
-    height: 45vh;
-    margin: 20px;
+#mealPlans-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 5px 10px 18px #888888;
+    margin: 50px;
+    height: 75vh;
+    width: 30vw;
+    overflow-y: auto;
 }
 
 #no-meals-planned {

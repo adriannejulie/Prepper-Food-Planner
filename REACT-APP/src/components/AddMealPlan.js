@@ -3,22 +3,31 @@ import axios from "axios";
 import "./AddMealPlan.css";
 import AddMealPlanRecipe from "./AddMealPlanRecipe";
 import { useUser } from "./UserContext";
+import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from "dayjs";
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-function AddMealPlan({ isOpen, onClose, date }) {
+function AddMealPlan({ isOpen, onClose, editMode, mealPlanID} ) {
 
-    const [breakfast, setBreakfast] = useState(false);
-    const [lunch, setLunch] = useState(false);
-    const [dinner, setDinner] = useState(false);
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [uploadedRecipes, setUploadedRecipes] = useState([]);
     const [recipeView, setRecipeView] = useState('uploaded');
     const [recipeID, setRecipeID] = useState('');
     const [searchValue, setSearchValue] = useState("");
     const { user, setUser } = useUser();
+    const [activeRecipeID, setActiveRecipeID] = useState('');
+    const [value, setValue] = useState(new dayjs());
+    const [alignment, setAlignment] = useState('');
+
+    const handleChange = (event, newAlignment) => {
+      setAlignment(newAlignment);
+      console.log(alignment);
+    };
 
 
     // functions that require APIs
-    // userID = 1 is a placeholder for when userID is implemented
     useEffect(() => {
         axios
             .get(`http://localhost:8080/getSavedRecipes/${user.userID}`)
@@ -39,56 +48,42 @@ function AddMealPlan({ isOpen, onClose, date }) {
     }, [isOpen]);
 
     const addMeal = () => {
-        console.log(`Add Meal ${date}`);
+        if (editMode) {
+            console.log(`Edit Meal ${value.format('YYYY-MM-DD')}`);
+            axios
+                .put(`http://localhost:8080/editMealPlan/${mealPlanID}`, {
+                    recipeID: recipeID,
+                    type: alignment,
+                    userID: user.userID, 
+                    date: value.format('YYYY-MM-DD'),
+                    mealPlanID: mealPlanID
+                })
+                .then((res) => {
+                    console.log(res);
+                    console.log(`Edit Meal ${value.format('YYYY-MM-DD')}`);
+                })
+        }
+        else {
+        console.log(`Add Meal ${value.format('YYYY-MM-DD')}`);
         axios
             .post(`http://localhost:8080/addMealPlan`, {
                 recipeID: recipeID,
-                type: breakfast ? "breakfast" : lunch ? "lunch" : "dinner",
-                userID: 1, // This is for when userID is implemented
-                date: date
+                type: alignment,
+                userID: user.userID, 
+                date: value.format('YYYY-MM-DD')
             })
             .then((res) => {
                 console.log(res);
-                console.log(`Add Meal ${date}`);
+                console.log(`Add Meal ${value.format('YYYY-MM-DD')}`);
             })
-
+        }
+        window.location.reload();
         onClose();
     }
 
     useEffect(() => {
         console.log(recipeID);
     }, [recipeID]);
-
-
-    const handleBreakfastToggle = () => {
-
-        if (!breakfast){
-            setBreakfast(true)
-            setLunch(false)
-            setDinner(false)
-            console.log('breakfast');
-        }
-    };
-
-    const handleLunchToggle = () => {
-
-        if (!lunch){
-            setBreakfast(false)
-            setLunch(true)
-            setDinner(false)
-            console.log('lunch');
-        }
-    };
-
-    const handleDinnerToggle = () => {
-
-        if (!dinner){
-            setBreakfast(false)
-            setLunch(false)
-            setDinner(true)
-            console.log('dinner');
-        }
-    };
 
     const handleSearchChange = (e) => {
         setSearchValue(e.target.value);
@@ -103,58 +98,86 @@ function AddMealPlan({ isOpen, onClose, date }) {
         }
     }
 
+    const handleRecipeClick = (recipeID) => {
+        setActiveRecipeID(recipeID);
+    };
+
     return (
         <Fragment>
-            {isOpen && (
+            {isOpen ? (
                 <div className="overlay">
-                <div className="overlay__background" onClick={onClose} />
-                <div className="overlay__container">
-                    <div className="overlay__controls">
-                        <button className="overlay__close" type="button" onClick={onClose}>
-                            X
-                        </button>
-                        <input id="text-input" type="text" placeholder="Search" value={searchValue} onChange={handleSearchChange}/>
-                    </div>
-                    <div className="overlay__view">
-                        <button id="view-toggle" onClick={setView}>
-                            { recipeView === 'uploaded' ? "Show Saved Recipes" : "Show Uploaded Recipes"}
-                        </button>
-                        <div className="recipe-viewer">
-                            { recipeView === 'uploaded' ? 
-                                // show uploaded recipes
-                                (<div>
-                                    {uploadedRecipes.map((recipe, index) => (
-                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={setRecipeID} isSearched={searchValue}/>
-                                    ))}
-                                </div>) 
+                    <div className="overlay__background" onClick={onClose} />
+                    <div className="overlay__container">
+                        <div className="overlay__view">
+                            <input id="text-input" type="text" placeholder="Search" value={searchValue} onChange={handleSearchChange}/>
+                            <div className="section-container">
+                                <div id="section">
+                                    <div id="recipes-container">
+                                        { recipeView === 'uploaded' ? 
+                                            // show uploaded recipes
+                                            (<div>
+                                                {uploadedRecipes.map((recipe, index) => (
+                                                    <AddMealPlanRecipe
+                                                        key={index}
+                                                        recipe={recipe}
+                                                        index={index}
+                                                        setRecipeID={setRecipeID}
+                                                        isSearched={searchValue}
+                                                        activeRecipeID={activeRecipeID} 
+                                                        onRecipeClick={handleRecipeClick} 
+                                                    />
+                                                ))}
+                                            </div>) 
 
-                                :
-                                // show saved recipes
-                                (<div>
-                                    {savedRecipes.map((recipe, index) => (
-                                        <AddMealPlanRecipe key={index} recipe={recipe} index={index} setRecipeID={setRecipeID} isSearched={searchValue}/>
-                                    ))}
-                                </div>)
-
-                            }
-                        </div>
-                        <div className="add-controls">
-                            <div id="type-input">
-                                <div id="text">What is this meal for?</div>
-                                <div className="carousel-options">
-                                    <div className={breakfast ? ("c-option carousel-hightlight alata-regular carousel-hightlight-to-none") : ("c-option carousel-inverse alata-regular")}
-                                    onClick={handleBreakfastToggle} > Breakfast </div>
-                                    <div className={lunch ? ("c-option carousel-hightlight alata-regular") : ("c-option carousel-inverse alata-regular")} onClick={handleLunchToggle} > Lunch </div>
-                                    <div className={dinner ? ("c-option carousel-hightlight alata-regular") : ("c-option carousel-inverse alata-regular")} onClick={handleDinnerToggle} > Dinner </div>
+                                            :
+                                            // show saved recipes
+                                            (<div>
+                                                {savedRecipes.map((recipe, index) => (
+                                                    <AddMealPlanRecipe
+                                                        key={index}
+                                                        recipe={recipe}
+                                                        index={index}
+                                                        setRecipeID={setRecipeID}
+                                                        isSearched={searchValue}
+                                                        activeRecipeID={activeRecipeID} 
+                                                        onRecipeClick={handleRecipeClick} 
+                                                    />
+                                                ))}
+                                            </div>)
+                                        }
+                                    </div>
+                                    <button id="view-toggle" onClick={setView}>
+                                        { recipeView === 'uploaded' ? "Show Saved Recipes" : "Show Uploaded Recipes"}
+                                    </button>
                                 </div>
+                                <div id="section">
+                                    <div id="text">Choose a Date</div>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} style={{"height": "50vh"}}/>
+                                    </LocalizationProvider> 
+                                    <div id="type-input">
+                                        <div id="text">What is this meal for?</div>
+                                        <ToggleButtonGroup
+                                            color="primary"
+                                            value={alignment}
+                                            exclusive
+                                            onChange={handleChange}
+                                            aria-label="Platform"
+                                        >
+                                            <ToggleButton value="breakfast">Breakfast</ToggleButton>
+                                            <ToggleButton value="lunch">Lunch</ToggleButton>
+                                            <ToggleButton value="dinner">Dinner</ToggleButton>
+                                        </ToggleButtonGroup>
+                                    </div>
+                                    <button id="add-Button" onClick={addMeal}>Add to Calendar</button>
+                                </div>                     
                             </div>
-                            <button id="add-Button" onClick={addMeal}>Add to Calendar</button>
-                            <div></div>
                         </div>
                     </div>
                 </div>
-                </div>
-            )}
+            )
+        : null
+        }
         </Fragment>
     );
 }
