@@ -7,9 +7,9 @@
     display: grid;
     grid-template-rows: 20% 80%;
     grid-template-columns: 70% 25%;
-    gap: 5%;
+    gap: 50px;
     width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     padding-top: 10px;
 }
 
@@ -19,8 +19,11 @@
     line-height: 20px;
     padding-left: 30px;
     font-size: large;
-    margin-left: 30px;
-    height: 450px;
+    margin-left: 70px;
+    height: 480px;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .recipe-instructions{
@@ -28,10 +31,14 @@
     line-height: 20px;
     padding-left: 30px;
     font-size: large;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .title-container{
     padding-left: 30px;
+    margin-left: 50px;
 }
 
 
@@ -60,6 +67,9 @@
     justify-content: center;
     align-items: center;
     font-size: large;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
@@ -72,6 +82,9 @@
     background-color: #f1f7eb;
     font-size: medium;
     box-shadow: 0 4px 2px -2px gray;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
@@ -87,6 +100,9 @@
     margin-right: 25px;
     margin-top: 5px;
     font-size: 30px;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .align-icons-title{
