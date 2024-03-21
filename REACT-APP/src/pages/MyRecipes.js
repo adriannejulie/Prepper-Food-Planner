@@ -5,7 +5,7 @@ import Recipe from "../components/Recipe.js";
 import RecipeViewing from "../components/RecipeViewing.js";
 import RecipeEditing from "../components/RecipeEditing.js";
 import NewRecipe from "../components/NewRecipe.js";
-import { MdBookmark, MdDehaze } from "react-icons/md";
+import { MdBookmark, MdDehaze, MdAdd } from "react-icons/md";
 import axios from "axios";
 import { useUser } from "../components/UserContext";
 
@@ -18,6 +18,7 @@ function MyRecipes() {
     const [currentSavedRecipe, setCurrentSavedRecipe] = useState("");
     const [currentUploadedRecipe, setCurrentUploadedRecipe] = useState("");
     const { user, setUser } = useUser();
+    const [toggleRecipeSidebar, setToggleRecipeSidebar] = useState(false);
 
 
     
@@ -158,6 +159,7 @@ function MyRecipes() {
                     console.log(res.data);
                     if (res.status === 200) {
                         window.alert("Recipe has been added to your recipes");
+                        selectedRecipeUploaded(res.data);
                     }
                     
                 })
@@ -202,18 +204,29 @@ function MyRecipes() {
     }
 
 
+    const toggleSideMenu = () => {
+        setToggleRecipeSidebar(!toggleRecipeSidebar);
+    }
+
+
     return (
         <div className="meal-planner-container">
+                {toggleRecipeSidebar ?
+                <div className="collapsed-container">
+                    <button className="menu-buttons collapsed-button-display" onClick={toggleSideMenu}><MdDehaze className="menu-buttons"/></button>
+                    <button className="menu-buttons collapsed-button-display" onClick={addNewRecipe}><MdAdd className="menu-buttons"/> </button>
+                    <button className="menu-buttons collapsed-button-display" onClick={chanegRecipeView}><MdBookmark className="menu-buttons"/></button>
+                </div> :
                 <div className="recipes-container">
-                <div className="menu">
-                        <button className="recipe-list-show-hide menu-buttons"><MdDehaze className="icon-size menu-buttons"/></button>
-                        <button className="add-recipe-button menu-buttons" onClick={addNewRecipe}>Add Recipe + </button>
+                    <div className="menu">
+                        <button className="recipe-list-show-hide menu-buttons" onClick={toggleSideMenu}><MdDehaze className="icon-size menu-buttons"/></button>
+                        <button className="add-recipe-button menu-buttons" onClick={addNewRecipe}>Add Recipe +</button>
                     </div>
                     <div className="saved-uploaded-selection menu-buttons"><MdBookmark className="icon-size menu-buttons"/>{(viewingUploadedRecipes) ? "Uploaded Recipes" : "Saved Recipes"}
                         <button className="swap-recipe-view menu-buttons" onClick={chanegRecipeView}><ArrowDropDownIcon className="menu-buttons menu-buttons" /></button>
                     </div>
                     {(viewingUploadedRecipes) ? uploadedRecipes.map((theRecipes) => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeUploaded} key={theRecipes.recipeID} isActiveRecipe={(currentUploadedRecipe.recipeID === theRecipes.recipeID)}/>)) : savedRecipes.map(theRecipes => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeSaved} key={theRecipes.recipeID} isActiveRecipe={(currentSavedRecipe.recipeID === theRecipes.recipeID)}/>))}
-                </div>
+                </div>}
                 <div className="recipe-viewing-container">
                     {activeRecipe}
                 </div>
