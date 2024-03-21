@@ -14,13 +14,15 @@
 }
 
 
-.recipe-instructions-container{
+.container-for-instructions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #c2ceb7;
-    line-height: 20px;
-    padding-left: 30px;
     font-size: large;
-    margin-left: 30px;
-    height: 450px;
+    margin-left: 7.5%;
+    height: 70%;
+    box-shadow: 0 4px 2px -2px gray;
 }
 
 .recipe-instructions{
@@ -30,8 +32,15 @@
     font-size: large;
 }
 
-.title-container{
+.recipe-title-container{
+
+
     padding-left: 30px;
+    margin-left: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
@@ -40,6 +49,7 @@
     flex-direction: column;
     box-shadow: 0 4px 2px -2px gray;
     width: 90%;
+    height: 70%;
 }
 
 
@@ -91,6 +101,7 @@
 
 .align-icons-title{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-right: 25px;
     font-size: larger;
@@ -129,4 +140,32 @@
     color: white;
     height: 32px;
     width: 32px;
+}
+
+.icon-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.instruction-text{
+
+    display: flex;
+    justify-content: start;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    overflow-y: auto;
+    word-wrap: break-word;
+    height: 80%;
+    width: 90%;
+}
+
+.alata{
+    font-family: "Alata", sans-serif;
 }
