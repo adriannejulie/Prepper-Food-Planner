@@ -44,9 +44,10 @@ function MyRecipes() {
                 setUploadedRecipes(res.data ? res.data : []);
                 if(res.data.length > 0){
                     selectedRecipeUploaded(res.data[0]);
+                    console.log("we are logging", res.data ? res.data : []);
                 }
+                console.log(uploadedRecipes);
             })
-            console.log(uploadedRecipes);
     }, []);
 
     const chanegRecipeView = () => {
@@ -70,6 +71,7 @@ function MyRecipes() {
 
 
     const editRecipe = (recipeViewing) => {
+        console.log(uploadedRecipes);
         setCurrentUploadedRecipe(recipeViewing);
         setActiveRecipe(<RecipeEditing aRecipe={recipeViewing} updateRecipe={updateRecipeContents}/>);
     }
@@ -91,6 +93,9 @@ function MyRecipes() {
         if(amounts.length > 0 && recipeIngredients.length > 0 && recipeTitle.length > 0 && cookTime.length > 0 && recipeCalories.length > 0 && recipeSteps.length > 0){
             var recipes = uploadedRecipes;
             var recipeIndex = recipes.findIndex(singleRecipe => singleRecipe.recipeID === iDOfRecipe);
+            console.log(iDOfRecipe);
+            console.log(recipes);
+            console.log(uploadedRecipes);
             recipes[recipeIndex].title = recipeTitle; 
             recipes[recipeIndex].measurements = amounts.join(","); 
             recipes[recipeIndex].ingredients = recipeIngredients.join(","); 
@@ -100,6 +105,29 @@ function MyRecipes() {
             setUploadedRecipes([...uploadedRecipes]);
             setCurrentUploadedRecipe(recipes[recipeIndex]);
             setActiveRecipe(<RecipeViewing aRecipe={recipes[recipeIndex]} swapToEditing={editRecipe} editAbility={true}/>);
+            axios
+                .put(`http://localhost:8080/updateRecipe/${iDOfRecipe}`, {
+                    "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                    "title" : recipeTitle,
+                    "measurements" : amounts.join(","),
+                    "ingredients" : recipeIngredients.join(","),
+                    "instructions" : recipeSteps,
+                    "prepTime" : cookTime,  
+                    "calories" : recipeCalories,
+                    "userID" : user.userID,
+                    "saves" : "6",
+                    "isPublic": true
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    if (res.status === 200) {
+                        window.alert("Recipe has been updated");
+                    }
+                })
+                .catch ((err) => {
+                    console.log(err);
+                    window.alert("There was an error updating the recipe");
+                });
         }
         else{
             console.log(cookTime);
@@ -112,28 +140,36 @@ function MyRecipes() {
     const saveNewRecipe = (amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps) => {
         console.log("gets the users saved recipes back");
         if(amounts.length > 0 && recipeIngredients.length > 0 && recipeTitle.length > 0 && cookTime.length > 0 && recipeCalories.length > 0 && recipeSteps.length > 0){
-
+            axios
+                .post(`http://localhost:8080/addRecipe`, {
+                    "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
+                    "title" : recipeTitle,
+                    "measurements" : amounts.join(","),
+                    "ingredients" : recipeIngredients.join(","),
+                    "instructions" : recipeSteps,
+                    "prepTime" : cookTime,  
+                    "calories" : recipeCalories,
+                    "userID" : user.userID,
+                    "saves" : "0",
+                    "isPublic": false
+                })
+                .then((res) => {
+                    // setUploadedRecipes(res.data ? res.data : []);
+                    console.log(res.data);
+                    if (res.status === 200) {
+                        window.alert("Recipe has been added to your recipes");
+                    }
+                    
+                })
+                .catch ((err) => {
+                    console.log(err);
+                    window.alert("There was an error adding the recipe");
+                });
+                
         }
         else{
             window.alert("One or more fields are empty. Please ensure all fields are all filled in.");
         }
-        /*
-        axios
-            // .get(`http://localhost:8080/getRecipes/${userID}`) // This is for when userID is implemented
-            .post(`http://localhost:8080/getRecipes/1`, {
-                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png",
-                "title" : recipeTitle,
-                "measuremnents" : amounts,
-                "ingredients" : recipeIngredients,
-                "instructions" : recipeSteps,
-                "prepTime" : cookTime,  
-                "calories" : recipeCalories,
-                "author" : ""
-            })
-            .then((res) => {
-                setUploadedRecipes(res.data ? res.data : []);
-            }).then(console.log(uploadedRecipes[uploadedRecipes.length - 1]))
-            */
     }
 
 
@@ -149,7 +185,8 @@ function MyRecipes() {
                 "instructions" : "",
                 "prepTime" : "",  
                 "calories" : "",
-                "author" : ""
+                "author" : "",
+                "saves" : "0"
             }
             console.log("ayo")
             var recipes = uploadedRecipes;
@@ -170,7 +207,7 @@ function MyRecipes() {
                 <div className="recipes-container">
                 <div className="menu">
                         <button className="recipe-list-show-hide menu-buttons"><MdDehaze className="icon-size menu-buttons"/></button>
-                        <button onClick={addNewRecipe}>Add Recipe + </button>
+                        <button className="add-recipe-button menu-buttons" onClick={addNewRecipe}>Add Recipe + </button>
                     </div>
                     <div className="saved-uploaded-selection menu-buttons"><MdBookmark className="icon-size menu-buttons"/>{(viewingUploadedRecipes) ? "Uploaded Recipes" : "Saved Recipes"}
                         <button className="swap-recipe-view menu-buttons" onClick={chanegRecipeView}><ArrowDropDownIcon className="menu-buttons menu-buttons" /></button>

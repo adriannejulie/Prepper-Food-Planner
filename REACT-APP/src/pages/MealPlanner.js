@@ -8,6 +8,7 @@ import { MdOutlineAddBox, MdSearch } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import AddMealPlan from "../components/AddMealPlan.js";
 import axios from 'axios';
+import { useUser } from "../components/UserContext";
 
 function MealPlanner() {
 
@@ -17,13 +18,14 @@ function MealPlanner() {
     const [showOverlay, setShowOverlay] = useState(false);
     const [recipes, setRecipes] = useState([]);
     const navigate = useNavigate();
+    const { user, setUser } = useUser();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 console.log(value.format("YYYY-MM-DD"));
     
-                const response = await axios.get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}`); // needs to be changed for userID
+                const response = await axios.get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}/${user.userID}`); // needs to be changed for userID
                 const data = response.data ? response.data : [];
                 
                 setMeals(data);
@@ -70,13 +72,14 @@ function MealPlanner() {
 
     return (
         <div className="meal-planner">
-            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay} date={value.format("YYYY-MM-DD")}/>
-            <div className="section">
-                <div id="section-calendar">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
-                    </LocalizationProvider> 
-                </div>
+            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay}/>
+            <div id="plannerSection">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateCalendar 
+                        value={value} 
+                        onChange={(newValue) => setValue(newValue)} 
+                        style={{"height": "50vh"}}/>
+                </LocalizationProvider> 
                 <button className="button" onClick={addMeal}>
                     <MdOutlineAddBox />
                     Add Meal
@@ -86,7 +89,7 @@ function MealPlanner() {
                     Find Recipes
                 </button>
             </div>
-            <div className="section">
+            <div id="mealPlans-container">
                 {
                     meals.length === 0 ? 
 
@@ -100,7 +103,7 @@ function MealPlanner() {
                     // meals are planned on the selected date
                     (<div id="meals-planned">
                         {recipes.map((recipe, index) => {
-                            return <MealPlan key={index} recipe={recipe} type={mealTypes[index]}></MealPlan>
+                            return <MealPlan key={index} mealPlanID={meals[index].mealPlanID} recipe={recipe} type={mealTypes[index]}></MealPlan>
                         })}
                     </div>)
                 }

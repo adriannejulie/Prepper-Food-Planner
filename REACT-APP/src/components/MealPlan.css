@@ -3,17 +3,18 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    border: solid 1px #53634E;
+    border: solid 2px #53634E;
     border-radius: 25px;
     height: 20vh;
     width: 25vw;
     margin: 10px;
+    background-color: #F2F5EB;
 }
 
 #img {
-    border-radius: 25px;
-    height: 10vh;
-    margin: 10px;
+    border-radius: 50px;
+    height: 15vh;
+    width: 20vw;
 }
 
 .mealplan-section {
@@ -27,9 +28,16 @@
 }
 
 #meal-name {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
-    color: #888888;
+    color: #53634E;
+    align-self: center;
+}
+
+#type-and-time-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
     align-self: center;
 }
 
