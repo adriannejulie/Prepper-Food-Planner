@@ -47,3 +47,8 @@
     width: 25vw;
     margin: 10px;
 }
+
+#meals-planned {
+    overflow-y: auto;
+    margin: 10px;
+}
