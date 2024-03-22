@@ -20,35 +20,33 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
 
     
     return (
-        <div className="recipe-grid alata">
-            <div className="recipe-title-container">
+        <div className="the-recipe-grid alata">
+            <div>
                 <h1 className="align-icons-title">
                     {aRecipe?.title}
                     <div className="title-icons">
-                        <button className="back-button" onClick={onBack}><IoMdArrowRoundBack className="icon-background con-style-header"/></button>
-                        <button className="save-button" onClick={onSave}><IoMdSave className="icon-background icon-style-header"/></button>
+                        <button className="back-save-button" onClick={onBack}><IoMdArrowRoundBack className="header-button-icons"/></button>
+                        <button className="back-save-button" onClick={onSave}><IoMdSave className="header-button-icons"/></button>
                     </div>
                 </h1>
-                <div className="icon-header">
                     <div className="align-icon-format icon-spacing">
-                        <MdAccountBox className="background-for-icon"/> 
+                        <MdAccountBox /> 
                         <div>
-                        Author: {aRecipe?.author}
+                            Author: {aRecipe?.author}
                         </div>
                     </div>
-                    <div className="cooktime-calories-container">
+                    <div className="cooktime-calories-row">
                         <div className="icon-spacing-cal">
-                            <div className="align-icon-format icon-spacing-cal"><MdHourglassTop className="background-for-icon"/>
+                            <div className="align-icon-format icon-spacing-cal"><MdHourglassTop className="icon-background"/>
                                 <div>  {aRecipe?.duration} Minutes </div>
                             </div>
                         </div>
                         <div className="icon-spacing-cal">
-                            <div className="align-icon-format icon-spacing-cal"><FaBicycle className="background-for-icon"/>
+                            <div className="align-icon-format icon-spacing-cal"><FaBicycle className="icon-background"/>
                                 <div>{aRecipe?.calories} Calories</div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
             <img className="the-recipe-image" src={aRecipe?.image}></img>
             <div className="container-for-instructions">
