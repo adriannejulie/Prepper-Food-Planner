@@ -5,9 +5,9 @@ import AddIngredient from "../components/AddIngredient.js";
 import { MdAccountBox, MdHourglassTop, MdModeEdit } from "react-icons/md";
 import { FaBicycle } from "react-icons/fa";
 import { ImCheckmark } from "react-icons/im";
-import { Cloudinary } from "../components/CloudinaryImageUpload";
+import {Cloudinary } from "../components/CloudinaryImageUpload";
 import { Image, Transformation } from 'cloudinary-react';
-import { CloudinaryContext, uploadMultiple } from 'cloudinary-react';
+import { CloudinaryContext, uploadMultiple } from 'cloudinary-react'; 
 
 function RecipeEditing({ aRecipe, updateRecipe }) {    
     const [amounts, setAmounts] = useState([]);
@@ -17,7 +17,7 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
     const [recipeCalories, setRecipeCalories] = useState(aRecipe?.calories);
     const [recipeSteps, setRecipeSteps] = useState(aRecipe?.instructions);
     const [showIngredientPopup, setShowIngredientPopup] = useState(false);
-    const [recipePhoto, setRecipePhoto] = useState(aRecipe?.image);
+    const [image, setImage] = useState(aRecipe?.image);
 
     useEffect(() => {
         try{
@@ -85,16 +85,13 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
     }
 
 
-    const getUploadedImage = (usersFile) => {
-        const file = usersFile.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = function() {
-            const data = reader.result;
-            setRecipePhoto(data);
-            console.log(data);
-            console.log(usersFile);
-  }
+    const handleImageUpload = async (e) =>{
+
+
+        const res_image =  await Cloudinary(e);
+        console.log(res_image)
+        setImage(res_image)
+        
     }
 
 
@@ -103,7 +100,7 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
         <div className="recipe-grid">
             <div>
                 {showIngredientPopup && <AddIngredient hidePopup={showHidePopup} ingredients={recipeIngredients} amounts={amounts} saveIngredients={saveIngredientsAdded}/>}
-                <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => updateRecipe(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, aRecipe.recipeID)}><ImCheckmark className="checkmark-icon-style"/></button></div>
+                <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => updateRecipe(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, aRecipe.recipeID, image)}><ImCheckmark className="checkmark-icon-style"/></button></div>
                 <div className="align-icons-text"><MdAccountBox /> Author: {aRecipe?.author}</div>
                 <div className="cooktime-calories-container">
                     <div className="align-icons-text"><MdHourglassTop className="icon-background"/><input className="duration-cooktime-input" value={cookTime} onChange={handleCookTimeChange}></input>Minutes</div>
@@ -112,8 +109,8 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
             </div>
             <label className="image-container">
                 <div className="icon-on-image"><div className="photo-icon-background"><MdModeEdit /></div></div>
-                <img className="recipe-image" src={recipePhoto} />
-                <input className="hide-element" type="file" name="myfile" onChange={(e) => getUploadedImage(e)}/>
+                <img className="recipe-image" src={image} />
+                <input className="hide-element" type="file" name="myfile" onChange={e => handleImageUpload(e)}/>
             </label>
             <textarea placeholder="Write your recipe here" className="recipe-instructions-container recipe-instructions-styling" value={recipeSteps} onChange={handleInstructionsChange}></textarea>
             <div className="ingredients-container" >
