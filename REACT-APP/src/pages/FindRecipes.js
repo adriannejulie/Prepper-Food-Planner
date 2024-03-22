@@ -39,7 +39,7 @@ function FindRecipes() {
                 "recipeID": 1,
                 "image" : "https://res.cloudinary.com/dhenatkk5/image/upload/v1710943320/qyn2z07ophdpulzskcxf.png",
                 "title" : "Buttermilk Pancakes 1",
-                "measuremnents" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
+                "measurements" : "1 cup,1 tsp,1 tsp,1,1 1/8 cup,2 tbsp,null",
                 "ingredients" : "flour, salt, baking soda, large egg, buttermilk, butter(melted), Syrup(Optional)",
                 "description" : "Yummy Buttermilk pancakes tr4heta[ojsiofndposnbvotiejokbn vbfjohgiepgjnvcbviepdojvnchb0psdnb AJHDVHJAWVDHJAWJHDVKHWVKDVJAHWDVGHJAWVD JHAWV DJH WHJKD VHKBWKAHBDHKAWBDKHJAWVDHKAVWDKHJAVW DHKAW DHJW VD AKHWVDKHAWVBDKHWVDKHWAVHKDVHKAWVHDVAWVDHKWAVDHJKA WDMNAV SJHDVWAKHDVBAJHVZ DJHAWVDHKAWVD HKV",
                 "steps" : "1. Preheat and grease skillet 2. Mix flour, salt, baking soda. Then add egg, buttermilk, and butter. Batter should look thick, spongy, and puffy.  3. Drop 1/3 cup of batter, spread lightly, cook until lightly browned on each side, 1-2 minutes per side.",

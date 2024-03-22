@@ -5,7 +5,7 @@
 
 .recipe-grid{
     display: grid;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 15% 85%;
     grid-template-columns: 70% 25%;
     gap: 5%;
     width: 100%;
@@ -35,8 +35,8 @@
 .recipe-title-container{
 
 
-    padding-left: 30px;
-    margin-left: 50px;
+
+    margin-left: 7.5%;
 
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@
 }
 
 
-.ingredients-container{
+.recipe-ingredients-container{
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 2px -2px gray;
@@ -53,15 +53,18 @@
 }
 
 
-.recipe-image{
+.the-recipe-image{
     width: 90%;
     height: 100%;
+    object-fit: cover;
 }
 
 
-.ingredients-header{
+.ingredients-container-title{
     text-align: center;
-    height: 30px;
+    height: auto;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
     line-height: 25px;
     margin-bottom: 20px;
     box-shadow: 0 4px 2px -2px gray;
@@ -73,7 +76,7 @@
 }
 
 
-.ingredients-list{
+.recipes-ingredients{
     line-height: 25px;
     height: 470px;
     display: flex;
@@ -87,23 +90,34 @@
 
 .cooktime-calories-container{
     display: flex;
-    padding-left: 3px;
+    justify-content: flex-end;
+    width: 50%;
+    gap: 5%;
 }
 
 
-.align-icons-text{
+.align-icon-format{
     display: flex;
+    flex-direction: row;
     align-items: center;
-    margin-right: 25px;
-    margin-top: 5px;
-    font-size: 30px;
+    justify-content: space-around;
+}
+
+
+.icon-spacing{
+    display: flex;
+    justify-content: space-between;
+}
+.icon-spacing-cal{
+    display: flex;
+    justify-content: space-between;
+
 }
 
 .align-icons-title{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-right: 25px;
     font-size: larger;
 }
 
@@ -146,6 +160,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    font-size: x-large;
 }
 
 .instruction-text{
