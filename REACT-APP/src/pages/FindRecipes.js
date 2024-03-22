@@ -12,7 +12,7 @@ function RecipeCard({ recipe, searchValue, handleClick }) {
 
     return (
         <>
-        <div className={`foundRecipe ${!containsSearch ? 'hide' : ''}`} onClick={() => handleClick(recipe.recipeID)}>
+            <div className={`foundRecipe ${!containsSearch ? 'hide' : ''}`} onClick={() => handleClick(recipe.recipeID)}>
             <img className="image" src={recipe.image}></img>
             <div className="top-container">
                 <div className="title">{recipe.title}</div>
@@ -22,9 +22,9 @@ function RecipeCard({ recipe, searchValue, handleClick }) {
                 <div className="time"><MdHourglassTop className="icon-find"/>{recipe.duration} Minutes</div>
                 <div className="calories"><FaBicycle className="icon-find"/>{recipe.calories} Calories</div>
             </div>
-        </div>
+            </div>
         </>
-  );
+    );
 }
 
 function FindRecipes() {
@@ -336,7 +336,7 @@ function FindRecipes() {
   };
 
 
-    return (
+  return (
         <div className="container">
             {!showRecipeViewing && (
                 <div className="box">
@@ -358,7 +358,8 @@ function FindRecipes() {
 
         </div>
       )
-    
+   
+
 }
 
 export default FindRecipes;

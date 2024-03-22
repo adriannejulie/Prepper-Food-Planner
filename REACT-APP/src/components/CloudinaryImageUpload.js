@@ -63,8 +63,8 @@ div for upload
 
 #IMPORTS 
                     
-import { Cloudinary } from "../components/CloudinaryImageUpload";
+import {Cloudinary } from "../components/CloudinaryImageUpload";
 import { Image, Transformation } from 'cloudinary-react';
-import { CloudinaryContext, uploadMultiple } from 'cloudinary-react';
+import { CloudinaryContext, uploadMultiple } from 'cloudinary-react'; 
 
 */

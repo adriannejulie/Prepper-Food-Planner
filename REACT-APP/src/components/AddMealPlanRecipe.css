@@ -1,13 +1,12 @@
 .recipe-view {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 28vw;
-    height: 15vh;
-    background-color: #DEE4D8;
-    border-radius: 50px;
-    justify-content: center;
+    height: 20vh;
+    background-color: white;
+    border-radius: 25px;
     align-items: center;
-    margin: 10px
+    margin: 15px;
 }
 
 .hide {
@@ -17,3 +16,77 @@
 .active {
     border: 2px solid #53634E;
 }
+
+#img-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    height: 6vh;
+    width: 28vw;
+}
+
+#meal-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 16vh;
+    width: 30vw;
+}
+
+#name-and-author-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 5vh;
+    width: 28vw;
+}
+
+#time-desc-cals-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 9vh;
+    width: 28vw;
+}
+
+#desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 7vh;
+    width: 17vw;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #DEE4D8;
+    border-radius: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    line-height: 1em;
+}
+
+#time-cals {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 7vh;
+    width: 9vw;
+}
+
+#text-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 15px;
+    background-color: #DEE4D8;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 50px;
+    width: fit-content;
+}
+

@@ -90,7 +90,8 @@ function SignUp({ onSignUp, onClose }) {
                 
             }
         } catch (error) {
-            if (error.response.status === 409) {
+            console.log(error)
+            if (error.response && error.response.status === 409) {
                 toast.error("Email already in use.");
             } else {
                 toast.error("Something went wrong");
