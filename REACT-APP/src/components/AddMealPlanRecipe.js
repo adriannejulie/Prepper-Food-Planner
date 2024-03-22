@@ -31,6 +31,10 @@ const AddMealPlanRecipe = ( { recipe, index, setRecipeID, isSearched, activeReci
 
     }, []);
 
+    useEffect(() => {
+        setFullDesc(recipe.description + "<br></br>" + recipe.ingredients);
+    }, []);
+
     return (
         <div
             className={`recipe-view ${!containsSearch ? "hide" : ""} ${isActive ? "active" : ""}`}
@@ -52,7 +56,12 @@ const AddMealPlanRecipe = ( { recipe, index, setRecipeID, isSearched, activeReci
                 </div>
                 <div id="time-desc-cals-container">
                     <div id='desc'>
-                        {recipe.description}
+                        <br></br>
+                        <br></br>
+                        Description<br></br>
+                        {recipe.description}<br></br><br></br>
+                        Ingredients<br></br>
+                        {recipe.ingredients}
                     </div>
                     <div id='time-cals'>
                         <div id="text-container">
