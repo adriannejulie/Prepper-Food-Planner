@@ -200,7 +200,7 @@ function MyRecipes() {
         if((uploadedRecipes.length === 0) || (currentUploadedRecipe !== "" && currentUploadedRecipe.title.length > 0 && currentUploadedRecipe.measurements.length > 0 && currentUploadedRecipe.ingredients.length > 0 && currentUploadedRecipe.instructions.length > 0 && currentUploadedRecipe.prepTime.length > 0 && currentUploadedRecipe.calories.length > 0)){
             const newRecipeTemplate = {
                 "recipeID": ((uploadedRecipes.length > 0) ? uploadedRecipes[uploadedRecipes.length - 1].recipeID + 1 : 0),
-                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1709337647/Screenshot_425_asbwjt.png", //change to default image
+                "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1711148973/Screenshot_682_sztx0w.png", 
                 "title" : "",
                 "measurements" : "",
                 "ingredients" : "",

@@ -110,8 +110,8 @@ function NewRecipe({ aRecipe, newRecipeSave }) {
             </div>
             <label className="image-container">
                 <div className="icon-on-image"><div className="photo-icon-background"><MdModeEdit /></div></div>
-                <img className="recipe-image" src={image} />
-                <input className="hide-element" type="file" name="myfile" onChange={e => handleImageUpload(e)}/>
+                <img className="recipe-image" src={image} alt="Recipe"/>
+                <input className="hide-element" type="file" name="myfile" accept="image/*" onChange={e => handleImageUpload(e)}/>
             </label>
             <textarea placeholder="Write your recipe here" className="recipe-instructions-container recipe-instructions-styling" value={recipeSteps} onChange={handleInstructionsChange}></textarea>
             <div className="ingredients-container" >
