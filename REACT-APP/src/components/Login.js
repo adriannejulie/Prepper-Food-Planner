@@ -98,6 +98,8 @@ function Login({ onLogin, onClose }) {
             
             if (response.status === 200){
 
+                console.log(response.data.firstName)
+                console.log(response.data.lastName)
                 const user = {
                     userID: response.data.userID,
                     name: response.data.firstName.concat(" ", response.data.lastName),
@@ -111,15 +113,19 @@ function Login({ onLogin, onClose }) {
                     closeLogin()
             }
         } catch (error){
-            if (error.response.status === 409){
+            if (error.response && error.response.status === 409){
 
                 toast.error("Account created with google. Please login with google instead")
                 
-            } else if (error.response.status === 401){
+            } else if (error.response && error.response.status === 401){
                 toast.error("Invalid Password. Please try again")
                 
+            } else if (error.response && error.response.status === 404){
+
+                toast.error("Email not associated with Prepper. Please sign in with Google or create and account with us!")
             } else {
-            toast.error("Unknown Error")
+                console.log(error)
+                toast.error("Unknown Error")
             }
         };
     };
