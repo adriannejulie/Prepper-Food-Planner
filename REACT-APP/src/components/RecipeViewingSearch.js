@@ -20,13 +20,13 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
 
     
     return (
-        <div className="recipe-grid alata">
+        <div className="the-recipe-grid alata">
             <div className="recipe-title-container">
                 <h1 className="align-icons-title">
                     {aRecipe?.title}
                     <div className="title-icons">
-                        <button className="back-button" onClick={onBack}><IoMdArrowRoundBack className="icon-background con-style-header"/></button>
-                        <button className="save-button" onClick={onSave}><IoMdSave className="icon-background icon-style-header"/></button>
+                        <button className="back-button" onClick={onBack}><IoMdArrowRoundBack className="icon-button-background header-button-icons"/></button>
+                        <button className="save-button" onClick={onSave}><IoMdSave className="icon-button-background header-button-icons"/></button>
                     </div>
                 </h1>
                 <div className="icon-header">
@@ -36,7 +36,7 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
                         Author: {aRecipe?.author}
                         </div>
                     </div>
-                    <div className="cooktime-calories-container">
+                    <div className="cooktime-calories-row">
                         <div className="icon-spacing-cal">
                             <div className="align-icon-format icon-spacing-cal"><MdHourglassTop className="background-for-icon"/>
                                 <div>  {aRecipe?.duration} Minutes </div>
