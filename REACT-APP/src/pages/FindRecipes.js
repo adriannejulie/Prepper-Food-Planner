@@ -334,47 +334,31 @@ function FindRecipes() {
       });
   };
 
-  return (
-<div className="container">
-      {!showRecipeViewing && (
-        <div className="box">
-          <div className="search-wrapper">
-            <label htmlFor="search">
-              <FaSearch className="title-icon" />
-              Browse Recipes
-            </label>
-            <input
-              className="find-recipe-input"
-              type="search"
-              id="search"
-              value={searchValue}
-              onChange={handleSearchChange}
-            />
-          </div>
 
-          <div className="recipeContainer">
-            {receivedRecipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.recipeID}
-                recipe={recipe}
-                searchValue={searchValue}
-                handleClick={handleClickRecipe}
-              />
-            ))}
-          </div>
+  return (
+        <div className="container">
+            {!showRecipeViewing && (
+                <div className="box">
+                    <div className="search-wrapper">
+                        <label htmlFor="search" className="browse-title"><FaSearch className="title-icon"/>Browse Recipes</label>
+                        <input className="find-recipe-input" type="search" id="search" value={searchValue} onChange={handleSearchChange}/>
+                    </div>
+                    
+                    <div className="recipeContainer">
+                        {receivedRecipes.map(recipe => (
+                            <RecipeCard key={recipe.recipeID} recipe={recipe} searchValue={searchValue} handleClick={handleClickRecipe} />
+                        ))}
+                    </div>
+                </div>
+            )}
+            {showRecipeViewing && (
+                <RecipeViewingSearch aRecipe={receivedRecipes.find(recipe => recipe.recipeID === selectedRecipeId)} onBack={handleBackToList} onSave={handleSaveRecipe}/>
+            )}
+
         </div>
-      )}
-      {showRecipeViewing && (
-        <RecipeViewingSearch
-          aRecipe={receivedRecipes.find(
-            (recipe) => recipe.recipeID === selectedRecipeId
-          )}
-          onBack={handleBackToList}
-          onSave={handleSaveRecipe}
-        />
-      )}
-    </div>
-  );
+
+        
+    );
 }
 
 export default FindRecipes;

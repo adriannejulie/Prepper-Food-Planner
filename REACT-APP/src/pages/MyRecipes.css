@@ -103,3 +103,24 @@
     font-size: 1.6vh;
     font-weight: 500;
 }
+
+
+.collapsed-container{
+    margin-top: 50px;
+    align-self: flex-start;
+    background-color: white;
+    padding: 10px;
+    padding-bottom: 0px;
+    border-radius: 0px 10px 10px 0px;
+}
+
+
+.collapsed-button-display{
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    justify-content: center;
+    margin-bottom: 10px;
+}
