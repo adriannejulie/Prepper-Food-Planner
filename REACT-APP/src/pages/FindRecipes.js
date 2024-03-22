@@ -333,8 +333,9 @@ function FindRecipes() {
         console.log(err);
       });
   };
-    return (
-      <div>
+
+
+  return (
         <div className="container">
             {!showRecipeViewing && (
                 <div className="box">
@@ -355,8 +356,9 @@ function FindRecipes() {
             )}
 
         </div>
-      </div>
-  );
+
+        
+    );
 }
 
 export default FindRecipes;

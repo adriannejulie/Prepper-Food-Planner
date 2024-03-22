@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
-function AddMealPlan({ isOpen, onClose, editMode, mealPlanID} ) {
+function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
 
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [uploadedRecipes, setUploadedRecipes] = useState([]);
