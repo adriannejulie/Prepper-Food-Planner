@@ -3,27 +3,26 @@
 }
 
 
-.recipe-viewing-grid{
+.recipe-grid{
     display: grid;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 15% 85%;
     grid-template-columns: 70% 25%;
-    gap: 50px;
+    gap: 5%;
     width: 100%;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
     padding-top: 10px;
 }
 
 
 .container-for-instructions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #c2ceb7;
-    line-height: 20px;
-    padding-left: 30px;
     font-size: large;
-    margin-left: 70px;
-    height: 480px;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    margin-left: 7.5%;
+    height: 70%;
+    box-shadow: 0 4px 2px -2px gray;
 }
 
 .recipe-instructions{
@@ -31,14 +30,17 @@
     line-height: 20px;
     padding-left: 30px;
     font-size: large;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
 }
 
 .recipe-title-container{
-    padding-left: 30px;
-    margin-left: 50px;
+
+
+
+    margin-left: 7.5%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
@@ -47,18 +49,22 @@
     flex-direction: column;
     box-shadow: 0 4px 2px -2px gray;
     width: 90%;
+    height: 70%;
 }
 
 
 .the-recipe-image{
     width: 90%;
     height: 100%;
+    object-fit: cover;
 }
 
 
 .ingredients-container-title{
     text-align: center;
-    height: 30px;
+    height: auto;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
     line-height: 25px;
     margin-bottom: 20px;
     box-shadow: 0 4px 2px -2px gray;
@@ -67,9 +73,6 @@
     justify-content: center;
     align-items: center;
     font-size: large;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
 }
 
 
@@ -82,38 +85,44 @@
     background-color: #f1f7eb;
     font-size: medium;
     box-shadow: 0 4px 2px -2px gray;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
 }
 
 
 .cooktime-calories-container{
     display: flex;
-    padding-left: 3px;
+    justify-content: flex-end;
+    width: 50%;
+    gap: 5%;
 }
 
 
 .align-icon-format{
     display: flex;
+    flex-direction: row;
     align-items: center;
-    margin-right: 25px;
-    margin-top: 5px;
-    font-size: 30px;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    justify-content: space-around;
+}
+
+
+.icon-spacing{
+    display: flex;
+    justify-content: space-between;
+}
+.icon-spacing-cal{
+    display: flex;
+    justify-content: space-between;
+
 }
 
 .align-icons-title{
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-right: 25px;
     font-size: larger;
 }
 
 
-.background-for-icon{
+.icon-background{
     background-color: black;
     color: white;
     border-radius: 4px;
@@ -141,8 +150,37 @@
 }
 
 
-.icon-style-header{
+.header-icon-style{
     color: white;
     height: 32px;
     width: 32px;
+}
+
+.icon-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: x-large;
+}
+
+.instruction-text{
+
+    display: flex;
+    justify-content: start;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    overflow-y: auto;
+    word-wrap: break-word;
+    height: 80%;
+    width: 90%;
+}
+
+.alata{
+    font-family: "Alata", sans-serif;
 }

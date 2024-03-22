@@ -38,12 +38,13 @@
 
 .box {
     width: 80%;
-    height: 78%;
+    height: 70%;
     background-color: var(--surface_container_low);
-    border: 4px solid var(--surface_dim);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    overflow-y: scroll;
+    border-radius: 10px;
+    font-family: "Alata", sans-serif;
+    
 }
 
 .search-wrapper{
@@ -59,117 +60,127 @@
     border-radius: 5px;
     border: 1px;
     margin-bottom: 20px;
+    font-family: "Alata", sans-serif;
+    font-weight: 30;
+    font-size: x-large;
+    padding-left: 10px;
 }
 
 .recipeContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    overflow-y: scroll;
     grid-gap: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+    max-height: 70%;
+    background-color: var(--on_primary);
 }
 
 .foundRecipe{
     display: grid;
-    grid-template-rows: 100px 80px 40px;
+    
     border: 1px solid var(--outline_variant);
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: var(--on_primary);
 }
 
 .top-container{
-    display: grid;
-    grid-template-rows: 50% 50%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin-top: 5px;
+    font-family: "Alata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
 }
 
 .bottom-container{
     display: grid;
     grid-template-columns: 50% 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.row-container{
+    display: grid;
+    grid-template-rows: 40% 60%;
+    padding-top: 30px;
     padding-bottom: 5px;
 }
 
 .image{
     width: 100%;
     height: 100px;
+    border-radius: 10px;
     opacity: 60%;
 }
 
 .title{
+    
     font-size: 20px;
     text-align: center;
-    height: 35px;
-    line-height: 35px;
+    height: 25px;
+    line-height: 25px;
     background-color: var(--component);
     display: flex;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 5px;
     justify-content: center;
     padding-left: 30px;
     padding-right: 30px;
     margin-left: 5px;
     margin-right: 5px;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    
+
 }
 
 .author{
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
     height: 25px;
     line-height: 25px;
     background-color: var(--component);
     display: flex;
-    border-radius: 5px;
-    margin-top: 7px;
+    border-radius: 10px;
+    margin-top: 5px;
     justify-content: center;
-    margin-left: 5px;
-    margin-right: 5px;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.browse-title{
-    font-size: 30px;
-    text-align: center;
-    font-family: "Alata", sans-serif;
-    font-weight: 600;
-    font-style: normal;
 }
 
 .time{
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
-    height: 35px;
-    line-height: 35px;
+    height: 25px;
+    line-height: 25px;
     background-color: var(--component);
     display: flex;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: 10px;
     justify-content: center;
-    margin-left: 5px;
-    margin-right: 2.5px;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    margin-right: 5px;
 }
 
 .calories{
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
-    height: 35px;
-    line-height: 35px;
+    height: 25px;
+    line-height: 25px;
     background-color: var(--component);
     display: flex;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: 10px;
     justify-content: center;
     margin-right: 5px;
-    margin-left: 2.5px;
-    font-family: "Alata", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+}
+
+.body{
+    font-size: 10px;
+    text-align: center;
+    height: 130px;
+    background-color: var(--component);
+    justify-content: center;
+    margin: 5px;
+    border-radius: 20px;
 }
 
 .hide{
@@ -184,24 +195,13 @@
     height: 24px; 
     line-height: 25px;
     margin-right: 5px;
-    margin-top: 5px;
-}
-
-.icon-auth{
-    background-color: var(--component);
-    color: black;
-    border-radius: 4px;
-    width: 24px;
-    height: 24px; 
-    line-height: 25px;
-    margin-right: 5px;
 }
 
 .title-icon{
     background-color: var(--surface_container_low);
     color: black;
     border-radius: 7px;
-    width: 24px;
-    height: 24px; 
+    width: 36px;
+    height: 36px; 
     margin-right: 20px;
 }
