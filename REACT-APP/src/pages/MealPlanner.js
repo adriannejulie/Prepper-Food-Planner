@@ -25,7 +25,7 @@ function MealPlanner() {
             try {
                 console.log(value.format("YYYY-MM-DD"));
     
-                const response = await axios.get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}/${user.userID}`); // needs to be changed for userID
+                const response = await axios.get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}/${user.userID}`); 
                 const data = response.data ? response.data : [];
                 
                 setMeals(data);
@@ -72,7 +72,7 @@ function MealPlanner() {
 
     return (
         <div className="meal-planner">
-            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay}/>
+            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay} editMode={false} mealPlanID={null}/>
             <div id="plannerSection">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateCalendar 
@@ -81,12 +81,12 @@ function MealPlanner() {
                         style={{"height": "50vh"}}/>
                 </LocalizationProvider> 
                 <button className="button" onClick={addMeal}>
-                    <MdOutlineAddBox />
-                    Add Meal
+                    <MdOutlineAddBox style={{height: "5vh", color:"white"}}/>
+                    <p style={{color: "white"}}>Add Meal</p>
                 </button>
                 <button className="button" onClick={findRecipes}>
-                    <MdSearch />
-                    Find Recipes
+                    <MdSearch style={{height: "5vh", color:"white"}}/>
+                    <p style={{color: "white"}}>Find Recipes</p>
                 </button>
             </div>
             <div id="mealPlans-container">
