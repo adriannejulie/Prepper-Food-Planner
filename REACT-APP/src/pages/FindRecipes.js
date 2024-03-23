@@ -99,10 +99,6 @@ function FindRecipes() {
 
             if (response.status === 200){
 
-                
-                //const recipeArr = await loadAuthors(response.data)
-
-                //setReceivedRecipes(recipeArr)
                 setReceivedRecipes(response.data)
 
             
