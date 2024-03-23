@@ -13,7 +13,7 @@ function RecipeCard({ recipe, searchValue, handleClick }) {
     return (
         <>
             <div className={`foundRecipe ${!containsSearch ? 'hide' : ''}`} onClick={() => handleClick(recipe.recipeID)}>
-            <img className="image" src={recipe.image}></img>
+            <img className="image" src={recipe.image} alt="Recipe"></img>
             <div className="top-container">
                 <div className="title">{recipe.title}</div>
                 <div className="author"><MdAccountBox className="icon-auth"/>{recipe.author}</div>

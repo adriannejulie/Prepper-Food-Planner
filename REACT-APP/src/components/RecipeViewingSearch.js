@@ -48,7 +48,7 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
                         </div>
                     </div>
             </div>
-            <img className="the-recipe-image" src={aRecipe?.image}></img>
+            <img className="the-recipe-image" src={aRecipe?.image} alt="Recipe"></img>
             <div className="container-for-instructions">
                 <div className="instruction-text">
                     <TextWithLineBreaks className="instruction-text" text= {aRecipe?.instructions} />

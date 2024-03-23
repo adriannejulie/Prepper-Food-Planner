@@ -26,7 +26,7 @@ function RecipeViewing({ aRecipe, swapToEditing, editAbility }) {
                     <div className="align-icons-text"><FaBicycle className="icon-background"/>{aRecipe?.calories} Calories</div>
                 </div>
             </div>
-            <img className="recipe-image" src={aRecipe?.image}></img>
+            <img className="recipe-image" src={aRecipe?.image} alt="Recipe"></img>
             <div className="recipe-instructions-container">{aRecipe?.instructions}</div>
             <div className="ingredients-container" >
                 <div className="ingredients-header">Ingredients</div>
