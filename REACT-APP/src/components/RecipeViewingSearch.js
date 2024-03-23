@@ -4,11 +4,16 @@ import { MdAccountBox, MdHourglassTop} from "react-icons/md";
 import { IoMdArrowRoundBack, IoMdSave  } from "react-icons/io";
 import { FaBicycle } from "react-icons/fa";
 import TextWithLineBreaks from '../components/TextWithLineBreaks';
+import { useUser } from "../components/UserContext";
+import axios from "axios";
+
+
 
 
 function RecipeViewingSearch({ aRecipe, onBack, onSave}) {    
     const [amounts, setAmounts] = useState([]);
     const [recipeIngredients, setIngredients] = useState([]);
+    const { user, setUser } = useUser();
 
     useEffect(() => {
         console.log(aRecipe)
@@ -18,6 +23,27 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
         setIngredients(recipeIngredients)
     }, [aRecipe])
 
+    const handleSaveRecipe = () => {
+        console.log(aRecipe.recipeID)
+        console.log(user.id)
+        axios
+        .post(`http://localhost:8080/addSavedRecipe`, {
+            recipeID: aRecipe.recipeID,
+            userID: user.userID,
+        })
+
+        .then((res) => {
+            console.log(res.data);
+            console.log(res.status);
+            if (res.status === 200) {
+            alert("Recipe saved successfully");
+            }
+        })
+        .catch((err) => {
+            alert("Recipe already saved");
+            console.log(err);
+        });
+    };
     
     return (
         <div className="the-recipe-grid alata">
@@ -26,7 +52,7 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
                     {aRecipe?.title}
                     <div className="title-icons">
                         <button className="back-save-button" onClick={onBack}><IoMdArrowRoundBack className="header-button-icons"/></button>
-                        <button className="back-save-button" onClick={onSave}><IoMdSave className="header-button-icons"/></button>
+                        <button className="back-save-button" onClick={handleSaveRecipe}><IoMdSave className="header-button-icons"/></button>
                     </div>
                 </h1>
                     <div className="align-icon-format icon-spacing">
@@ -38,7 +64,7 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
                     <div className="cooktime-calories-row">
                         <div className="icon-spacing-cal">
                             <div className="align-icon-format icon-spacing-cal"><MdHourglassTop className="icon-background"/>
-                                <div>  {aRecipe?.duration} Minutes </div>
+                                <div>  {aRecipe?.prepTime} Minutes </div>
                             </div>
                         </div>
                         <div className="icon-spacing-cal">
