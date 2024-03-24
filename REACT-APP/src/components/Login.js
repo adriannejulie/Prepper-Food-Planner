@@ -171,15 +171,6 @@ function Login({ onLogin, onClose }) {
                             type="password"
                         />
                     </div>
-                    <div className="login-section">
-                        <label>
-                            <input
-                                type="checkbox"
-                            />
-                            Remember Me
-                            <a href="#">Forgot Password?</a>
-                        </label>
-                    </div>
                     <div className="login-buttons">
                         <button onClick={standardLogin}>Login</button>
                     </div>

@@ -11,16 +11,11 @@ import { useUser } from "../components/UserContext";
 
 
 function MyRecipes() {
-<<<<<<< Updated upstream
-    const [savedRecipes, setSavedRecipes] = useState([]);
-    const [uploadedRecipes, setUploadedRecipes] = useState([]);
-=======
     const [savedRecipes, setSavedRecipes] = useState(null);
     const [uploadedRecipes, setUploadedRecipes] = useState(null);
 
     const [savedRecipesWithAuthor, setSavedRecipesWithAuthor] = useState([]);
     const [uploadedRecipesWithAuthor, setUploadedRecipesWithAuthor] = useState([])
->>>>>>> Stashed changes
     const [viewingUploadedRecipes, setViewingUploadedRecipes] = useState(false);
     const [activeRecipe, setActiveRecipe] = useState("");
     const [currentSavedRecipe, setCurrentSavedRecipe] = useState("");
@@ -35,8 +30,7 @@ function MyRecipes() {
 
         console.log(user)
         axios
-            .get(`http://localhost:8080/getSavedRecipes/${user.userID}`) // This is for when userID is implemented
-            //.get(`http://localhost:8080/getSavedRecipes/1`)
+            .get(`http://localhost:8080/getSavedRecipes/${user.userID}`) 
             .then((res) => {
                 setSavedRecipes(res.data ? res.data : []);
                 if(res.data.length > 0){
@@ -51,8 +45,8 @@ function MyRecipes() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/getRecipes/${user.userID}`) // This is for when userID is implemented
-            //.get(`http://localhost:8080/getRecipes/1`)
+            .get(`http://localhost:8080/getRecipes/${user.userID}`) 
+
             .then((res) => {
                 setUploadedRecipes(res.data ? res.data : []);
                 if(res.data.length > 0){
@@ -65,6 +59,78 @@ function MyRecipes() {
                 console.log(uploadedRecipes);
             })
     }, []);
+
+    useEffect(() => {
+
+        if(uploadedRecipes){
+
+            const getAuthorPromise = async () => {
+                try{
+                    const fetchAuthorData = await Promise.all(
+
+                        uploadedRecipes.map(async (item) => {
+
+                            const response = await axios.get(`http://localhost:8080/getUser/${item.userID}`)
+                            const data = await response.data
+                            const author =  data.firstName.concat(" ", data.lastName)
+
+                            return {
+                                ...item,
+                                author: author
+                            };
+                            
+                        })
+                        
+                        
+                        
+                    );
+                    setUploadedRecipesWithAuthor(fetchAuthorData);
+                    
+                } catch (err){
+        
+                    console.error(err)
+                } 
+            }
+            getAuthorPromise()
+        }
+        
+    }, [uploadedRecipes])
+    
+    useEffect(() => {
+
+        if(savedRecipes){
+
+            const getAuthorPromise = async () => {
+                try{
+                    const fetchAuthorData = await Promise.all(
+
+                        savedRecipes.map(async (item) => {
+
+                            const response = await axios.get(`http://localhost:8080/getUser/${item.userID}`)
+                            const data = await response.data
+                            const author =  data.firstName.concat(" ", data.lastName)
+
+                            return {
+                                ...item,
+                                author: author
+                            };
+                            
+                        })
+                        
+                        
+                        
+                    );
+                    setSavedRecipesWithAuthor(fetchAuthorData);
+                    
+                } catch (err){
+        
+                    console.error(err)
+                } 
+            }
+            getAuthorPromise()
+        }
+        
+    }, [savedRecipes])
 
     const chanegRecipeView = () => {
         if(currentUploadedRecipe.title !== "" && currentUploadedRecipe.measurements !== "" && currentUploadedRecipe.ingredients !== "" && currentUploadedRecipe.instructions !== "" && currentUploadedRecipe.prepTime !== "" && currentUploadedRecipe.calories !== ""){
@@ -93,7 +159,6 @@ function MyRecipes() {
 
 
     const editRecipe = (recipeViewing) => {
-        console.log(uploadedRecipes);
         setCurrentUploadedRecipe(recipeViewing);
         setActiveRecipe(<RecipeEditing aRecipe={recipeViewing} updateRecipe={updateRecipeContents}/>);
     }
@@ -112,13 +177,12 @@ function MyRecipes() {
 
 
     const updateRecipeContents = (amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, iDOfRecipe, recipeImage) => {
-        console.log(uploadedRecipes);
         if(amounts.length > 0 && recipeIngredients.length > 0 && recipeTitle.length > 0 && cookTime.length > 0 && recipeCalories.length > 0 && recipeSteps.length > 0){
-            var recipes = uploadedRecipes;
+            var recipes = uploadedRecipesWithAuthor;
             var recipeIndex = recipes.findIndex(singleRecipe => singleRecipe.recipeID === iDOfRecipe);
             console.log(iDOfRecipe);
             console.log(recipes);
-            console.log(uploadedRecipes);
+            console.log(uploadedRecipesWithAuthor);
             recipes[recipeIndex].title = recipeTitle; 
             recipes[recipeIndex].measurements = amounts.join(","); 
             recipes[recipeIndex].ingredients = recipeIngredients.join(","); 
@@ -126,7 +190,7 @@ function MyRecipes() {
             recipes[recipeIndex].prepTime = cookTime; 
             recipes[recipeIndex].calories = recipeCalories; 
             recipes[recipeIndex].image = recipeImage; 
-            setUploadedRecipes([...uploadedRecipes]);
+            setUploadedRecipesWithAuthor([...uploadedRecipesWithAuthor]);
             setCurrentUploadedRecipe(recipes[recipeIndex]);
             setActiveRecipe(<RecipeViewing aRecipe={recipes[recipeIndex]} swapToEditing={editRecipe} editAbility={true}/>);
             axios
@@ -183,9 +247,9 @@ function MyRecipes() {
                     if (res.status === 200) {
                         window.alert("Recipe has been added to your recipes");
                         selectedRecipeUploaded(res.data);
-                        const recipes = uploadedRecipes;
+                        const recipes = uploadedRecipesWithAuthor;
                         recipes[recipes.length - 1] = res.data;
-                        setUploadedRecipes(recipes);
+                        setUploadedRecipesWithAuthor(recipes);
                     }
                     
                 })
@@ -205,9 +269,9 @@ function MyRecipes() {
         console.log(uploadedRecipes);
         setViewingUploadedRecipes(true);
         console.log(currentUploadedRecipe !== "")
-        if((uploadedRecipes.length === 0) || (currentUploadedRecipe !== "" && currentUploadedRecipe.title.length > 0 && currentUploadedRecipe.measurements.length > 0 && currentUploadedRecipe.ingredients.length > 0 && currentUploadedRecipe.instructions.length > 0 && currentUploadedRecipe.prepTime.length > 0 && currentUploadedRecipe.calories.length > 0)){
+        if((uploadedRecipesWithAuthor.length === 0) || (currentUploadedRecipe !== "" && currentUploadedRecipe.title.length > 0 && currentUploadedRecipe.measurements.length > 0 && currentUploadedRecipe.ingredients.length > 0 && currentUploadedRecipe.instructions.length > 0 && currentUploadedRecipe.prepTime.length > 0 && currentUploadedRecipe.calories.length > 0)){
             const newRecipeTemplate = {
-                "recipeID": ((uploadedRecipes.length > 0) ? uploadedRecipes[uploadedRecipes.length - 1].recipeID + 1 : 0),
+                "recipeID": ((uploadedRecipesWithAuthor.length > 0) ? uploadedRecipesWithAuthor[uploadedRecipesWithAuthor.length - 1].recipeID + 1 : 0),
                 "image" : "https://res.cloudinary.com/dgabkajhe/image/upload/v1711148973/Screenshot_682_sztx0w.png", 
                 "title" : "",
                 "measurements" : "",
@@ -219,9 +283,9 @@ function MyRecipes() {
                 "saves" : "0"
             }
             console.log("ayo", newRecipeTemplate.recipeID)
-            var recipes = uploadedRecipes;
+            var recipes = uploadedRecipesWithAuthor;
             recipes.push(newRecipeTemplate);
-            setUploadedRecipes([...recipes]); 
+            setUploadedRecipesWithAuthor([...recipes]); 
             setCurrentUploadedRecipe(newRecipeTemplate);
             setActiveRecipe(<NewRecipe aRecipe={newRecipeTemplate} newRecipeSave={saveNewRecipe}/>);
         }
@@ -252,11 +316,7 @@ function MyRecipes() {
                     <button onClick={chanegRecipeView} className="saved-uploaded-selection menu-buttons"><MdBookmark className="icon-size menu-buttons"/>{(viewingUploadedRecipes) ? "Uploaded Recipes" : "Saved Recipes"}
                         <div className="swap-recipe-view menu-buttons" ><ArrowDropDownIcon className="menu-buttons menu-buttons" /></div>
                     </button>
-<<<<<<< Updated upstream
-                    {(viewingUploadedRecipes) ? ((uploadedRecipes.length > 0) ? uploadedRecipes.map((theRecipes) => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeUploaded} key={theRecipes.recipeID} isActiveRecipe={(currentUploadedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Uploaded</h3>) : ((savedRecipes.length > 0) ? savedRecipes.map(theRecipes => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeSaved} key={theRecipes.recipeID} isActiveRecipe={(currentSavedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Saved</h3>)}
-=======
-                    {(viewingUploadedRecipes) ? ((uploadedRecipesWithAuthor.length > 0) ? uploadedRecipesWithAuthor.map((theRecipes) => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeUploaded} key={theRecipes.recipeID} isActiveRecipe={(currentUploadedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Uploaded</h3>) : ((savedRecipesWithAuthor.length > 0) ? savedRecipesWithAuthor.map(theRecipes => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeSaved} key={theRecipes.recipeID} isActiveRecipe={(currentSavedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Saved</h3>)}
->>>>>>> Stashed changes
+{(viewingUploadedRecipes) ? ((uploadedRecipesWithAuthor.length > 0) ? uploadedRecipesWithAuthor.map((theRecipes) => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeUploaded} key={theRecipes.recipeID} isActiveRecipe={(currentUploadedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Uploaded</h3>) : ((savedRecipesWithAuthor.length > 0) ? savedRecipesWithAuthor.map(theRecipes => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeSaved} key={theRecipes.recipeID} isActiveRecipe={(currentSavedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Saved</h3>)}
                 </div>}
                 <div className="recipe-viewing-container">
                     {activeRecipe}
