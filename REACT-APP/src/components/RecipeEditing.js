@@ -98,7 +98,7 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
 
     return (
         <div className="recipe-grid">
-            <div>
+            <div className="recipe-view-header">
                 {showIngredientPopup && <AddIngredient hidePopup={showHidePopup} ingredients={recipeIngredients} amounts={amounts} saveIngredients={saveIngredientsAdded}/>}
                 <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => updateRecipe(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, aRecipe.recipeID, image)}><ImCheckmark className="checkmark-icon-style"/></button></div>
                 <div className="align-icons-text"><MdAccountBox /> Author: {aRecipe?.author}</div>

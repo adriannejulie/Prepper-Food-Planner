@@ -243,24 +243,6 @@ function DefaultPage({ }) {
                             <div style={{ cursor: 'pointer' }} className="contact-header" onClick={handleAboutUs}>About Us</div>
                         </div>
                     </div>
-                    <CloudinaryContext cloudName="dh0iihyz2">
-                        
-                        { image ? 
-                        (
-                            
-                            <Image publicId={image}>
-                                <Transformation width="300" height="200" crop="fill" />
-                            </Image>
-                            
-                           
-                        ) 
-                        : 
-                        (
-                            
-                            <input type="file" onChange={e => handleImageUpload(e)} />
-                        )
-                        }
-                    </CloudinaryContext>
                 </div>
 
             </div>

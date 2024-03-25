@@ -12,12 +12,17 @@
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     font-weight: bold;
-    border-radius: 10px;
     border: solid;
     border-color: grey;
     border-width: 1px;
     margin: 0px;
     height: 47px;
+}
+
+.recipe-view-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 
@@ -39,7 +44,6 @@
     background-color: black;
     height: 20px;
     width: 20px;
-    border-radius: 5px;
     margin-left: 10px;
 }
 
@@ -55,7 +59,6 @@
     background-color: black;
     height: 30px;
     width: 30px;
-    border-radius: 3px;
     margin-left: 10px;
 }
 
@@ -95,7 +98,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    border-radius: 5px;
     height: 35px;
     width: 35px;
 }

@@ -99,7 +99,7 @@ function NewRecipe({ aRecipe, newRecipeSave }) {
 
     return (
         <div className="recipe-grid">
-            <div>
+            <div className="recipe-view-header">
                 {showIngredientPopup && <AddIngredient hidePopup={showHidePopup} ingredients={recipeIngredients} amounts={amounts} saveIngredients={saveIngredientsAdded}/>}
                 <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => newRecipeSave(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, image)}><ImCheckmark className="checkmark-icon-style"/></button></div>
                 <div className="align-icons-text"><MdAccountBox /> Author: {aRecipe?.author}</div>
