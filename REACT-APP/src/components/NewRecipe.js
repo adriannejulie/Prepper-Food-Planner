@@ -9,6 +9,9 @@ import { Cloudinary } from "../components/CloudinaryImageUpload";
 import { Image, Transformation } from 'cloudinary-react';
 import { CloudinaryContext, uploadMultiple } from 'cloudinary-react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function NewRecipe({ aRecipe, newRecipeSave }) {    
     const [amounts, setAmounts] = useState([]);
     const [recipeIngredients, setIngredients] = useState([]);
@@ -76,7 +79,7 @@ function NewRecipe({ aRecipe, newRecipeSave }) {
             var instructionsAsString = addedIngredients.join(",");
         }
         else{
-            window.alert("You have entered an amount for a blank ingredient. Please either remove the amount or enter an ingredient.");
+            toast.error("You have entered an amount for a blank ingredient. Please either remove the amount or enter an ingredient.");
         }
     }
 
@@ -94,8 +97,9 @@ function NewRecipe({ aRecipe, newRecipeSave }) {
 
 
     return (
+        <> <ToastContainer position="top-center" autoClose={2000}/>
         <div className="recipe-grid">
-            <div>
+            <div className="recipe-view-header">
                 {showIngredientPopup && <AddIngredient hidePopup={showHidePopup} ingredients={recipeIngredients} amounts={amounts} saveIngredients={saveIngredientsAdded}/>}
                 <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => newRecipeSave(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, image)}><ImCheckmark className="checkmark-icon-style"/></button></div>
                 <div className="align-icons-text"><MdAccountBox /> Author: {aRecipe?.author}</div>
@@ -114,7 +118,7 @@ function NewRecipe({ aRecipe, newRecipeSave }) {
                 <div className="ingredients-header">Ingredients<button className="edit-ingredients-button" onClick={showHidePopup}><MdModeEdit className="edit-ingredients-icon"/></button></div>
                 <div className="ingredients-list">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>
             </div>
-        </div>
+        </div></>
     );
 }
 

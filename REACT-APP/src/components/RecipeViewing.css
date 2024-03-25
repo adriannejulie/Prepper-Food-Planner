@@ -5,19 +5,25 @@
 
 .recipe-grid{
     display: grid;
-    grid-template-rows: 30% 65%;
-    grid-template-columns: 60% 35%;
-    gap: 5%;
+    grid-template-rows: 27.5% 70%;
+    grid-template-columns: 62.5% 35%;
+    gap: 2.5%;
     width: 100%;
-    padding-bottom: 30px;
-    padding-top: 30px;
+
 }
 
+
+.recipe-view-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 .recipe-instructions-container{
     background-color: #c2ceb7;
     line-height: 20px;
     padding: 20px;
+    font-size: medium;
 }
 
 
@@ -67,13 +73,16 @@
     display: flex;
     align-items: center;
     margin-right: 25px;
+    font-size: medium;
 }
 
+h1.align-icons-text{
+    font-size: xx-large;
+}
 
 .icon-background{
     background-color: black;
     color: white;
-    border-radius: 2px;
     width: 16.5px;
     height: 16.5px; 
     padding: 3px;
@@ -85,7 +94,6 @@
     background-color: black;
     height: 24px;
     width: 24px;
-    border-radius: 3px;
     margin-left: 10px;
 }
 

@@ -7,7 +7,8 @@ import TextWithLineBreaks from '../components/TextWithLineBreaks';
 import { useUser } from "../components/UserContext";
 import axios from "axios";
 
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function RecipeViewingSearch({ aRecipe, onBack, onSave}) {    
@@ -36,16 +37,17 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
             console.log(res.data);
             console.log(res.status);
             if (res.status === 200) {
-            alert("Recipe saved successfully");
+            toast.success("Recipe saved successfully");
             }
         })
         .catch((err) => {
-            alert("Recipe already saved");
+            toast.success("Recipe already saved");
             console.log(err);
         });
     };
     
     return (
+        <> <ToastContainer position="top-center" autoClose={2000}/>
         <div className="the-recipe-grid alata">
             <div>
                 <h1 className="align-icons-title">
@@ -84,7 +86,7 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
                 <div className="ingredients-container-title">Ingredients</div>
                 <div className="recipes-ingredients">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>
             </div>
-        </div>
+        </div></>
     );
 }
 
