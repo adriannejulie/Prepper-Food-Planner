@@ -33,12 +33,6 @@ function MyRecipes() {
             .get(`http://localhost:8080/getSavedRecipes/${user.userID}`) 
             .then((res) => {
                 setSavedRecipes(res.data ? res.data : []);
-                if(res.data.length > 0){
-                    selectedRecipeSaved(res.data[0]);
-                }
-                else{
-                    setActiveRecipe(noActiveRecipe);
-                }
             })
             console.log(savedRecipes);
     }, []);
@@ -49,13 +43,6 @@ function MyRecipes() {
 
             .then((res) => {
                 setUploadedRecipes(res.data ? res.data : []);
-                if(res.data.length > 0){
-                    setCurrentUploadedRecipe(res.data[0]);
-                    console.log("we are logging", res.data ? res.data : []);
-                }
-                else{
-                    setActiveRecipe(noActiveRecipe);
-                }
                 console.log(uploadedRecipes);
             })
     }, []);
@@ -85,6 +72,12 @@ function MyRecipes() {
                         
                     );
                     setUploadedRecipesWithAuthor(fetchAuthorData);
+                    if(fetchAuthorData.length > 0){
+                        setCurrentUploadedRecipe(fetchAuthorData[0]);
+                    }
+                    else{
+                        setActiveRecipe(noActiveRecipe);
+                    }
                     
                 } catch (err){
         
@@ -121,6 +114,12 @@ function MyRecipes() {
                         
                     );
                     setSavedRecipesWithAuthor(fetchAuthorData);
+                    if(fetchAuthorData.length > 0){
+                        selectedRecipeSaved(fetchAuthorData[0]);
+                    }
+                    else{
+                        setActiveRecipe(noActiveRecipe);
+                    }
                     
                 } catch (err){
         
