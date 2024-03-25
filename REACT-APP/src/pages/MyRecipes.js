@@ -241,7 +241,7 @@ function MyRecipes() {
                     "calories" : recipeCalories,
                     "userID" : user.userID,
                     "saves" : "0",
-                    "isPublic": false
+                    "isPublic": true
                 })
                 .then((res) => {
                     // setUploadedRecipes(res.data ? res.data : []);

@@ -40,21 +40,6 @@ function FindRecipes() {
 
     const { user, setUser } = useUser();
 
-    const loadAuthors = async (data) => {
-
-        const recipeArr = []
-        const oldRecipes = data;
-
-        for (var i = 0; i < oldRecipes.length; i++) {
-            const recipeCpy = oldRecipes[i]
-            const authorName = await getAuthor(recipeCpy.userID)
-            recipeCpy.author = authorName
-            recipeArr.push(recipeCpy)
-        }
-        
-
-    }
-
 
     useEffect(() => {
 
@@ -136,18 +121,6 @@ function FindRecipes() {
     };
 
 
-    const getAuthor = async (id) => {
-
-        try{
-            const response = await axios.get(`http://localhost:8080/getUser/${id}`)
-            const data = await response.data
-            console.log(data.firstName)
-            return data.firstName.concat(" ", data.lastName)
-        } catch (err){
-
-            return "Anonymous"
-        }
-    }
 
     const handleSaveRecipe = () => {
         return;
