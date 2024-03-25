@@ -143,3 +143,6 @@
     align-items: center;
     margin-top: 100%;
 }
+.Toastify__toast {
+    font-size: 18px; /* Adjust the font size */
+}

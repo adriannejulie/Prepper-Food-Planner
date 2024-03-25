@@ -9,6 +9,8 @@ import { MdBookmark, MdDehaze, MdAdd } from "react-icons/md";
 import axios from "axios";
 import { useUser } from "../components/UserContext";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MyRecipes() {
     const [savedRecipes, setSavedRecipes] = useState(null);
@@ -153,7 +155,7 @@ function MyRecipes() {
             }
         }
         else{
-            window.alert("you have not filled out all necessary columns for a recipe");
+            toast.error("you have not filled out all necessary columns for a recipe");
         }
     }
 
@@ -209,18 +211,18 @@ function MyRecipes() {
                 .then((res) => {
                     console.log(res.data);
                     if (res.status === 200) {
-                        window.alert("Recipe has been updated");
+                        toast.success("Recipe has been updated");
                     }
                 })
                 .catch ((err) => {
                     console.log(err);
-                    window.alert("There was an error updating the recipe");
+                    toast.error("There was an error updating the recipe")
                 });
         }
         else{
             console.log(cookTime);
             console.log(amounts.length > 0 , recipeIngredients.length > 0 , recipeTitle.length > 0 , cookTime.length > 0, recipeCalories > -1 , recipeSteps.length > 0);
-            window.alert("One or more fields are empty. Please ensure all fields are all filled in.");
+            toast.error("One or more fields are empty. Please ensure all fields are all filled in.");
         }
     }
 
@@ -245,7 +247,7 @@ function MyRecipes() {
                     // setUploadedRecipes(res.data ? res.data : []);
                     console.log(res.data);
                     if (res.status === 200) {
-                        window.alert("Recipe has been added to your recipes");
+                        toast.success("Recipe has been added to your recipes");
                         selectedRecipeUploaded(res.data);
                         const recipes = uploadedRecipesWithAuthor;
                         recipes[recipes.length - 1] = res.data;
@@ -255,12 +257,12 @@ function MyRecipes() {
                 })
                 .catch ((err) => {
                     console.log(err);
-                    window.alert("There was an error adding the recipe");
+                    toast.error("There was an error adding the recipe");
                 });
                 
         }
         else{
-            window.alert("One or more fields are empty. Please ensure all fields are all filled in.");
+            toast.error("One or more fields are empty. Please ensure all fields are all filled in.");
         }
     }
 
@@ -290,7 +292,7 @@ function MyRecipes() {
             setActiveRecipe(<NewRecipe aRecipe={newRecipeTemplate} newRecipeSave={saveNewRecipe}/>);
         }
         else{
-            window.alert("One or more fields in the current recipe are missing. Please ensure you have filled out all the fields for a recipe before creating another one.");
+            toast.error("One or more fields in the current recipe are missing. Please ensure you have filled out all the fields for a recipe before creating another one.");
         }
     }
 
@@ -301,6 +303,8 @@ function MyRecipes() {
 
 
     return (
+        <>            <ToastContainer position="top-center" autoClose={2000}/>
+
         <div className="meal-planner-container">
                 {toggleRecipeSidebar ?
                 <div className="collapsed-container">
@@ -321,7 +325,7 @@ function MyRecipes() {
                 <div className="recipe-viewing-container">
                     {activeRecipe}
                 </div>
-        </div>
+        </div>        </>
     );
 }
 
