@@ -170,8 +170,14 @@ function MyRecipes() {
 
 
     const selectedRecipeUploaded = (recipeLookingAt) => {
-        setCurrentUploadedRecipe(recipeLookingAt);
-        setActiveRecipe(<RecipeViewing aRecipe={recipeLookingAt} swapToEditing={editRecipe} editAbility={true}/>);
+        console.log("goes in selectedRecipeUploaded", recipeLookingAt)
+        if(currentUploadedRecipe.calories.length > 0 && currentUploadedRecipe.ingredients.length > 0 && currentUploadedRecipe.instructions.length > 0 && currentUploadedRecipe.measurements.length > 0 && currentUploadedRecipe.prepTime.length > 0 && currentUploadedRecipe.title.length > 0){
+            setCurrentUploadedRecipe(recipeLookingAt);
+            setActiveRecipe(<RecipeViewing aRecipe={recipeLookingAt} swapToEditing={editRecipe} editAbility={true}/>);
+        }
+        else{
+            window.alert("Please finish uploading recipe before trying to view another recipe.")
+        }
     }
 
 
@@ -248,6 +254,8 @@ function MyRecipes() {
                         selectedRecipeUploaded(res.data);
                         const recipes = uploadedRecipesWithAuthor;
                         recipes[recipes.length - 1] = res.data;
+                        recipes[recipes.length - 1]['author'] = user.name;
+                        console.log(uploadedRecipesWithAuthor[recipes.length - 1])
                         setUploadedRecipesWithAuthor(recipes);
                     }
                     
@@ -278,8 +286,8 @@ function MyRecipes() {
                 "instructions" : "",
                 "prepTime" : "",  
                 "calories" : "",
-                "author" : "",
-                "saves" : "0"
+                "saves" : "0",
+                "author": user.name,
             }
             console.log("ayo", newRecipeTemplate.recipeID)
             var recipes = uploadedRecipesWithAuthor;
