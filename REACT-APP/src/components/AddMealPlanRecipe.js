@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './AddMealPlanRecipe.css';
 import axios from 'axios';
-import { MdPerson, MdHourglassTop, MdOutlinePedalBike } from "react-icons/md";
+import { MdAccountBox, MdHourglassTop } from "react-icons/md";
+import { FaBicycle } from "react-icons/fa";
 
 const AddMealPlanRecipe = ( { recipe, index, setRecipeID, isSearched, activeRecipeID, onRecipeClick }) => {
     const containsSearch = 
@@ -11,7 +12,7 @@ const AddMealPlanRecipe = ( { recipe, index, setRecipeID, isSearched, activeReci
     const isActive = recipe.recipeID === activeRecipeID;
 
     const [ author, setAuthor ] = useState('No Author');
-    const [ fullDesc, setFullDesc ] = useState('');
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,52 +32,24 @@ const AddMealPlanRecipe = ( { recipe, index, setRecipeID, isSearched, activeReci
 
     }, []);
 
-    useEffect(() => {
-        setFullDesc(recipe.description + "<br></br>" + recipe.ingredients);
-    }, []);
-
     return (
-        <div
-            className={`recipe-view ${!containsSearch ? "hide" : ""} ${isActive ? "active" : ""}`}
-            onClick={() => {
-                setRecipeID(recipe.recipeID);
-                onRecipeClick(recipe.recipeID);
-            }}
-        >
-            <img id="img-container" src={recipe.image} alt="Recipe Image"></img>
-            <div id="meal-info-container">
-                <div id="name-and-author-container">
-                    <div id="text-container">
-                        {recipe.title}
-                    </div>
-                    <div id="text-container">
-                        <MdPerson /> 
-                        <p>{author}</p>
-                    </div>
+        <>
+            <div className={`recipe-view ${!containsSearch ? "hide" : ""} ${isActive ? "active" : ""}`}
+                 onClick={() => {
+                 setRecipeID(recipe.recipeID);
+                 onRecipeClick(recipe.recipeID);
+            }}>
+                <img className="image" src={recipe.image} alt="Recipe"></img>
+                <div id="top-container">
+                    <div className="title">{recipe.title}</div>
+                    <div className="author"><MdAccountBox className="icon-auth"/>{author}</div>
                 </div>
-                <div id="time-desc-cals-container">
-                    <div id='desc'>
-                        <br></br>
-                        <br></br>
-                        Description<br></br>
-                        {recipe.description}<br></br><br></br>
-                        Ingredients<br></br>
-                        {recipe.ingredients}
-                    </div>
-                    <div id='time-cals'>
-                        <div id="text-container">
-                            <MdHourglassTop style={{height: "2vh"}}/>
-                            <p>{recipe.prepTime} Minutes</p>
-                        </div>
-                        <div id="text-container">
-                            <MdOutlinePedalBike style={{height: "2vh"}}/>
-                            <p>{recipe.calories} Calories</p>
-                        </div>
-                    </div>
+                <div id="bottom-container">
+                    <div id="time"><MdHourglassTop className="icon-find"/>{recipe.prepTime} Minutes</div>
+                    <div id="calories"><FaBicycle className="icon-find"/>{recipe.calories} Calories</div>
                 </div>
-
             </div>
-        </div>
+        </>
     );
 };
 
