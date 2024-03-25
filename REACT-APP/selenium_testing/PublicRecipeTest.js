@@ -31,15 +31,22 @@ const driver = new Builder().forBrowser("firefox").build();
         await driver.wait(until.elementIsVisible(myRecipesLink), 10000);
         await myRecipesLink.click();
 
-        const firstRecipe = await driver.findElement(By.css('.foundRecipe:not(.hide)')); 
+        //Search recipe
+        const searchBox = await driver.findElement(By.css('.find-recipe-input'));
+        await searchBox.sendKeys('chicken');
+
+        // Wait for the recipes to filter
+        await driver.sleep(2000); 
+
+        const firstRecipe = await driver.findElement(By.css('.foundRecipe:not(.hide)'));
         await firstRecipe.click();
-        
+
         // Wait for the recipe details to be displayed and the save button to become visible
-        await driver.sleep(1000); 
-        
+        await driver.sleep(1000);
+
         // Click the save button
         const headerButtons = await driver.findElements(By.css(".header-button-icons"));
-        const saveButton = headerButtons[1]; 
+        const saveButton = headerButtons[1];
         await saveButton.click();
 
     } catch (error) {
