@@ -178,7 +178,7 @@ function MyRecipes() {
             setActiveRecipe(<RecipeViewing aRecipe={recipeLookingAt} swapToEditing={editRecipe} editAbility={true}/>);
         }
         else{
-            window.alert("Please finish uploading recipe before trying to view another recipe.")
+            toast.error("Please finish uploading recipe before trying to view another recipe.")
         }
     }
 
