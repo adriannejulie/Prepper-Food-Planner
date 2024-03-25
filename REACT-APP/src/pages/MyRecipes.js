@@ -35,12 +35,6 @@ function MyRecipes() {
             .get(`http://localhost:8080/getSavedRecipes/${user.userID}`) 
             .then((res) => {
                 setSavedRecipes(res.data ? res.data : []);
-                if(res.data.length > 0){
-                    selectedRecipeSaved(res.data[0]);
-                }
-                else{
-                    setActiveRecipe(noActiveRecipe);
-                }
             })
             console.log(savedRecipes);
     }, []);
@@ -51,13 +45,6 @@ function MyRecipes() {
 
             .then((res) => {
                 setUploadedRecipes(res.data ? res.data : []);
-                if(res.data.length > 0){
-                    setCurrentUploadedRecipe(res.data[0]);
-                    console.log("we are logging", res.data ? res.data : []);
-                }
-                else{
-                    setActiveRecipe(noActiveRecipe);
-                }
                 console.log(uploadedRecipes);
             })
     }, []);
@@ -87,6 +74,12 @@ function MyRecipes() {
                         
                     );
                     setUploadedRecipesWithAuthor(fetchAuthorData);
+                    if(fetchAuthorData.length > 0){
+                        setCurrentUploadedRecipe(fetchAuthorData[0]);
+                    }
+                    else{
+                        setActiveRecipe(noActiveRecipe);
+                    }
                     
                 } catch (err){
         
@@ -123,6 +116,12 @@ function MyRecipes() {
                         
                     );
                     setSavedRecipesWithAuthor(fetchAuthorData);
+                    if(fetchAuthorData.length > 0){
+                        selectedRecipeSaved(fetchAuthorData[0]);
+                    }
+                    else{
+                        setActiveRecipe(noActiveRecipe);
+                    }
                     
                 } catch (err){
         
@@ -173,8 +172,14 @@ function MyRecipes() {
 
 
     const selectedRecipeUploaded = (recipeLookingAt) => {
-        setCurrentUploadedRecipe(recipeLookingAt);
-        setActiveRecipe(<RecipeViewing aRecipe={recipeLookingAt} swapToEditing={editRecipe} editAbility={true}/>);
+        console.log("goes in selectedRecipeUploaded", recipeLookingAt)
+        if(currentUploadedRecipe.calories.length > 0 && currentUploadedRecipe.ingredients.length > 0 && currentUploadedRecipe.instructions.length > 0 && currentUploadedRecipe.measurements.length > 0 && currentUploadedRecipe.prepTime.length > 0 && currentUploadedRecipe.title.length > 0){
+            setCurrentUploadedRecipe(recipeLookingAt);
+            setActiveRecipe(<RecipeViewing aRecipe={recipeLookingAt} swapToEditing={editRecipe} editAbility={true}/>);
+        }
+        else{
+            toast.error("Please finish uploading recipe before trying to view another recipe.")
+        }
     }
 
 
@@ -251,6 +256,8 @@ function MyRecipes() {
                         selectedRecipeUploaded(res.data);
                         const recipes = uploadedRecipesWithAuthor;
                         recipes[recipes.length - 1] = res.data;
+                        recipes[recipes.length - 1]['author'] = user.name;
+                        console.log(uploadedRecipesWithAuthor[recipes.length - 1])
                         setUploadedRecipesWithAuthor(recipes);
                     }
                     
@@ -281,8 +288,8 @@ function MyRecipes() {
                 "instructions" : "",
                 "prepTime" : "",  
                 "calories" : "",
-                "author" : "",
-                "saves" : "0"
+                "saves" : "0",
+                "author": user.name,
             }
             console.log("ayo", newRecipeTemplate.recipeID)
             var recipes = uploadedRecipesWithAuthor;

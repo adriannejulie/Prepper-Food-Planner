@@ -23,15 +23,11 @@ function NewRecipe({ aRecipe, newRecipeSave }) {
     const [image, setImage] = useState(aRecipe?.image);
 
     useEffect(() => {
-        try{
+        if(recipeIngredients.length > 0){
             const recipeIngredients = aRecipe.ingredients.split(",");
             const recipeMeasurements = aRecipe.measurements.split(",");
             setAmounts(recipeMeasurements)
             setIngredients(recipeIngredients)
-        }
-        catch{
-            setAmounts([""])
-            setIngredients([""])
         }
     }, [aRecipe])
 
