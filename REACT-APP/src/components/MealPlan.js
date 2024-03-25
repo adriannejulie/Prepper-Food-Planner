@@ -57,17 +57,25 @@ function MealPlan ({recipe, mealPlanID, type, index }) {
             <div className='typetime' style={{backgroundColor: "white"}}>
                 <div id='type-and-time'>
                     <div id='type-and-time-text'>
-                        <MdOutlineAccessTime style={{height: "2vh", color:"white"}}/>
-                        <p style={{color: "white"}}>{capitalize(type)}</p>
+                        <div id='icon'>
+                            <MdOutlineAccessTime style={{height: "2vh", color:"white"}}/>
+                        </div>
+                        <div id='time-text'>
+                            <p style={{color: "white", justifySelf:"center"}}>{capitalize(type)}</p>
+                        </div>
                     </div>
                 </div>
                 <div id='type-and-time'>
                     <div id='type-and-time-text'>
-                        <MdHourglassTop style={{height: "2vh", color:"white"}}/>
-                        <p style={{color: "white"}}>{recipe.prepTime} M</p>
+                        <div id='icon'>
+                            <MdHourglassTop style={{height: "2vh", color:"white"}}/>
+                        </div>
+                        <div id='time-text'>
+                            <p style={{color: "white"}}>{recipe.prepTime} M</p>
+                        </div>
                     </div>
                 </div>
-                <div id='icons'>
+                <div id='edit-and-delete'>
                     <button id='button' onClick={editMeal}>
                         <MdModeEdit />
                     </button>
