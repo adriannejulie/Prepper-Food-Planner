@@ -9,6 +9,9 @@ import {Cloudinary } from "../components/CloudinaryImageUpload";
 import { Image, Transformation } from 'cloudinary-react';
 import { CloudinaryContext, uploadMultiple } from 'cloudinary-react'; 
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function RecipeEditing({ aRecipe, updateRecipe }) {    
     const [amounts, setAmounts] = useState([]);
     const [recipeIngredients, setIngredients] = useState([]);
@@ -80,7 +83,7 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
             var instructionsAsString = addedIngredients.join(",");
         }
         else{
-            window.alert("You have entered an amount for a blank ingredient. Please either remove the amount or enter an ingredient.");
+            toast.error("You have entered an amount for a blank ingredient. Please either remove the amount or enter an ingredient.");
         }
     }
 
@@ -97,6 +100,7 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
 
 
     return (
+        <><ToastContainer position="top-center" autoClose={2000}/>
         <div className="recipe-grid">
             <div className="recipe-view-header">
                 {showIngredientPopup && <AddIngredient hidePopup={showHidePopup} ingredients={recipeIngredients} amounts={amounts} saveIngredients={saveIngredientsAdded}/>}
@@ -118,6 +122,7 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
                 <div className="ingredients-list">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>
             </div>
         </div>
+        </>
     );
 }
 
