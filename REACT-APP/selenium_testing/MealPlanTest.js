@@ -42,14 +42,14 @@ const driver = new Builder().forBrowser("firefox").build();
         const addToCalendarButton = await driver.findElement(By.id('add-Button'));
         await addToCalendarButton.click();
 
-        await driver.sleep(3000);
+        await driver.sleep(5000);
 
         //EDIT MEALPLAN
         // Find all the edit buttons within the 'meals-planned' container
         const editButtons = await driver.findElements(By.css('.edit'));
 
         // Check if there are edit buttons present and click the first one
-        await editButtons[0].click();  
+        await editButtons[0].click();
 
         // Select the first recipe again
         const recipesInEdit = await driver.findElements(By.css('.recipes'));
@@ -68,5 +68,7 @@ const driver = new Builder().forBrowser("firefox").build();
     } catch (error) {
         console.error('Error in login automation:', error);
     } finally {
+        await driver.sleep(3000);
+        await driver.quit();
     }
 })();
