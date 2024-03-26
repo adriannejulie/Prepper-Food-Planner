@@ -139,7 +139,8 @@ function AboutUs({ }) {
                               
                                 <img src={teampng} className="team-member-picture"></img>
                                 <div className="team-member-header">Julia Lat</div>
-                                <div className="team-member-bio">Julia Lat</div>
+                                <div className="team-member-bio">Hello! My name is Julia Lat, I'm a back-end engineer at Prepper. In this project, I mainly focused on back-end implementation, integration of the front-end and back-end, and testing. 
+                                Hope you enjoy our project!</div>
                             </div>
 
                             <div className="team-member-cont">
