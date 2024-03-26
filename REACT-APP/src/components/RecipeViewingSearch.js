@@ -78,8 +78,7 @@ function RecipeViewingSearch({ aRecipe, onBack, onSave}) {
             </div>
             <img className="the-recipe-image" src={aRecipe?.image} alt="Recipe"></img>
             <div className="container-for-instructions">
-            <div className="instruction-text" dangerouslySetInnerHTML={{ __html: aRecipe?.instructions.replace(/\n/g, '<br>')
-            </div>
+            <div className="instruction-text" dangerouslySetInnerHTML={{ __html: aRecipe?.instructions.replace(/\n/g, '<br>')}}/></div>
             <div className="recipe-ingredients-container" >
                 <div className="ingredients-container-title">Ingredients</div>
                 <div className="recipes-ingredients">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>
