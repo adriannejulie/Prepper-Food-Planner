@@ -20,8 +20,8 @@ function MyRecipes() {
     const [uploadedRecipesWithAuthor, setUploadedRecipesWithAuthor] = useState([])
     const [viewingUploadedRecipes, setViewingUploadedRecipes] = useState(false);
     const [activeRecipe, setActiveRecipe] = useState("");
-    const [currentSavedRecipe, setCurrentSavedRecipe] = useState("");
-    const [currentUploadedRecipe, setCurrentUploadedRecipe] = useState("");
+    const [currentSavedRecipe, setCurrentSavedRecipe] = useState(null);
+    const [currentUploadedRecipe, setCurrentUploadedRecipe] = useState(null);
     const { user, setUser } = useUser();
     const [toggleRecipeSidebar, setToggleRecipeSidebar] = useState(false);
     const noActiveRecipe = <h1 className="no-active-recipe">No Active Recipe.</h1>;
@@ -173,6 +173,7 @@ function MyRecipes() {
 
     const selectedRecipeUploaded = (recipeLookingAt) => {
         console.log("goes in selectedRecipeUploaded", recipeLookingAt)
+        console.log("goes in selectedRecipeUploaded", currentUploadedRecipe)
         if(currentUploadedRecipe.calories.length > 0 && currentUploadedRecipe.ingredients.length > 0 && currentUploadedRecipe.instructions.length > 0 && currentUploadedRecipe.measurements.length > 0 && currentUploadedRecipe.prepTime.length > 0 && currentUploadedRecipe.title.length > 0){
             setCurrentUploadedRecipe(recipeLookingAt);
             setActiveRecipe(<RecipeViewing aRecipe={recipeLookingAt} swapToEditing={editRecipe} editAbility={true}/>);
@@ -250,13 +251,15 @@ function MyRecipes() {
                 })
                 .then((res) => {
                     // setUploadedRecipes(res.data ? res.data : []);
-                    console.log(res.data);
+                    console.log(res);
                     if (res.status === 200) {
                         toast.success("Recipe has been added to your recipes");
-                        selectedRecipeUploaded(res.data);
                         const recipes = uploadedRecipesWithAuthor;
+                        console.log(recipes.length - 1)
                         recipes[recipes.length - 1] = res.data;
                         recipes[recipes.length - 1]['author'] = user.name;
+                        setCurrentUploadedRecipe(recipes[recipes.length - 1]);
+                        setActiveRecipe(<RecipeViewing aRecipe={recipes[recipes.length - 1]} swapToEditing={editRecipe} editAbility={true}/>);
                         console.log(uploadedRecipesWithAuthor[recipes.length - 1])
                         setUploadedRecipesWithAuthor(recipes);
                     }
@@ -294,8 +297,9 @@ function MyRecipes() {
             console.log("ayo", newRecipeTemplate.recipeID)
             var recipes = uploadedRecipesWithAuthor;
             recipes.push(newRecipeTemplate);
-            setUploadedRecipesWithAuthor([...recipes]); 
+            setUploadedRecipesWithAuthor([...recipes]);
             setCurrentUploadedRecipe(newRecipeTemplate);
+            console.log(currentUploadedRecipe)
             setActiveRecipe(<NewRecipe aRecipe={newRecipeTemplate} newRecipeSave={saveNewRecipe}/>);
         }
         else{
