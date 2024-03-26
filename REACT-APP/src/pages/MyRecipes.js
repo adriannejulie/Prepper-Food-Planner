@@ -13,8 +13,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function MyRecipes() {
-    const [savedRecipes, setSavedRecipes] = useState(null);
-    const [uploadedRecipes, setUploadedRecipes] = useState(null);
+    const [savedRecipes, setSavedRecipes] = useState([]);
+    const [uploadedRecipes, setUploadedRecipes] = useState([]);
 
     const [savedRecipesWithAuthor, setSavedRecipesWithAuthor] = useState([]);
     const [uploadedRecipesWithAuthor, setUploadedRecipesWithAuthor] = useState([])
@@ -134,28 +134,45 @@ function MyRecipes() {
     }, [savedRecipes])
 
     const chanegRecipeView = () => {
-        if(currentUploadedRecipe.title !== "" && currentUploadedRecipe.measurements !== "" && currentUploadedRecipe.ingredients !== "" && currentUploadedRecipe.instructions !== "" && currentUploadedRecipe.prepTime !== "" && currentUploadedRecipe.calories !== ""){
+        console.log(savedRecipes)
+        console.log(currentUploadedRecipe)
+        
+        if(currentUploadedRecipe && !viewingUploadedRecipes){
+   
+                if(currentUploadedRecipe.title !== "" && currentUploadedRecipe.measurements !== "" && currentUploadedRecipe.ingredients !== "" && currentUploadedRecipe.instructions !== "" && currentUploadedRecipe.prepTime !== "" && currentUploadedRecipe.calories !== ""){
+                    setViewingUploadedRecipes(!viewingUploadedRecipes);
+
+                    if(viewingUploadedRecipes){
+                        if(currentSavedRecipe !== ""){
+                            setActiveRecipe(<RecipeViewing aRecipe={currentSavedRecipe} swapToEditing={editRecipe} editAbility={false}/>);
+                        }
+                        else{
+                            setActiveRecipe(noActiveRecipe);
+                        }
+                    }
+                    else{
+                        if(currentUploadedRecipe !== ""){
+                            setActiveRecipe(<RecipeViewing aRecipe={currentUploadedRecipe} swapToEditing={editRecipe} editAbility={true}/>);
+                        }
+                        else{
+                            setActiveRecipe(noActiveRecipe);
+                        }
+                    }
+                }
+                else{
+                    toast.error("you have not filled out all necessary columns for a recipe");
+                }
+            
+        } else if (currentSavedRecipe && viewingUploadedRecipes){
+            
+            setActiveRecipe(<RecipeViewing aRecipe={currentSavedRecipe} swapToEditing={editRecipe} editAbility={false}/>);
+            
             setViewingUploadedRecipes(!viewingUploadedRecipes);
-            if(viewingUploadedRecipes){
-                if(currentSavedRecipe !== ""){
-                    setActiveRecipe(<RecipeViewing aRecipe={currentSavedRecipe} swapToEditing={editRecipe} editAbility={false}/>);
-                }
-                else{
-                    setActiveRecipe(noActiveRecipe);
-                }
-            }
-            else{
-                if(currentUploadedRecipe !== ""){
-                    setActiveRecipe(<RecipeViewing aRecipe={currentUploadedRecipe} swapToEditing={editRecipe} editAbility={true}/>);
-                }
-                else{
-                    setActiveRecipe(noActiveRecipe);
-                }
-            }
+        } else {
+            setActiveRecipe(noActiveRecipe)
+            setViewingUploadedRecipes(!viewingUploadedRecipes);
         }
-        else{
-            toast.error("you have not filled out all necessary columns for a recipe");
-        }
+        
     }
 
 
@@ -331,7 +348,14 @@ function MyRecipes() {
                     <button onClick={chanegRecipeView} className="saved-uploaded-selection menu-buttons"><MdBookmark className="icon-size menu-buttons"/>{(viewingUploadedRecipes) ? "Uploaded Recipes" : "Saved Recipes"}
                         <div className="swap-recipe-view menu-buttons" ><ArrowDropDownIcon className="menu-buttons menu-buttons" /></div>
                     </button>
-{(viewingUploadedRecipes) ? ((uploadedRecipesWithAuthor.length > 0) ? uploadedRecipesWithAuthor.map((theRecipes) => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeUploaded} key={theRecipes.recipeID} isActiveRecipe={(currentUploadedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Uploaded</h3>) : ((savedRecipesWithAuthor.length > 0) ? savedRecipesWithAuthor.map(theRecipes => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeSaved} key={theRecipes.recipeID} isActiveRecipe={(currentSavedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Saved</h3>)}
+{(viewingUploadedRecipes) ? 
+    ((uploadedRecipesWithAuthor.length > 0) 
+        ? uploadedRecipesWithAuthor.map((theRecipes) => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeUploaded} key={theRecipes.recipeID} isActiveRecipe={(currentUploadedRecipe.recipeID === theRecipes.recipeID)}/>)) 
+        : <h3 className="no-recipes-in-container">No Recipes Uploaded</h3>) 
+                            : (
+                            (savedRecipesWithAuthor && savedRecipesWithAuthor.length > 0) 
+                                ? savedRecipesWithAuthor.map(theRecipes => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeSaved} key={theRecipes.recipeID} isActiveRecipe={(currentSavedRecipe.recipeID === theRecipes.recipeID)}/>)) 
+                                : <h3 className="no-recipes-in-container">No Recipes Saved</h3>)}
                 </div>}
                 <div className="recipe-viewing-container">
                     {activeRecipe}
