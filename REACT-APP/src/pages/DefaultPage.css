@@ -305,18 +305,18 @@ div > .link {
 
 }
 
-.picture-half{
-    width: 50%;
+.picture-half-landing{
+    width: 60%;
     height: auto;
 }
 
-.text-half{
+.text-half-landing{
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 60%;
     height: auto;
     background-color: white;
     gap: 50px;
@@ -325,7 +325,7 @@ div > .link {
 
 }
 
-.mid-header{
+.mid-header-landing{
 
     font-size: smaller;
     font-weight: 100;
@@ -418,12 +418,7 @@ div > .link {
 }
 
 
-.picture-caro{
 
-    width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-}
 
 .carousel-descr{
 
@@ -445,9 +440,17 @@ div > .link {
     font-size: medium;
 }
 
-.caro-pic-holder{
+.caro-pic-holder-landing{
     height: 100%;
-    width: 20%;
+    width: 35%;
+}
+
+.picture-caro-landing{
+
+    width: 100%;
+    height: max-content;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 
