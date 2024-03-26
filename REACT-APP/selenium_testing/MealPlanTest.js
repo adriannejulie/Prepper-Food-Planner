@@ -4,7 +4,7 @@
 
 const { Builder, By, until } = require("selenium-webdriver");
 
-const driver = new Builder().forBrowser("firefox").build();
+const driver = new Builder().forBrowser("chrome").build();
 
 (async function loginAutomation() {
     try {
@@ -25,23 +25,24 @@ const driver = new Builder().forBrowser("firefox").build();
         const loginButton = await driver.findElement(By.xpath('//button[contains(text(), "Login")]'));
         await loginButton.click();
 
-        //CREATING MEALPLAN
+        //CREATING MEALPLAN (REQ-08)
         const addMealButton = await driver.findElement(By.css('.button'));
         await addMealButton.click();
 
-        // Select the first recipe (
+        // Select the first recipe 
         const firstRecipe = await driver.findElements(By.css('.recipes'));
         await firstRecipe[0].click();
 
-        // Select Lunch for meal
+        // Select Lunch for meal (REQ-18)
         await driver.wait(until.elementLocated(By.css('.lunch')), 10000);
         const lunchToggle = await driver.findElement(By.css('.lunch'));
         await lunchToggle.click();
 
-        // Click add to calendar
+        // Click add to calendar (REQ-07)
         const addToCalendarButton = await driver.findElement(By.id('add-Button'));
         await addToCalendarButton.click();
 
+        // View the meal plan (REQ-17)
         await driver.sleep(5000);
 
         //EDIT MEALPLAN
@@ -64,6 +65,17 @@ const driver = new Builder().forBrowser("firefox").build();
         // Click add to calendar
         const editToCalendarButton = await driver.findElement(By.id('add-Button'));
         await editToCalendarButton.click();
+
+        //DELETE MEALPLAN (REQ-19)
+        // Wait for the delete buttons to be visible and interactable
+        await driver.wait(until.elementsLocated(By.css('.delete')), 10000);
+
+        // Find all the delete buttons within the 'meal-plan' container
+        const deleteButtons = await driver.findElements(By.css('.delete'));
+
+        await deleteButtons[0].click();
+
+
 
     } catch (error) {
         console.error('Error in login automation:', error);
