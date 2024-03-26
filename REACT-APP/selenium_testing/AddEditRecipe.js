@@ -31,7 +31,7 @@ const driver = new Builder().forBrowser("firefox").build();
         await driver.wait(until.elementIsVisible(myRecipesLink), 10000);
         await myRecipesLink.click();
 
-        //ADD RECIPE
+        //ADD RECIPE (REQ-13)
         const savedRecipesButton = await driver.wait(until.elementLocated(By.xpath("//button[contains(text(), 'Add Recipe')]")), 10000);
         await savedRecipesButton.click();
         await driver.wait(until.elementLocated(By.css('.recipe-title-styling')), 10000);
@@ -76,6 +76,18 @@ const driver = new Builder().forBrowser("firefox").build();
         const closeIngredientsButton = await driver.findElement(By.css('.close'));
         await closeIngredientsButton.click();
 
+        // Add a photo (REQ-14)
+        // Navigate to the image upload section
+        const fileInput = await driver.findElement(By.css('input[type="file"]'));
+        await driver.executeScript("arguments[0].style.display = 'block';", fileInput);
+
+        // Set the file
+        const filePath = require('path').resolve(__dirname, '../src/images/braden-headshot.png');
+
+        // Upload the file
+        await fileInput.sendKeys(filePath);
+        await driver.sleep(3000); 
+
         // Save Recipe
         const saveCompleteRecipeButton = await driver.findElement(By.css('.checkmark-button'));
         await saveCompleteRecipeButton.click();
@@ -84,7 +96,7 @@ const driver = new Builder().forBrowser("firefox").build();
         await driver.sleep(3000);
 
 
-        // EDIT RECIPE
+        // EDIT RECIPE (REQ-12)
         const editRecipeButton = await driver.wait(until.elementLocated(By.css('.recipe-header-button')), 10000);
         await editRecipeButton.click();
 
