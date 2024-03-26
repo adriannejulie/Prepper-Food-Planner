@@ -32,13 +32,13 @@ function AddIngredient({ hidePopup, ingredients, amounts, saveIngredients}) {
             <div className="ingredient-container">
                 <div className="buttons-container">
                     <div className="hide-buttons">
-                        <button className="icon-buttons"><MdSave className="icon-style"/></button>
-                        <button className="icon-buttons" onClick={hidePopup}><MdOutlineClose className="icon-style"/></button>
+                        <button className="icon-buttons save-button" data-testid="saveIngredients"><MdSave className="icon-style"/></button>
+                        <button className="icon-buttons close-button" onClick={hidePopup} data-testid="closeIngredientsPopup"><MdOutlineClose className="icon-style"/></button>
                     </div>
                     <button className="add-ingredient-button" onClick={addNewIngredient}>Add an Ingredient</button>
                     <div>
-                        <button className="icon-buttons" onClick={() => saveIngredients(recipesMeasurements, recipesIngredients)}><MdSave className="icon-style"/></button>
-                        <button className="icon-buttons" onClick={hidePopup}><MdOutlineClose className="icon-style"/></button>
+                        <button className="icon-buttons save" onClick={() => saveIngredients(recipesMeasurements, recipesIngredients)}><MdSave className="icon-style"/></button>
+                        <button className="icon-buttons close" onClick={hidePopup}><MdOutlineClose className="icon-style"/></button>
                     </div>
                 </div>
                 <div className="ingredient-list">

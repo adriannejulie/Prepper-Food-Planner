@@ -116,7 +116,6 @@
 .icon-button-background{
     background-color: black;
     color: white;
-    border-radius: 4px;
     width: 24px;
     height: 24px; 
     padding: 4px;
@@ -128,7 +127,6 @@
     background-color: black;
     height: 24px;
     width: 24px;
-    border-radius: 7px;
     margin-left: 10px;
 }
 

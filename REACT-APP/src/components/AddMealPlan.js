@@ -8,6 +8,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from "dayjs";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { toast, ToastContainer } from 'react-toastify';
 
 function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
 
@@ -48,6 +49,10 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
     }, [isOpen]);
 
     const addMeal = () => {
+        if (recipeID === '' || alignment === '') {
+            toast.error("Please select a recipe and a meal type.");
+            return;
+        }
         if (editMode) {
             console.log(`Edit Meal ${value.format('YYYY-MM-DD')}`);
             axios
@@ -104,6 +109,7 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
 
     return (
         <Fragment>
+            <ToastContainer position="top-center" autoClose={2000}/>
             {isOpen ? (
                 <div className="overlay">
                     <div className="overlay__background" onClick={onClose} />
@@ -115,7 +121,7 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
                                     <div id="recipes-container">
                                         { recipeView === 'uploaded' ? 
                                             // show uploaded recipes
-                                            (<div>
+                                            (<div class="recipes">
                                                 {uploadedRecipes.map((recipe, index) => (
                                                     <AddMealPlanRecipe
                                                         key={index}
@@ -131,7 +137,7 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
 
                                             :
                                             // show saved recipes
-                                            (<div>
+                                            (<div class="recipes">
                                                 {savedRecipes.map((recipe, index) => (
                                                     <AddMealPlanRecipe
                                                         key={index}
@@ -164,8 +170,8 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
                                             onChange={handleChange}
                                             aria-label="Platform"
                                         >
-                                            <ToggleButton value="breakfast">Breakfast</ToggleButton>
-                                            <ToggleButton value="lunch">Lunch</ToggleButton>
+                                            <ToggleButton value="breakfast" class="breakfast">Breakfast</ToggleButton>
+                                            <ToggleButton value="lunch" class="lunch">Lunch</ToggleButton>
                                             <ToggleButton value="dinner">Dinner</ToggleButton>
                                         </ToggleButtonGroup>
                                     </div>

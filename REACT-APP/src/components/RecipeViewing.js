@@ -18,7 +18,7 @@ function RecipeViewing({ aRecipe, swapToEditing, editAbility }) {
     
     return (
         <div className="recipe-grid">
-            <div>
+            <div className="recipe-view-header">
                 <h1 className="align-icons-text">{aRecipe?.title} <button className={(editAbility) ? "recipe-header-button" : "hide-button"} onClick={() => swapToEditing(aRecipe)}><MdModeEdit className="header-icon-style"/></button></h1>
                 <div className="align-icons-text"><MdAccountBox /> Author: {aRecipe?.author}</div>
                 <div className="cooktime-calories-container">

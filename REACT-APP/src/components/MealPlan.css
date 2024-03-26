@@ -45,15 +45,31 @@
     font-weight: bold;
 }
 
-#type-and-time {
+#icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 2vw;
+}
+
+#time-text {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 5vw;
+}
+
+#type-and-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     background-color: #53634E;
     border-radius: 25px;
     height: 3vh;
-    width: 8vw;
+    width: 9vw;
     margin: 3px;
 }
 

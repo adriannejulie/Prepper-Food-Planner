@@ -9,17 +9,19 @@ import { MdBookmark, MdDehaze, MdAdd } from "react-icons/md";
 import axios from "axios";
 import { useUser } from "../components/UserContext";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MyRecipes() {
     const [savedRecipes, setSavedRecipes] = useState(null);
     const [uploadedRecipes, setUploadedRecipes] = useState(null);
 
-    const [savedRecipesWithAuthor, setSavedRecipesWithAuthor] = useState(null);
-    const [uploadedRecipesWithAuthor, setUploadedRecipesWithAuthor] = useState(null)
+    const [savedRecipesWithAuthor, setSavedRecipesWithAuthor] = useState([]);
+    const [uploadedRecipesWithAuthor, setUploadedRecipesWithAuthor] = useState([])
     const [viewingUploadedRecipes, setViewingUploadedRecipes] = useState(false);
     const [activeRecipe, setActiveRecipe] = useState("");
-    const [currentSavedRecipe, setCurrentSavedRecipe] = useState("");
-    const [currentUploadedRecipe, setCurrentUploadedRecipe] = useState("");
+    const [currentSavedRecipe, setCurrentSavedRecipe] = useState(null);
+    const [currentUploadedRecipe, setCurrentUploadedRecipe] = useState(null);
     const { user, setUser } = useUser();
     const [toggleRecipeSidebar, setToggleRecipeSidebar] = useState(false);
     const noActiveRecipe = <h1 className="no-active-recipe">No Active Recipe.</h1>;
@@ -33,12 +35,6 @@ function MyRecipes() {
             .get(`http://localhost:8080/getSavedRecipes/${user.userID}`) 
             .then((res) => {
                 setSavedRecipes(res.data ? res.data : []);
-                if(res.data.length > 0){
-                    selectedRecipeSaved(res.data[0]);
-                }
-                else{
-                    setActiveRecipe(noActiveRecipe);
-                }
             })
             console.log(savedRecipes);
     }, []);
@@ -49,13 +45,6 @@ function MyRecipes() {
 
             .then((res) => {
                 setUploadedRecipes(res.data ? res.data : []);
-                if(res.data.length > 0){
-                    setCurrentUploadedRecipe(res.data[0]);
-                    console.log("we are logging", res.data ? res.data : []);
-                }
-                else{
-                    setActiveRecipe(noActiveRecipe);
-                }
                 console.log(uploadedRecipes);
             })
     }, []);
@@ -85,6 +74,12 @@ function MyRecipes() {
                         
                     );
                     setUploadedRecipesWithAuthor(fetchAuthorData);
+                    if(fetchAuthorData.length > 0){
+                        setCurrentUploadedRecipe(fetchAuthorData[0]);
+                    }
+                    else{
+                        setActiveRecipe(noActiveRecipe);
+                    }
                     
                 } catch (err){
         
@@ -121,6 +116,12 @@ function MyRecipes() {
                         
                     );
                     setSavedRecipesWithAuthor(fetchAuthorData);
+                    if(fetchAuthorData.length > 0){
+                        selectedRecipeSaved(fetchAuthorData[0]);
+                    }
+                    else{
+                        setActiveRecipe(noActiveRecipe);
+                    }
                     
                 } catch (err){
         
@@ -153,7 +154,7 @@ function MyRecipes() {
             }
         }
         else{
-            window.alert("you have not filled out all necessary columns for a recipe");
+            toast.error("you have not filled out all necessary columns for a recipe");
         }
     }
 
@@ -171,8 +172,15 @@ function MyRecipes() {
 
 
     const selectedRecipeUploaded = (recipeLookingAt) => {
-        setCurrentUploadedRecipe(recipeLookingAt);
-        setActiveRecipe(<RecipeViewing aRecipe={recipeLookingAt} swapToEditing={editRecipe} editAbility={true}/>);
+        console.log("goes in selectedRecipeUploaded", recipeLookingAt)
+        console.log("goes in selectedRecipeUploaded", currentUploadedRecipe)
+        if(currentUploadedRecipe.calories.length > 0 && currentUploadedRecipe.ingredients.length > 0 && currentUploadedRecipe.instructions.length > 0 && currentUploadedRecipe.measurements.length > 0 && currentUploadedRecipe.prepTime.length > 0 && currentUploadedRecipe.title.length > 0){
+            setCurrentUploadedRecipe(recipeLookingAt);
+            setActiveRecipe(<RecipeViewing aRecipe={recipeLookingAt} swapToEditing={editRecipe} editAbility={true}/>);
+        }
+        else{
+            toast.error("Please finish uploading recipe before trying to view another recipe.")
+        }
     }
 
 
@@ -209,18 +217,18 @@ function MyRecipes() {
                 .then((res) => {
                     console.log(res.data);
                     if (res.status === 200) {
-                        window.alert("Recipe has been updated");
+                        toast.success("Recipe has been updated");
                     }
                 })
                 .catch ((err) => {
                     console.log(err);
-                    window.alert("There was an error updating the recipe");
+                    toast.error("There was an error updating the recipe")
                 });
         }
         else{
             console.log(cookTime);
             console.log(amounts.length > 0 , recipeIngredients.length > 0 , recipeTitle.length > 0 , cookTime.length > 0, recipeCalories > -1 , recipeSteps.length > 0);
-            window.alert("One or more fields are empty. Please ensure all fields are all filled in.");
+            toast.error("One or more fields are empty. Please ensure all fields are all filled in.");
         }
     }
 
@@ -239,28 +247,32 @@ function MyRecipes() {
                     "calories" : recipeCalories,
                     "userID" : user.userID,
                     "saves" : "0",
-                    "isPublic": false
+                    "isPublic": true
                 })
                 .then((res) => {
                     // setUploadedRecipes(res.data ? res.data : []);
-                    console.log(res.data);
+                    console.log(res);
                     if (res.status === 200) {
-                        window.alert("Recipe has been added to your recipes");
-                        selectedRecipeUploaded(res.data);
+                        toast.success("Recipe has been added to your recipes");
                         const recipes = uploadedRecipesWithAuthor;
+                        console.log(recipes.length - 1)
                         recipes[recipes.length - 1] = res.data;
+                        recipes[recipes.length - 1]['author'] = user.name;
+                        setCurrentUploadedRecipe(recipes[recipes.length - 1]);
+                        setActiveRecipe(<RecipeViewing aRecipe={recipes[recipes.length - 1]} swapToEditing={editRecipe} editAbility={true}/>);
+                        console.log(uploadedRecipesWithAuthor[recipes.length - 1])
                         setUploadedRecipesWithAuthor(recipes);
                     }
                     
                 })
                 .catch ((err) => {
                     console.log(err);
-                    window.alert("There was an error adding the recipe");
+                    toast.error("There was an error adding the recipe");
                 });
                 
         }
         else{
-            window.alert("One or more fields are empty. Please ensure all fields are all filled in.");
+            toast.error("One or more fields are empty. Please ensure all fields are all filled in.");
         }
     }
 
@@ -279,18 +291,19 @@ function MyRecipes() {
                 "instructions" : "",
                 "prepTime" : "",  
                 "calories" : "",
-                "author" : "",
-                "saves" : "0"
+                "saves" : "0",
+                "author": user.name,
             }
             console.log("ayo", newRecipeTemplate.recipeID)
             var recipes = uploadedRecipesWithAuthor;
             recipes.push(newRecipeTemplate);
-            setUploadedRecipesWithAuthor([...recipes]); 
+            setUploadedRecipesWithAuthor([...recipes]);
             setCurrentUploadedRecipe(newRecipeTemplate);
+            console.log(currentUploadedRecipe)
             setActiveRecipe(<NewRecipe aRecipe={newRecipeTemplate} newRecipeSave={saveNewRecipe}/>);
         }
         else{
-            window.alert("One or more fields in the current recipe are missing. Please ensure you have filled out all the fields for a recipe before creating another one.");
+            toast.error("One or more fields in the current recipe are missing. Please ensure you have filled out all the fields for a recipe before creating another one.");
         }
     }
 
@@ -301,6 +314,8 @@ function MyRecipes() {
 
 
     return (
+        <>            <ToastContainer position="top-center" autoClose={2000}/>
+
         <div className="meal-planner-container">
                 {toggleRecipeSidebar ?
                 <div className="collapsed-container">
@@ -316,12 +331,12 @@ function MyRecipes() {
                     <button onClick={chanegRecipeView} className="saved-uploaded-selection menu-buttons"><MdBookmark className="icon-size menu-buttons"/>{(viewingUploadedRecipes) ? "Uploaded Recipes" : "Saved Recipes"}
                         <div className="swap-recipe-view menu-buttons" ><ArrowDropDownIcon className="menu-buttons menu-buttons" /></div>
                     </button>
-                    {(viewingUploadedRecipes) ? ((uploadedRecipesWithAuthor) ? uploadedRecipesWithAuthor.map((theRecipes) => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeUploaded} key={theRecipes.recipeID} isActiveRecipe={(currentUploadedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Uploaded</h3>) : ((savedRecipesWithAuthor) ? savedRecipesWithAuthor.map(theRecipes => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeSaved} key={theRecipes.recipeID} isActiveRecipe={(currentSavedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Saved</h3>)}
+{(viewingUploadedRecipes) ? ((uploadedRecipesWithAuthor.length > 0) ? uploadedRecipesWithAuthor.map((theRecipes) => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeUploaded} key={theRecipes.recipeID} isActiveRecipe={(currentUploadedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Uploaded</h3>) : ((savedRecipesWithAuthor.length > 0) ? savedRecipesWithAuthor.map(theRecipes => (<Recipe aRecipe={theRecipes} viewNewRecipe={selectedRecipeSaved} key={theRecipes.recipeID} isActiveRecipe={(currentSavedRecipe.recipeID === theRecipes.recipeID)}/>)) : <h3 className="no-recipes-in-container">No Recipes Saved</h3>)}
                 </div>}
                 <div className="recipe-viewing-container">
                     {activeRecipe}
                 </div>
-        </div>
+        </div>        </>
     );
 }
 

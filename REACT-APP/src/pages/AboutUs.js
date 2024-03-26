@@ -12,6 +12,8 @@ import { FaGithubAlt } from "react-icons/fa";
 import { RxDividerHorizontal } from "react-icons/rx";
 import teampng from "../images/team_png.png";
 import Tordan from "../images/tordan.png";
+import Vordan from "../images/vordan.jpg";
+import Braden from "../images/braden-headshot.png"
 import { useNavigate } from "react-router-dom"; 
 
 import "./AboutUs.css";
@@ -127,7 +129,7 @@ function AboutUs({ }) {
                         <div className="team-row">
                             <div className="team-member-cont">
                                 
-                                <img src={teampng} className="team-member-picture"></img>
+                                <img src={Braden} className="team-member-picture"></img>
                                 <div className="team-member-header">Braden Vivas</div>
                                 <div className="team-member-bio">Hey All! My name is Braden Vivas, resident project manager! For this project I mostly worked on the front-end side of the project
                                 but also dabbled in whatever need to be done! As a leader of this group, it was my duty to make sure things flowed smoothly by managing both front-end and back-end workflows and filling 
@@ -160,9 +162,9 @@ function AboutUs({ }) {
 
                         <div className="team-row">
                             <div className="team-member-cont">
-                                <img src={teampng} className="team-member-picture"></img>
+                                <img src={Vordan} className="team-member-picture"></img>
                                 <div className="team-member-header">Jordan Vanbeselaere</div>
-                                <div className="team-member-bio">Jordan Vanbeselaere</div>
+                                <div className="team-member-bio">I'm not just another Front-End Engineer; I'm a visionary with a keen eye for detail and a knack for turning concepts into captivating digital experiences. Armed with a deep understanding of web technologies and a relentless drive for perfection, I thrive in the ever-evolving landscape of front-end development.</div>
                             </div>
 
                             <div className="team-member-cont">

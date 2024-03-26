@@ -12,10 +12,11 @@ import { FaGithubAlt } from "react-icons/fa";
 import { RxDividerHorizontal } from "react-icons/rx";
 import { useNavigate } from "react-router-dom"; 
 
-import { Cloudinary } from "../components/CloudinaryImageUpload";
-import { Image, Transformation } from 'cloudinary-react';
-import { CloudinaryContext, uploadMultiple } from 'cloudinary-react';
 
+import prepperCalendar from "../images/prepper-calendar.jpeg"
+import prepperRecipe from "../images/prepper-recipe.jpeg"
+import prepperSave from "../images/prepper-recipe.jpeg"
+import prepperSearch from "../images/prepper-search.jpeg"
 
 import "./DefaultPage.css";
 
@@ -36,15 +37,6 @@ function DefaultPage({ }) {
 
     const [image, setImage] = useState(null);
 
-    const handleImageUpload = async (e) =>{
-
-
-        const res_image =  await Cloudinary(e);
-
-        setImage(res_image)
-        
-    }
-    
     useEffect( () => {
         console.log(image)
     }, [image])
@@ -158,9 +150,9 @@ function DefaultPage({ }) {
 
                     <div className="mid-section">
 
-                        <img src={previewPlaceholder} className="picture-half" />
-                        <div className="text-half alata-regular">
-                            <div className="mid-header">How it works</div>
+                        <img src={prepperSave} className="picture-half-landing" />
+                        <div className="text-half-landing alata-regular">
+                            <div className="mid-header-landing">How it works</div>
                             <div className="mid-text">Plan, Create and Share with Prepper!<br></br>Schedule a meal that you create and upload yourself or find using our catalog of recipes uploaded by other users!</div>
 
                         </div>
@@ -178,18 +170,18 @@ function DefaultPage({ }) {
                         </div>
                         <div className="carousel-content">
 
-                                <div className="caro-pic-holder">
-                                    <img src={showCarousel1 ? (previewPlaceholder) : (
+                                <div className="caro-pic-holder-landing">
+                                    <img src={showCarousel1 ? (prepperCalendar) : (
 
-                                        showCarousel2 ? (backgroundCal) : (
+                                        showCarousel2 ? (prepperRecipe) : (
 
-                                            showCarousel3 ? (previewPlaceholder) : (
+                                            showCarousel3 ? (prepperSearch) : (
 
                                                 previewPlaceholder //ERROR
                                             )
                                         )
 
-                                    )} className="picture-caro" />
+                                    )} className="picture-caro-landing" />
                                 </div>
 
                                 <div className="carousel-descr alata-regular ">
@@ -228,7 +220,7 @@ function DefaultPage({ }) {
                         <img src={logodark} className="footer-logo footer-content"/>
                         <div className="contacts white playfair-display footer-contact">
                             <div className="contact-header"> Contact Us</div>
-                            <div className="contact-header"> Fake-Phone-Number</div>
+                            <div className="contact-header">+1-437-542-1660</div>
                         </div>
                         <div className= "contact-icons footer-content">
                                 <a href= "mailto:prepper.planner@gmail.com" className="icon white">
@@ -243,24 +235,6 @@ function DefaultPage({ }) {
                             <div style={{ cursor: 'pointer' }} className="contact-header" onClick={handleAboutUs}>About Us</div>
                         </div>
                     </div>
-                    <CloudinaryContext cloudName="dh0iihyz2">
-                        
-                        { image ? 
-                        (
-                            
-                            <Image publicId={image}>
-                                <Transformation width="300" height="200" crop="fill" />
-                            </Image>
-                            
-                           
-                        ) 
-                        : 
-                        (
-                            
-                            <input type="file" onChange={e => handleImageUpload(e)} />
-                        )
-                        }
-                    </CloudinaryContext>
                 </div>
 
             </div>

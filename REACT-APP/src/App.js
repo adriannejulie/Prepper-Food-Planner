@@ -55,9 +55,7 @@ function App() {
                     <Route
                         path="/about-us"
                         element={
-                            <ProtectedRoute>
                                 <AboutUs />
-                            </ProtectedRoute>
                         }
                     />
                     <Route path="*" element={<NotFoundPage />} />
