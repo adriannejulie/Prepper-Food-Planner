@@ -69,7 +69,7 @@ function generateRandomEmail() {
         await loginButton.click();
         await driver.sleep(3000); 
 
-        //DELETE ACCOUNT
+        //DELETE ACCOUNT (REQ-22)
         await driver.wait(until.elementLocated(By.css('.dropdown-trigger')), 10000);
         const accountDropdownTrigger2 = await driver.findElement(By.css('.dropdown-trigger'));
         await accountDropdownTrigger2.click();
