@@ -149,7 +149,7 @@ function AboutUs({ }) {
         
                                 <img src={teampng} className="team-member-picture"></img>
                                 <div className="team-member-header">Cole Thompson</div>
-                                <div className="team-member-bio">Cole Thompson</div>
+                                <div className="team-member-bio">Hello Everyone! I'm Cole Thompson, one of the members who was apart of the front-end team. Most of my time for this project was spent implementing the required functionality for the My Recipes page of this application.</div>
                             </div>
 
                             <div className="team-member-cont">
