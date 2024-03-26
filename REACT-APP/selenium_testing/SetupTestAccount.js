@@ -8,6 +8,7 @@ const driver = new Builder().forBrowser("chrome").build();
 (async function loginAutomation() {
     try {
         await driver.get('http://localhost:3000/');
+        await driver.manage().window().maximize();
 
         const signupLink = await driver.findElement(By.xpath("//a[contains(text(), 'Sign Up')]"));
         await signupLink.click();

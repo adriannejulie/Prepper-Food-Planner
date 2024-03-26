@@ -5,8 +5,9 @@ const driver = new Builder().forBrowser("chrome").build();
 (async function loginAutomation() {
     try {
         await driver.get('http://localhost:3000/');
+        await driver.manage().window().maximize();
 
-        // INVALID LOGIN
+        // INVALID LOGIN (REQ-01)
         const loginLink = await driver.findElement(By.xpath("//a[contains(text(), 'Log In')]"));
         await loginLink.click();
 

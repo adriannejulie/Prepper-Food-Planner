@@ -18,6 +18,7 @@ function generateRandomEmail() {
         const testingEmail = generateRandomEmail();
 
         await driver.get('http://localhost:3000/');
+        await driver.manage().window().maximize();
 
         //SIGNUP (REQ-02)
         const signupLink = await driver.findElement(By.xpath("//a[contains(text(), 'Sign Up')]"));

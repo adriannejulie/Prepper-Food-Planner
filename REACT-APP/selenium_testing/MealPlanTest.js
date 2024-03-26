@@ -10,6 +10,7 @@ const driver = new Builder().forBrowser("chrome").build();
     try {
 
         await driver.get('http://localhost:3000/');
+        await driver.manage().window().maximize();
 
         //Log in to test account
         const loginLink = await driver.findElement(By.xpath("//a[contains(text(), 'Log In')]"));
