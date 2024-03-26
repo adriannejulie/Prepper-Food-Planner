@@ -115,7 +115,7 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
                                     <div id="recipes-container">
                                         { recipeView === 'uploaded' ? 
                                             // show uploaded recipes
-                                            (<div>
+                                            (<div class="recipes">
                                                 {uploadedRecipes.map((recipe, index) => (
                                                     <AddMealPlanRecipe
                                                         key={index}
@@ -131,7 +131,7 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
 
                                             :
                                             // show saved recipes
-                                            (<div>
+                                            (<div class="recipes">
                                                 {savedRecipes.map((recipe, index) => (
                                                     <AddMealPlanRecipe
                                                         key={index}
@@ -165,7 +165,7 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
                                             aria-label="Platform"
                                         >
                                             <ToggleButton value="breakfast">Breakfast</ToggleButton>
-                                            <ToggleButton value="lunch">Lunch</ToggleButton>
+                                            <ToggleButton value="lunch" class="lunch">Lunch</ToggleButton>
                                             <ToggleButton value="dinner">Dinner</ToggleButton>
                                         </ToggleButtonGroup>
                                     </div>

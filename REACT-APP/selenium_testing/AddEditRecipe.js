@@ -52,10 +52,14 @@ const driver = new Builder().forBrowser("firefox").build();
         await instructionsTextarea.sendKeys('Test Instructions: Mix all ingredients and bake for 45 minutes.');
 
         // Open ingredients window
-        const addIngredientsButton = await driver.findElement(By.css('.edit-ingredients-button'));
+        const openIngredientsButton = await driver.findElement(By.css('.edit-ingredients-button'));
+        await openIngredientsButton.click();
+
+        //Add an ingredient
+        const addIngredientsButton = await driver.findElement(By.css('.add-ingredient-button'));
         await addIngredientsButton.click();
 
-        //Add ingredients
+        //Fill in ingredient
         await driver.wait(until.elementLocated(By.css('.amount-box')), 10000);
         const amountBoxes = await driver.findElements(By.css('.amount-box'));
         await amountBoxes[amountBoxes.length - 1].sendKeys('2 cups');
@@ -64,17 +68,18 @@ const driver = new Builder().forBrowser("firefox").build();
         const ingredientBoxes = await driver.findElements(By.css('.ingredient-box'));
         await ingredientBoxes[ingredientBoxes.length - 1].sendKeys('Sugar');
 
-        //Save ingredients
-        const saveButton = await driver.findElement(By.css('[data-testid="saveIngredients"]'));
-        await driver.executeScript("arguments[0].click();", saveButton);
+        // Save ingredients after editing or adding new ones
+        const saveIngredientsButton = await driver.findElement(By.css('.save'));
+        await saveIngredientsButton.click();
 
-        //Close ingredients window
-        const closeButton = await driver.findElement(By.css('[data-testid="closeIngredientsPopup"]'));
-        await driver.executeScript("arguments[0].click();", closeButton);
+        // Close ingredients window
+        const closeIngredientsButton = await driver.findElement(By.css('.close'));
+        await closeIngredientsButton.click();
 
-        //Finish recipe
-        const saveRecipeButton = await driver.findElement(By.css('.checkmark-button'));
-        await saveRecipeButton.click();
+        // Save Recipe
+        const saveCompleteRecipeButton = await driver.findElement(By.css('.checkmark-button'));
+        await saveCompleteRecipeButton.click();
+
 
         await driver.sleep(3000);
 
@@ -110,13 +115,13 @@ const driver = new Builder().forBrowser("firefox").build();
         // Clear existing ingredient amounts and names, then add new ones
         await driver.wait(until.elementLocated(By.css('.amount-box')), 10000);
         const amountEditBoxes = await driver.findElements(By.css('.amount-box'));
-        await amountEditBoxes[0].clear(); 
+        await amountEditBoxes[0].clear();
         await amountEditBoxes[0].sendKeys('1 cup');
 
         await driver.wait(until.elementLocated(By.css('.ingredient-box')), 10000);
         const ingredientEditBoxes = await driver.findElements(By.css('.ingredient-box'));
-        await ingredientEditBoxes[0].clear(); 
-        await ingredientEditBoxes[0].sendKeys('Flour'); 
+        await ingredientEditBoxes[0].clear();
+        await ingredientEditBoxes[0].sendKeys('Flour');
 
         // Save the edited ingredients
         const saveEditedIngredientsButton = await driver.findElement(By.css('[data-testid="saveIngredients"]'));
@@ -133,7 +138,7 @@ const driver = new Builder().forBrowser("firefox").build();
     } catch (error) {
         console.error('Error in login automation:', error);
     } finally {
-        await driver.sleep(3000); 
+        await driver.sleep(3000);
         await driver.quit();
     }
 })();

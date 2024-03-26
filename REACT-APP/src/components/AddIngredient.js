@@ -37,8 +37,8 @@ function AddIngredient({ hidePopup, ingredients, amounts, saveIngredients}) {
                     </div>
                     <button className="add-ingredient-button" onClick={addNewIngredient}>Add an Ingredient</button>
                     <div>
-                        <button className="icon-buttons" onClick={() => saveIngredients(recipesMeasurements, recipesIngredients)}><MdSave className="icon-style"/></button>
-                        <button className="icon-buttons" onClick={hidePopup}><MdOutlineClose className="icon-style"/></button>
+                        <button className="icon-buttons save" onClick={() => saveIngredients(recipesMeasurements, recipesIngredients)}><MdSave className="icon-style"/></button>
+                        <button className="icon-buttons close" onClick={hidePopup}><MdOutlineClose className="icon-style"/></button>
                     </div>
                 </div>
                 <div className="ingredient-list">
