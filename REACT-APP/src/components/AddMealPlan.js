@@ -164,7 +164,7 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
                                             onChange={handleChange}
                                             aria-label="Platform"
                                         >
-                                            <ToggleButton value="breakfast">Breakfast</ToggleButton>
+                                            <ToggleButton value="breakfast" class="breakfast">Breakfast</ToggleButton>
                                             <ToggleButton value="lunch" class="lunch">Lunch</ToggleButton>
                                             <ToggleButton value="dinner">Dinner</ToggleButton>
                                         </ToggleButtonGroup>

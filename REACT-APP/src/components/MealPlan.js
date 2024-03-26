@@ -76,10 +76,10 @@ function MealPlan ({recipe, mealPlanID, type, index }) {
                     </div>
                 </div>
                 <div id='edit-and-delete'>
-                    <button id='button' onClick={editMeal}>
+                    <button className='edit' id='button' onClick={editMeal}>
                         <MdModeEdit />
                     </button>
-                    <button id='button' onClick={deleteMeal}>
+                    <button className='delete' id='button' onClick={deleteMeal}>
                         <MdDelete />
                     </button>
                 </div>
