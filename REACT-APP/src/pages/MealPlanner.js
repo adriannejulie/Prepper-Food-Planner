@@ -5,57 +5,91 @@ import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from "dayjs";
 import { MdOutlineAddBox, MdSearch } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import AddMealPlan from "../components/AddMealPlan.js";
+import axios from 'axios';
+import { useUser } from "../components/UserContext";
 
 function MealPlanner() {
 
     const [value, setValue] = useState(new dayjs());
     const [meals, setMeals] = useState([]);
+    const [mealTypes, setMealTypes] = useState([]);
+    const [showOverlay, setShowOverlay] = useState(false);
+    const [recipes, setRecipes] = useState([]);
+    const navigate = useNavigate();
+    const { user, setUser } = useUser();
 
     useEffect(() => {
-        console.log(value.format("YYYY-MM-DD"));
+        const fetchData = async () => {
+            try {
+                console.log(value.format("YYYY-MM-DD"));
+    
+                const response = await axios.get(`http://localhost:8080/getMealPlans/${value.format("YYYY-MM-DD")}/${user.userID}`); 
+                const data = response.data ? response.data : [];
+                
+                setMeals(data);
+                setMealTypes(data.map((meal) => meal.type));
+                console.log(data);
 
-        // dummy data using for testing
-        if (value.format("YYYY-MM-DD") === "2024-03-25") {
-            setMeals(["Christmas Dinner", "Easter Lunch", "Thanksgiving Breakfast"]);
-        }
-        else {
-            setMeals([]);
-        }
+            } catch (error) {
+                console.error("Error fetching meal plans:", error);
+            }
+        };
+    
+        fetchData();
+    }, [value]);
 
-        console.log(meals);
-      }, [value]);
+      useEffect(() => {
+        console.log("Get Recipe");
+        const fetchRecipes = async () => {
+            const newRecipes = [];
+            for (let i = 0; i < meals.length; i++) {
+                const res = await axios.get(`http://localhost:8080/getRecipe/${meals[i].recipeID}`);
+                newRecipes.push(res.data ? res.data : {});
+                console.log(res);
+            }
+            setRecipes(newRecipes);
+            console.log(newRecipes);
+        };
+        fetchRecipes();
+    }, [meals]);
 
     // temp functions, functionality to be added
     const addMeal = () => {
+        setShowOverlay(!showOverlay);
         console.log("Add Meal");
     }
 
     const findRecipes = () => {
-        console.log("Find Recipes");
+        navigate("/find-recipes");
     }
 
-
-
-    // temp data, to be replaced with API call from functions above
+    const toggleOverlay = () => {
+        setShowOverlay(!showOverlay);
+        window.location.reload();
+    }
 
     return (
         <div className="meal-planner">
-            <div className="section">
-                <div id="section-calendar">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
-                    </LocalizationProvider> 
-                </div>
+            <AddMealPlan isOpen={showOverlay} onClose={toggleOverlay} editMode={false} mealPlanID={null}/>
+            <div id="plannerSection">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateCalendar 
+                        value={value} 
+                        onChange={(newValue) => setValue(newValue)} 
+                        style={{"height": "50vh"}}/>
+                </LocalizationProvider> 
                 <button className="button" onClick={addMeal}>
-                    <MdOutlineAddBox />
-                    Add Meal
+                    <MdOutlineAddBox style={{height: "5vh", color:"white"}}/>
+                    <p style={{color: "white"}}>Add Meal</p>
                 </button>
                 <button className="button" onClick={findRecipes}>
-                    <MdSearch />
-                    Find Recipes
+                    <MdSearch style={{height: "5vh", color:"white"}}/>
+                    <p style={{color: "white"}}>Find Recipes</p>
                 </button>
             </div>
-            <div className="section">
+            <div id="mealPlans-container">
                 {
                     meals.length === 0 ? 
 
@@ -68,8 +102,8 @@ function MealPlanner() {
 
                     // meals are planned on the selected date
                     (<div id="meals-planned">
-                        {meals.map((meal, index) => {
-                            return <MealPlan key={index} meal={meal}></MealPlan>
+                        {recipes.map((recipe, index) => {
+                            return <MealPlan key={index} mealPlanID={meals[index].mealPlanID} recipe={recipe} type={mealTypes[index]}></MealPlan>
                         })}
                     </div>)
                 }

@@ -1,0 +1,133 @@
+.overlay__background {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 9;
+  }
+  
+.overlay__container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 10;
+    padding: 30px;
+    border-radius: 50px;
+    width: 80vw;
+    height: 80vh;
+    background-color: #DEE4D8;
+}
+
+.overlay__controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    width: 80vw;
+    height: 2vh;
+}
+
+.overlay__close {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#text-input {
+    width: 67vw;
+    height: 30px;
+    margin: 10px;
+}
+
+.overlay__view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 80vw;
+    height: 80vh;
+}
+
+.section-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80vw;
+    height: 70vh;
+}
+
+#section {
+    display: flex;
+    width: 30vw;
+    height: 65vh;
+    flex-direction: column;
+    background-color: #F2F5EB;
+    border-radius: 25px;
+    align-items: center;
+}
+
+
+#recipes-container {
+    height: 60vh;
+    width: 30vw;
+    padding:10px;
+    overflow-y: auto;
+}
+
+#text {
+    background-color: white;
+    border-radius: 50px; 
+    font-size: 14px;
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+
+#add-Button {
+    background-color: #53634E;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 5px 10px 18px #888888;
+    height: 4vh;
+    width: 20vw;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#type-input{
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 10vh;
+    align-items: center;
+}
+
+#view-toggle{
+    background-color: #53634E;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 5px 10px 18px #888888;
+    height: 4vh;
+    width: 20vw;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}

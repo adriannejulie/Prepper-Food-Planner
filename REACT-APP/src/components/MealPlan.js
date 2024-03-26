@@ -1,52 +1,86 @@
 import React, { useState } from 'react';
 import './MealPlan.css';
-import { MdOutlineBookmarkBorder, MdModeEdit } from "react-icons/md";
+import { MdDelete, MdModeEdit, MdHourglassTop, MdOutlineAccessTime } from "react-icons/md";
+import axios from 'axios';
+import AddMealPlan from './AddMealPlan';
 
-// dunno about this import
-import Recipe from './Recipe';
 
-function MealPlan ({meal, index}) {
+function MealPlan ({recipe, mealPlanID, type, index }) {
 
-    // dunno if this will actually work?
-    // const [recipe, setRecipe] = useState(Recipe);
-
-    // temp function, functionality to be added
-    const getRecipe = (recipeID) => {
-        console.log("Get Recipe");
-    }
+    const [ editMode , setEditMode ] = useState(false);
+    const [showOverlay, setShowOverlay] = useState(false);
 
     const editMeal = () => {
+        setEditMode(!editMode);
+        setShowOverlay(!showOverlay);
         console.log("Edit Meal");
     }
 
-    // this is a sus button
-    const saveMeal = () => {
-        console.log("Save Meal");
+    const toggleOverlay = () => {
+        setShowOverlay(!showOverlay);
+    }
+
+
+    const deleteMeal = () => {
+        const deleteMeal = async () => {
+            try { 
+                const response = await axios.delete(`http://localhost:8080/removeMealPlan/${mealPlanID}`); 
+                const data = response.data ? response.data : [];
+                
+                console.log(data);
+
+            } catch (error) {
+                console.error("Error deleting meal:", error);
+            }
+        };
+    
+        deleteMeal();
+        window.location.reload();
+    }
+
+    const capitalize = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     return (
         <div className='meal' key={index}>
+            <AddMealPlan isOpen={ showOverlay } onClose={ toggleOverlay } editMode={ editMode } mealPlanID={ mealPlanID }/> 
             <div className='mealplan-section'>
-                
-                <img id='img' src="https://reactjs.org/logo-og.png" alt="React Image"></img>
+                <div id='img'>
+                    <img src={recipe.image} alt="React Image"></img>
+                </div>
                 <div id='meal-name'>
-                    {meal}
+                    {recipe.title}
                 </div>
 
             </div>
-            <div className='mealplan-section' style={{backgroundColor: "white"}}>
+            <div className='typetime' style={{backgroundColor: "white"}}>
                 <div id='type-and-time'>
-                    <p id='meal-name'>Breakfast</p>
+                    <div id='type-and-time-text'>
+                        <div id='icon'>
+                            <MdOutlineAccessTime style={{height: "2vh", color:"white"}}/>
+                        </div>
+                        <div id='time-text'>
+                            <p style={{color: "white", justifySelf:"center"}}>{capitalize(type)}</p>
+                        </div>
+                    </div>
                 </div>
                 <div id='type-and-time'>
-                    <p id='meal-name'>30-45min</p>
+                    <div id='type-and-time-text'>
+                        <div id='icon'>
+                            <MdHourglassTop style={{height: "2vh", color:"white"}}/>
+                        </div>
+                        <div id='time-text'>
+                            <p style={{color: "white"}}>{recipe.prepTime} M</p>
+                        </div>
+                    </div>
                 </div>
-                <div id='icons'>
-                    <button id='button' onClick={editMeal}>
+                <div id='edit-and-delete'>
+                    <button className='edit' id='button' onClick={editMeal}>
                         <MdModeEdit />
                     </button>
-                    <button id='button' onClick={saveMeal}>
-                        <MdOutlineBookmarkBorder />
+                    <button className='delete' id='button' onClick={deleteMeal}>
+                        <MdDelete />
                     </button>
                 </div>
             </div>

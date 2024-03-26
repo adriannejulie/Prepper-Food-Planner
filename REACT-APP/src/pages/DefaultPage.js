@@ -3,9 +3,6 @@ import logoLight from "../images/prepper_logo.png";
 import logodark from "../images/prepper-logo-dark.png"
 import backgroundCal from "../images/backgroundCalendar.png"
 import previewPlaceholder from "../images/placeholder-preview.png";
-import clip1 from "../images/clip1.png";
-import clip2 from "../images/clip2.png";
-import clip3 from "../images/clip3.png";
 import { Link, Navigate } from 'react-router-dom';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Login from "../components/Login";
@@ -16,6 +13,10 @@ import { RxDividerHorizontal } from "react-icons/rx";
 import { useNavigate } from "react-router-dom"; 
 
 
+import prepperCalendar from "../images/prepper-calendar.jpeg"
+import prepperRecipe from "../images/prepper-recipe.jpeg"
+import prepperSave from "../images/prepper-recipe.jpeg"
+import prepperSearch from "../images/prepper-search.jpeg"
 
 import "./DefaultPage.css";
 
@@ -34,6 +35,11 @@ function DefaultPage({ }) {
     const [isAnimating, setIsAnimating] = useState(false);
     const navigate = useNavigate();
 
+    const [image, setImage] = useState(null);
+
+    useEffect( () => {
+        console.log(image)
+    }, [image])
 
     const handleAnimation = () => {
         setIsAnimating(!isAnimating);
@@ -100,7 +106,7 @@ function DefaultPage({ }) {
 
 
     return (
-        <div className="container">
+        <div className="landing-page-container">
             <div className="content">
                 <img src={logoLight} alt="Logo" className="logo" />
                 <div className="default-header">
@@ -132,7 +138,7 @@ function DefaultPage({ }) {
                         <div className="big-title alata-regular white"> 
                             Plan with Prepper!
                         </div>
-                        <Link onClick={handleSignup} className="link eye-catcher-join alata-regular">
+                        <Link onClick={handleSignup} className="link eye-catcher-join alata-regular white">
                             Start Planning!
                         </Link>
                     </div>
@@ -144,10 +150,10 @@ function DefaultPage({ }) {
 
                     <div className="mid-section">
 
-                        <img src={previewPlaceholder} className="picture-half" />
-                        <div className="text-half alata-regular">
-                            <div className="mid-header">How it works</div>
-                            <div className="mid-text">Plan, Create and Share with Prepper!<br></br>Schedule a meal that you create and upload yourself or find using our catalog of recipes uploaded by other user!</div>
+                        <img src={prepperSave} className="picture-half-landing" />
+                        <div className="text-half-landing alata-regular">
+                            <div className="mid-header-landing">How it works</div>
+                            <div className="mid-text">Plan, Create and Share with Prepper!<br></br>Schedule a meal that you create and upload yourself or find using our catalog of recipes uploaded by other users!</div>
 
                         </div>
 
@@ -164,18 +170,18 @@ function DefaultPage({ }) {
                         </div>
                         <div className="carousel-content">
 
-                                <div className="caro-pic-holder">
-                                    <img src={showCarousel1 ? (previewPlaceholder) : (
+                                <div className="caro-pic-holder-landing">
+                                    <img src={showCarousel1 ? (prepperCalendar) : (
 
-                                        showCarousel2 ? (backgroundCal) : (
+                                        showCarousel2 ? (prepperRecipe) : (
 
-                                            showCarousel3 ? (previewPlaceholder) : (
+                                            showCarousel3 ? (prepperSearch) : (
 
                                                 previewPlaceholder //ERROR
                                             )
                                         )
 
-                                    )} className="picture-caro" />
+                                    )} className="picture-caro-landing" />
                                 </div>
 
                                 <div className="carousel-descr alata-regular ">
@@ -214,19 +220,19 @@ function DefaultPage({ }) {
                         <img src={logodark} className="footer-logo footer-content"/>
                         <div className="contacts white playfair-display footer-contact">
                             <div className="contact-header"> Contact Us</div>
-                            <div className="contact-header"> Fake-Phone-Number</div>
+                            <div className="contact-header">+1-437-542-1660</div>
                         </div>
                         <div className= "contact-icons footer-content">
                                 <a href= "mailto:prepper.planner@gmail.com" className="icon white">
                                 <MdEmail/>
                                 </a>
-                                <a  href= "https://github.com/adriannejulie/Prepper-Food-Planner" className="icon white">
-                                <FaGithubAlt />
+                                <a href="https://github.com/adriannejulie/Prepper-Food-Planner" className="icon white" target="blank" rel="noopener noreferrer">
+                                    <FaGithubAlt />
                                 </a>
                                 
                         </div>
                         <div className="info-pages white playfair-display footer-content">
-                            <div className="contact-header" onClick={handleAboutUs}>About Us</div>
+                            <div style={{ cursor: 'pointer' }} className="contact-header" onClick={handleAboutUs}>About Us</div>
                         </div>
                     </div>
                 </div>

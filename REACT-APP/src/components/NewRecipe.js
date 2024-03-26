@@ -5,14 +5,14 @@ import AddIngredient from "../components/AddIngredient.js";
 import { MdAccountBox, MdHourglassTop, MdModeEdit } from "react-icons/md";
 import { FaBicycle } from "react-icons/fa";
 import { ImCheckmark } from "react-icons/im";
-import {Cloudinary } from "../components/CloudinaryImageUpload";
+import { Cloudinary } from "../components/CloudinaryImageUpload";
 import { Image, Transformation } from 'cloudinary-react';
-import { CloudinaryContext, uploadMultiple } from 'cloudinary-react'; 
+import { CloudinaryContext, uploadMultiple } from 'cloudinary-react';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function RecipeEditing({ aRecipe, updateRecipe }) {    
+function NewRecipe({ aRecipe, newRecipeSave }) {    
     const [amounts, setAmounts] = useState([]);
     const [recipeIngredients, setIngredients] = useState([]);
     const [recipeTitle, setRecipeTitle] = useState(aRecipe?.title);
@@ -23,15 +23,11 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
     const [image, setImage] = useState(aRecipe?.image);
 
     useEffect(() => {
-        try{
+        if(recipeIngredients.length > 0){
             const recipeIngredients = aRecipe.ingredients.split(",");
             const recipeMeasurements = aRecipe.measurements.split(",");
             setAmounts(recipeMeasurements)
             setIngredients(recipeIngredients)
-        }
-        catch{
-            setAmounts([""])
-            setIngredients([""])
         }
     }, [aRecipe])
 
@@ -99,12 +95,13 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
 
 
 
+
     return (
-        <><ToastContainer position="top-center" autoClose={2000}/>
+        <> <ToastContainer position="top-center" autoClose={2000}/>
         <div className="recipe-grid">
             <div className="recipe-view-header">
                 {showIngredientPopup && <AddIngredient hidePopup={showHidePopup} ingredients={recipeIngredients} amounts={amounts} saveIngredients={saveIngredientsAdded}/>}
-                <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => updateRecipe(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, aRecipe.recipeID, image)}><ImCheckmark className="checkmark-icon-style"/></button></div>
+                <div className="align-icons-text"><input className="recipe-title-styling" value={recipeTitle} onChange={handleTitleChange}></input><button className="checkmark-button" onClick={() => newRecipeSave(amounts, recipeIngredients, recipeTitle, cookTime, recipeCalories, recipeSteps, image)}><ImCheckmark className="checkmark-icon-style"/></button></div>
                 <div className="align-icons-text"><MdAccountBox /> Author: {aRecipe?.author}</div>
                 <div className="cooktime-calories-container">
                     <div className="align-icons-text"><MdHourglassTop className="icon-background"/><input className="duration-cooktime-input" value={cookTime} onChange={handleCookTimeChange}></input>Minutes</div>
@@ -121,9 +118,8 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
                 <div className="ingredients-header">Ingredients<button className="edit-ingredients-button" onClick={showHidePopup}><MdModeEdit className="edit-ingredients-icon"/></button></div>
                 <div className="ingredients-list">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>
             </div>
-        </div>
-        </>
+        </div></>
     );
 }
 
-export default RecipeEditing;
+export default NewRecipe;

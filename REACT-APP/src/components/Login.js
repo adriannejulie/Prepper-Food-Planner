@@ -8,6 +8,11 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UserContext";
 import axios from "axios";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 function Login({ onLogin, onClose }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,22 +21,58 @@ function Login({ onLogin, onClose }) {
     const { setUser } = useUser();
     const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-    const showUserInformation = (tokenObject) => {
+    const showUserInformation = async (tokenObject) => {
         const token = tokenObject.credential;
+        const decodedToken = jwtDecode(token);
+
+        const name = decodedToken.name.split(" ")
+        const email = decodedToken.email
+
+
+        console.log(email)
+        console.log(name)
 
         try {
-            const decodedToken = jwtDecode(token);
-            const user = {
-                name: decodedToken.name,
-                email: decodedToken.email,
-                picture: decodedToken.picture
-            };
 
-            setUser(user);
-            navigate("/meal-planner");
-            closeLogin();
+            const response = await axios.post('http://localhost:8080/addUser', {
+
+            
+                email: email,
+                firstName: name[0],
+                lastName: name[1],
+                password: null,
+                google: true,
+
+            
+            });
+
+            //email already exists
+            if ( response.status === 200){
+
+                //sign up
+                const user = {
+                    userID: response.data.userID,
+                    name: decodedToken.name,
+                    email: decodedToken.email,
+                    picture: decodedToken.picture
+                };
+    
+                console.log(user)
+                setUser(user);
+                navigate("/meal-planner");
+                closeLogin();
+            }  else {
+                toast.error("Unknown error")
+            }
+
+
+            
         } catch (error) {
-            console.error("Error decoding JWT:", error);
+            if (error.response && error.response.status === 409) {
+                toast.error("Account already exists with Prepper. Please login locally.");
+            } else {
+                toast.error("Error decoding JWT: " + error.message);
+            }
         }
     };
 
@@ -43,6 +84,7 @@ function Login({ onLogin, onClose }) {
         setPassword(e.target.value);
     };
 
+
     const standardLogin = async () => {
         try{
             const response = await axios.get('http://localhost:8080/login', {
@@ -52,22 +94,39 @@ function Login({ onLogin, onClose }) {
                 isGoogle: false
             }
             });
-            
-            console.log(response.data)
 
-                console.log(response.data)
+            
+            if (response.status === 200){
+
+                console.log(response.data.firstName)
+                console.log(response.data.lastName)
                 const user = {
+                    userID: response.data.userID,
                     name: response.data.firstName.concat(" ", response.data.lastName),
                     email: email,
                     picture: null,
                 }
 
-                setUser(user)
-                navigate("/meal-planner")
-                closeLogin()
+                    console.log(user)
+                    setUser(user)
+                    navigate("/meal-planner")
+                    closeLogin()
             }
-         catch (error){
-            window.alert("Incorrect username or password");
+        } catch (error){
+            if (error.response && error.response.status === 409){
+
+                toast.error("Account created with google. Please login with google instead")
+                
+            } else if (error.response && error.response.status === 401){
+                toast.error("Invalid Password. Please try again")
+                
+            } else if (error.response && error.response.status === 404){
+
+                toast.error("Email not associated with Prepper. Please sign in with Google or create and account with us!")
+            } else {
+                console.log(error)
+                toast.error("Unknown Error")
+            }
         };
     };
 
@@ -77,11 +136,9 @@ function Login({ onLogin, onClose }) {
 
     };
 
-
-
-
     return (
         <>
+            <ToastContainer position="top-center" />
             {showLogin && (
                 <div className="login-container">
                     <div className="exit">
@@ -113,15 +170,6 @@ function Login({ onLogin, onClose }) {
                             onChange={handlePasswordChange}
                             type="password"
                         />
-                    </div>
-                    <div className="login-section">
-                        <label>
-                            <input
-                                type="checkbox"
-                            />
-                            Remember Me
-                            <a href="#">Forgot Password?</a>
-                        </label>
                     </div>
                     <div className="login-buttons">
                         <button onClick={standardLogin}>Login</button>

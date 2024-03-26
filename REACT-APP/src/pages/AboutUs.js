@@ -12,7 +12,9 @@ import { FaGithubAlt } from "react-icons/fa";
 import { RxDividerHorizontal } from "react-icons/rx";
 import teampng from "../images/team_png.png";
 import Tordan from "../images/tordan.png";
-
+import Vordan from "../images/vordan.jpg";
+import Braden from "../images/braden-headshot.png"
+import { useNavigate } from "react-router-dom"; 
 
 import "./AboutUs.css";
 
@@ -21,6 +23,7 @@ function AboutUs({ }) {
     const [showSignUp, setShowSignUp] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
 
     const [isAnimating, setIsAnimating] = useState(false);
@@ -47,12 +50,16 @@ function AboutUs({ }) {
         setShowSignUp(false);
     };
 
+    const handleHomePage = () => {
+        navigate("/");
+
+    }
 
 
     return (
         <div className="container">
             <div className="content">
-                <img src={logoLight} alt="Logo" className="logo" />
+                <img src={logoLight} alt="Logo" className="logo" onClick={handleHomePage}/>
                 <div className="default-header">
                     <div className="login-signup-button tertiary alata-regular">
                         <Link onClick={handleLogin} className="link white">
@@ -122,7 +129,7 @@ function AboutUs({ }) {
                         <div className="team-row">
                             <div className="team-member-cont">
                                 
-                                <img src={teampng} className="team-member-picture"></img>
+                                <img src={Braden} className="team-member-picture"></img>
                                 <div className="team-member-header">Braden Vivas</div>
                                 <div className="team-member-bio">Hey All! My name is Braden Vivas, resident project manager! For this project I mostly worked on the front-end side of the project
                                 but also dabbled in whatever need to be done! As a leader of this group, it was my duty to make sure things flowed smoothly by managing both front-end and back-end workflows and filling 
@@ -134,7 +141,8 @@ function AboutUs({ }) {
                               
                                 <img src={teampng} className="team-member-picture"></img>
                                 <div className="team-member-header">Julia Lat</div>
-                                <div className="team-member-bio">Julia Lat</div>
+                                <div className="team-member-bio">Hello! My name is Julia Lat, I'm a back-end engineer at Prepper. In this project, I mainly focused on back-end implementation, integration of the front-end and back-end, and testing. 
+                                Hope you enjoy our project!</div>
                             </div>
 
                             <div className="team-member-cont">
@@ -154,9 +162,9 @@ function AboutUs({ }) {
 
                         <div className="team-row">
                             <div className="team-member-cont">
-                                <img src={teampng} className="team-member-picture"></img>
+                                <img src={Vordan} className="team-member-picture"></img>
                                 <div className="team-member-header">Jordan Vanbeselaere</div>
-                                <div className="team-member-bio">Jordan Vanbeselaere</div>
+                                <div className="team-member-bio">I'm not just another Front-End Engineer; I'm a visionary with a keen eye for detail and a knack for turning concepts into captivating digital experiences. Armed with a deep understanding of web technologies and a relentless drive for perfection, I thrive in the ever-evolving landscape of front-end development.</div>
                             </div>
 
                             <div className="team-member-cont">
@@ -193,8 +201,6 @@ function AboutUs({ }) {
                         </div>
                         <div className="info-pages white playfair-display footer-content">
                             <div className="contact-header" >About Us</div>
-                            <RxDividerHorizontal className="contact-header white" />
-                            <div className="contact-header">FAQ</div>
                         </div>
                     </div>
                 </div>
