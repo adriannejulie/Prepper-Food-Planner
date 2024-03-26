@@ -4,7 +4,7 @@
 
 const { Builder, By, until } = require("selenium-webdriver");
 
-const driver = new Builder().forBrowser("firefox").build();
+const driver = new Builder().forBrowser("chrome").build();
 
 (async function loginAutomation() {
     try {
@@ -25,7 +25,7 @@ const driver = new Builder().forBrowser("firefox").build();
         const loginButton = await driver.findElement(By.xpath('//button[contains(text(), "Login")]'));
         await loginButton.click();
 
-        //Navigate to MyRecipes and view Saved Recipes
+        //Navigate to MyRecipes and view Saved Recipes (REQ-06)
         await driver.wait(until.elementLocated(By.xpath("//a[contains(@class, 'link') and contains(text(), 'My Recipes')]")), 10000);
         const myRecipesLink = await driver.findElement(By.xpath("//a[contains(@class, 'link') and contains(text(), 'My Recipes')]"));
         await driver.wait(until.elementIsVisible(myRecipesLink), 10000);
@@ -33,7 +33,7 @@ const driver = new Builder().forBrowser("firefox").build();
 
         await driver.sleep(3000); 
 
-        //View uploaded recipes
+        //View uploaded recipes (REQ-11)
         const savedRecipesButton = await driver.wait(until.elementLocated(By.xpath("//button[contains(text(), 'Saved Recipes')]")), 10000);
         await savedRecipesButton.click();
 

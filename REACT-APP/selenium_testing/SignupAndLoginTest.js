@@ -5,7 +5,7 @@
 
 const { Builder, By, until } = require("selenium-webdriver");
 
-const driver = new Builder().forBrowser("firefox").build();
+const driver = new Builder().forBrowser("chrome").build();
 
 function generateRandomEmail() {
     const randomPart = Math.random().toString(36).substring(2, 15);
@@ -19,7 +19,7 @@ function generateRandomEmail() {
 
         await driver.get('http://localhost:3000/');
 
-        //SIGNUP
+        //SIGNUP (REQ-02)
         const signupLink = await driver.findElement(By.xpath("//a[contains(text(), 'Sign Up')]"));
         await signupLink.click();
 
@@ -44,7 +44,7 @@ function generateRandomEmail() {
 
         await driver.sleep(3000);
 
-        //LOGOUT
+        //LOGOUT (REQ-03)
         await driver.wait(until.elementLocated(By.css('.dropdown-trigger')), 10000);
         const accountDropdownTrigger = await driver.findElement(By.css('.dropdown-trigger'));
         await accountDropdownTrigger.click();
@@ -54,7 +54,7 @@ function generateRandomEmail() {
         await logoutButton.click();
 
 
-        //LOGIN
+        //LOGIN (REQ-00)
         const loginLink = await driver.findElement(By.xpath("//a[contains(text(), 'Log In')]"));
         await loginLink.click();
 

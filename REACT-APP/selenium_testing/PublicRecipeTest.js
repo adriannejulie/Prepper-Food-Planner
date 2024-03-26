@@ -4,7 +4,7 @@
 
 const { Builder, By, until } = require("selenium-webdriver");
 
-const driver = new Builder().forBrowser("firefox").build();
+const driver = new Builder().forBrowser("chrome").build();
 
 (async function loginAutomation() {
     try {
@@ -25,13 +25,13 @@ const driver = new Builder().forBrowser("firefox").build();
         const loginButton = await driver.findElement(By.xpath('//button[contains(text(), "Login")]'));
         await loginButton.click();
 
-        //Navigate to FindRecipes 
+        //Navigate to FindRecipes (REQ-09)
         await driver.wait(until.elementLocated(By.xpath("//a[contains(@class, 'link') and contains(text(), 'Find Recipes')]")), 10000);
         const myRecipesLink = await driver.findElement(By.xpath("//a[contains(@class, 'link') and contains(text(), 'Find Recipes')]"));
         await driver.wait(until.elementIsVisible(myRecipesLink), 10000);
         await myRecipesLink.click();
 
-        //Search recipe
+        //Search recipe (REQ-05)
         const searchBox = await driver.findElement(By.css('.find-recipe-input'));
         await searchBox.sendKeys('chicken');
 
@@ -44,7 +44,7 @@ const driver = new Builder().forBrowser("firefox").build();
         // Wait for the recipe details to be displayed and the save button to become visible
         await driver.sleep(1000);
 
-        // Click the save button
+        // Click the save button (REQ=10)
         const headerButtons = await driver.findElements(By.css(".header-button-icons"));
         const saveButton = headerButtons[1];
         await saveButton.click();

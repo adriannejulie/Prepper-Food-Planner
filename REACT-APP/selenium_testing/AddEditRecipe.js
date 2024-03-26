@@ -4,7 +4,7 @@
 
 const { Builder, By, until } = require("selenium-webdriver");
 
-const driver = new Builder().forBrowser("firefox").build();
+const driver = new Builder().forBrowser("chrome").build();
 
 (async function loginAutomation() {
     try {
@@ -55,7 +55,7 @@ const driver = new Builder().forBrowser("firefox").build();
         const openIngredientsButton = await driver.findElement(By.css('.edit-ingredients-button'));
         await openIngredientsButton.click();
 
-        //Add an ingredient
+        //Add an ingredient (REQ-15)
         const addIngredientsButton = await driver.findElement(By.css('.add-ingredient-button'));
         await addIngredientsButton.click();
 
@@ -68,7 +68,7 @@ const driver = new Builder().forBrowser("firefox").build();
         const ingredientBoxes = await driver.findElements(By.css('.ingredient-box'));
         await ingredientBoxes[ingredientBoxes.length - 1].sendKeys('Sugar');
 
-        // Save ingredients after editing or adding new ones
+        // Save ingredients after editing or adding new ones (REQ-16)
         const saveIngredientsButton = await driver.findElement(By.css('.save'));
         await saveIngredientsButton.click();
 
@@ -91,7 +91,6 @@ const driver = new Builder().forBrowser("firefox").build();
         // Save Recipe
         const saveCompleteRecipeButton = await driver.findElement(By.css('.checkmark-button'));
         await saveCompleteRecipeButton.click();
-
 
         await driver.sleep(3000);
 
