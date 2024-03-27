@@ -16,6 +16,7 @@ import Vordan from "../images/vordan.jpg";
 import Braden from "../images/braden-headshot.png"
 import Nick from "../images/nick.png"
 import { useNavigate } from "react-router-dom"; 
+import Sarah from "../images/sarah.png";
 
 import "./AboutUs.css";
 
@@ -169,9 +170,12 @@ function AboutUs({ }) {
                             </div>
 
                             <div className="team-member-cont">
-                                <img src={teampng} className="team-member-picture"></img>
+                                <img src={Sarah} className="team-member-picture"></img>
                                 <div className="team-member-header">Sarah Qin</div>
-                                <div className="team-member-bio">Sarah Qin</div>
+                                <div className="team-member-bio">Hello Prepper Users! My name is Sarah Qin, the back-end engineer, the backbone of the Prepper, 
+                                and the bridge between Prepper Users and healthy lifestyle. If you have any feedback or suggestions, 
+                                feel free to reach out and we will make Prepper better together! </div>
+                                </div>
                             </div>
 
                             <div className="team-member-cont">
@@ -208,12 +212,8 @@ function AboutUs({ }) {
                 </div>
 
             </div>
-            </div>
-            </div>
         </div>
-    );
-    
-    
+    </div>);
 }
 
 export default AboutUs;
