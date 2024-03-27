@@ -175,9 +175,7 @@ function AboutUs({ }) {
                                 <div className="team-member-bio">Hello Prepper Users! My name is Sarah Qin, the back-end engineer, the backbone of the Prepper, 
                                 and the bridge between Prepper Users and healthy lifestyle. If you have any feedback or suggestions, 
                                 feel free to reach out and we will make Prepper better together! </div>
-                                </div>
                             </div>
-
                             <div className="team-member-cont">
                                 <img src={Nick} className="team-member-picture"></img>
                                 <div className="team-member-header">Nicholas Garcia</div>
@@ -185,9 +183,10 @@ function AboutUs({ }) {
                                                                  implementing the front-end design, back-end functions, and their integration. I hope that our project helps you meet your meal plan goals!</div>
                             </div>  
                         </div>
-
-
                     </div>
+
+
+                </div>
                    
 
                     <div className="footer">
