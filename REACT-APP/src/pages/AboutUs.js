@@ -15,6 +15,8 @@ import Tordan from "../images/tordan.png";
 import Vordan from "../images/vordan.jpg";
 import Braden from "../images/braden-headshot.png"
 import Nick from "../images/nick.png"
+import Julia from "../images/julia.png"
+
 import { useNavigate } from "react-router-dom"; 
 import Sarah from "../images/sarah.png";
 
@@ -141,7 +143,7 @@ function AboutUs({ }) {
 
                             <div className="team-member-cont">
                               
-                                <img src={teampng} className="team-member-picture"></img>
+                                <img src={Julia} className="team-member-picture"></img>
                                 <div className="team-member-header">Julia Lat</div>
                                 <div className="team-member-bio">Hello! My name is Julia Lat, I'm a back-end engineer at Prepper. In this project, I mainly focused on back-end implementation, integration of the front-end and back-end, and testing. 
                                 Hope you enjoy our project!</div>
