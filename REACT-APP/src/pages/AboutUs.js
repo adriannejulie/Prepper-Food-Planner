@@ -14,6 +14,7 @@ import teampng from "../images/team_png.png";
 import Tordan from "../images/tordan.png";
 import Vordan from "../images/vordan.jpg";
 import Braden from "../images/braden-headshot.png"
+import Nick from "../images/nick.png"
 import { useNavigate } from "react-router-dom"; 
 
 import "./AboutUs.css";
@@ -174,9 +175,10 @@ function AboutUs({ }) {
                             </div>
 
                             <div className="team-member-cont">
-                                <img src={teampng} className="team-member-picture"></img>
+                                <img src={Nick} className="team-member-picture"></img>
                                 <div className="team-member-header">Nicholas Garcia</div>
-                                <div className="team-member-bio">Nicholas Garcia</div>
+                                <div className="team-member-bio">Hi! My name is Nicholas Garcia and I am a full-stack developer at Prepper. For this project, I worked mainly on the Meal Planner page,
+                                                                 implementing the front-end design, back-end functions, and their integration. I hope that our project helps you meet your meal plan goals!</div>
                             </div>  
                         </div>
 
