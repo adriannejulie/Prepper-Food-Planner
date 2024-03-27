@@ -40,7 +40,7 @@ function MealPlanner() {
         fetchData();
     }, [value]);
 
-      useEffect(() => {
+    useEffect(() => {
         console.log("Get Recipe");
         const fetchRecipes = async () => {
             const newRecipes = [];
@@ -102,8 +102,8 @@ function MealPlanner() {
 
                     // meals are planned on the selected date
                     (<div id="meals-planned">
-                        {recipes.map((recipe, index) => {
-                            return <MealPlan key={index} mealPlanID={meals[index].mealPlanID} recipe={recipe} type={mealTypes[index]}></MealPlan>
+                        {meals.map((meal, index) => {
+                            return <MealPlan key={index} meal={meal} index={index}></MealPlan>
                         })}
                     </div>)
                 }
