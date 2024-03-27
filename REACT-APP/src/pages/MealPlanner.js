@@ -40,21 +40,6 @@ function MealPlanner() {
         fetchData();
     }, [value]);
 
-    useEffect(() => {
-        console.log("Get Recipe");
-        const fetchRecipes = async () => {
-            const newRecipes = [];
-            for (let i = 0; i < meals.length; i++) {
-                const res = await axios.get(`http://localhost:8080/getRecipe/${meals[i].recipeID}`);
-                newRecipes.push(res.data ? res.data : {});
-                console.log(res);
-            }
-            setRecipes(newRecipes);
-            console.log(newRecipes);
-        };
-        fetchRecipes();
-    }, [meals]);
-
     // temp functions, functionality to be added
     const addMeal = () => {
         setShowOverlay(!showOverlay);
