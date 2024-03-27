@@ -20,7 +20,7 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
     const { user, setUser } = useUser();
     const [activeRecipeID, setActiveRecipeID] = useState('');
     const [value, setValue] = useState(new dayjs());
-    const [alignment, setAlignment] = useState('');
+    const [alignment, setAlignment] = useState();
 
     const handleChange = (event, newAlignment) => {
       setAlignment(newAlignment);
@@ -49,46 +49,54 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
     }, [isOpen]);
 
     const addMeal = () => {
-        if (recipeID === '' || alignment === '') {
-            toast.error("Please select a recipe and a meal type.");
-            return;
-        }
-        if (editMode) {
-            console.log(`Edit Meal ${value.format('YYYY-MM-DD')}`);
+        console.log(alignment)
+
+        if (alignment){
+            if (recipeID === '' || alignment === '') {
+                toast.error("Please select a recipe and a meal type.");
+                return;
+            }
+            if (editMode) {
+                console.log(`Edit Meal ${value.format('YYYY-MM-DD')}`);
+                axios
+                    .put(`http://localhost:8080/editMealPlan/${mealPlanID}`, {
+                        recipeID: recipeID,
+                        type: alignment,
+                        userID: user.userID, 
+                        date: value.format('YYYY-MM-DD'),
+                        mealPlanID: mealPlanID
+                    })
+                    .then((res) => {
+                        console.log(res);
+                        console.log(`Edit Meal ${value.format('YYYY-MM-DD')}`);
+                    })
+            }
+            else {
+            console.log(`Add Meal ${value.format('YYYY-MM-DD')}`);
             axios
-                .put(`http://localhost:8080/editMealPlan/${mealPlanID}`, {
+                .post(`http://localhost:8080/addMealPlan`, {
                     recipeID: recipeID,
                     type: alignment,
                     userID: user.userID, 
-                    date: value.format('YYYY-MM-DD'),
-                    mealPlanID: mealPlanID
+                    date: value.format('YYYY-MM-DD')
                 })
                 .then((res) => {
                     console.log(res);
-                    console.log(`Edit Meal ${value.format('YYYY-MM-DD')}`);
+                    console.log(`Add Meal ${value.format('YYYY-MM-DD')}`);
                 })
+            }
+            window.location.reload();
+            onClose();
+        } else {
+            toast.error("Please select a recipe and a meal type.");
+            return;
+
         }
-        else {
-        console.log(`Add Meal ${value.format('YYYY-MM-DD')}`);
-        axios
-            .post(`http://localhost:8080/addMealPlan`, {
-                recipeID: recipeID,
-                type: alignment,
-                userID: user.userID, 
-                date: value.format('YYYY-MM-DD')
-            })
-            .then((res) => {
-                console.log(res);
-                console.log(`Add Meal ${value.format('YYYY-MM-DD')}`);
-            })
-        }
-        window.location.reload();
-        onClose();
     }
 
     useEffect(() => {
-        console.log(recipeID);
-    }, [recipeID]);
+        console.log(alignment);
+    }, [alignment]);
 
     const handleSearchChange = (e) => {
         setSearchValue(e.target.value);
@@ -170,9 +178,9 @@ function AddMealPlan({ isOpen, onClose, editMode, mealPlanID }) {
                                             onChange={handleChange}
                                             aria-label="Platform"
                                         >
-                                            <ToggleButton value="breakfast" class="breakfast">Breakfast</ToggleButton>
-                                            <ToggleButton value="lunch" class="lunch">Lunch</ToggleButton>
-                                            <ToggleButton value="dinner">Dinner</ToggleButton>
+                                            <ToggleButton value="breakfast">Breakfast</ToggleButton>
+                                            <ToggleButton value="lunch" >Lunch</ToggleButton>
+                                            <ToggleButton value="dinner" >Dinner</ToggleButton>
                                         </ToggleButtonGroup>
                                     </div>
                                     <button id="add-Button" onClick={addMeal}>Add to Calendar</button>

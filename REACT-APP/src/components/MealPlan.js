@@ -47,7 +47,7 @@ function MealPlan ({recipe, mealPlanID, type, index }) {
             <AddMealPlan isOpen={ showOverlay } onClose={ toggleOverlay } editMode={ editMode } mealPlanID={ mealPlanID }/> 
             <div className='mealplan-section'>
                 <div id='img'>
-                    <img src={recipe.image} alt="React Image"></img>
+                    <img className="meal-plan-img" src={recipe.image} alt="React Image"></img>
                 </div>
                 <div id='meal-name'>
                     {recipe.title}

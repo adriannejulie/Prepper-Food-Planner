@@ -27,7 +27,7 @@ function RecipeViewing({ aRecipe, swapToEditing, editAbility }) {
                 </div>
             </div>
             <img className="recipe-image" src={aRecipe?.image} alt="Recipe"></img>
-            <div className="recipe-instructions-container">{aRecipe?.instructions}</div>
+            <div className="recipe-instructions-container" dangerouslySetInnerHTML={{ __html: aRecipe?.instructions.replace(/\n/g, '<br>')}}></div>
             <div className="ingredients-container" >
                 <div className="ingredients-header">Ingredients</div>
                 <div className="ingredients-list">{recipeIngredients.map((ingredient, index) => (<div key={index}>{("null" !== amounts[index]) ? amounts[index] : ""} {ingredient}</div>))}</div>

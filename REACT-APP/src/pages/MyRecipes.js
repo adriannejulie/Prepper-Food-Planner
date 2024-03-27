@@ -211,7 +211,7 @@ function MyRecipes() {
             recipes[recipeIndex].title = recipeTitle; 
             recipes[recipeIndex].measurements = amounts.join(","); 
             recipes[recipeIndex].ingredients = recipeIngredients.join(","); 
-            recipes[recipeIndex].intructions = recipeSteps; 
+            recipes[recipeIndex].instructions = recipeSteps; 
             recipes[recipeIndex].prepTime = cookTime; 
             recipes[recipeIndex].calories = recipeCalories; 
             recipes[recipeIndex].image = recipeImage; 
@@ -235,6 +235,7 @@ function MyRecipes() {
                     console.log(res.data);
                     if (res.status === 200) {
                         toast.success("Recipe has been updated");
+                        //window.location.reload()
                     }
                 })
                 .catch ((err) => {

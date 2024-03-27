@@ -97,3 +97,7 @@
     width: 10vw;
     height: 15vh;
 }
+
+.meal-plan-img{
+    object-fit: cover;
+}
