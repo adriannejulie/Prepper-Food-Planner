@@ -1,5 +1,5 @@
 .duration-cooktime-input{
-    width: 19.5px;
+    width: 20%;
     margin-right: 5px;
 }
 
@@ -17,6 +17,7 @@
     border-width: 1px;
     margin: 0px;
     height: 47px;
+    width: 100%;
 }
 
 .recipe-view-header{

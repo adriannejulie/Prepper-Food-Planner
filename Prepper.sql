@@ -1,4 +1,0 @@
-DROP DATABASE IF EXISTS prepper;
-CREATE DATABASE prepper;
-USE prepper;
-
