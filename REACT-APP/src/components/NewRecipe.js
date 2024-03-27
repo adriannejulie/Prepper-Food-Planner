@@ -57,7 +57,11 @@ function NewRecipe({ aRecipe, newRecipeSave }) {
     }
 
 
-    const saveIngredientsAdded = (newAmounts, addedIngredients) => {
+    const saveIngredientsAdded = (newAmounts, addedIngredients, deleteArr) => {
+
+        newAmounts = newAmounts.filter((_, index) => !deleteArr.includes(index))
+        addedIngredients = addedIngredients.filter((_, index) => !deleteArr.includes(index))
+
         var removalIndex = addedIngredients.indexOf("");
         for (let i = 0; i < addedIngredients.length && removalIndex !== -1; i++) { 
             if((newAmounts[removalIndex] === "" || newAmounts[removalIndex] === "null") && addedIngredients[removalIndex] === ""){
