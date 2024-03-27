@@ -61,20 +61,34 @@ function RecipeEditing({ aRecipe, updateRecipe }) {
     }
 
 
-    const saveIngredientsAdded = (newAmounts, addedIngredients) => {
+    const saveIngredientsAdded = (newAmounts, addedIngredients, deleteArr) => {
+
+
+        newAmounts = newAmounts.filter((_, index) => !deleteArr.includes(index))
+        addedIngredients = addedIngredients.filter((_, index) => !deleteArr.includes(index))
+
+
+
         var removalIndex = addedIngredients.indexOf("");
+
+        //If there are any empty fields
         for (let i = 0; i < addedIngredients.length && removalIndex !== -1; i++) { 
+            //If empty
             if((newAmounts[removalIndex] === "" || newAmounts[removalIndex] === "null") && addedIngredients[removalIndex] === ""){
+                //Get rid of it
                 newAmounts.splice(removalIndex, 1);
                 addedIngredients.splice(removalIndex, 1);
             }
+            //Get the next index
             removalIndex = newAmounts.indexOf("", removalIndex);
         }
         
+        //if it's not blank
         if(!(addedIngredients.includes(""))){
             setAmounts(newAmounts);
             setIngredients(addedIngredients);
             var replaceIndex = newAmounts.indexOf("");
+            //if the amount is not filled in, replace it with null Amount
             for (let i = 0; i < newAmounts.length && replaceIndex !== -1; i++) {
                 newAmounts[replaceIndex] = "null";
                 replaceIndex = newAmounts.indexOf("", replaceIndex);
