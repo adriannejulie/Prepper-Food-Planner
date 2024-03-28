@@ -58,6 +58,10 @@ To run this project, you will need three platforms:
 
 After doing these 4 things, you should be able to properly run the prepper application. 
 
+***The video below shows steps 2-4***
+
+[[Watch the video]](https://youtu.be/tup6Whzw3Tw)
+
 
 
 
